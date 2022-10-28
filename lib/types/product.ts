@@ -11,7 +11,7 @@ export interface ProductType {
   apy: number;
   max_cap: number;
   curr_dep: number;
-  price_change: number;
+  price_change?: number;
   position: number;
   currency: string;
 }

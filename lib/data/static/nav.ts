@@ -1,4 +1,4 @@
-import { navItem } from '../types/common';
+import { navItem } from '../../types/common';
 
 export const navItems: navItem[] = [
   {
