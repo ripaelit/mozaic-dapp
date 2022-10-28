@@ -6,6 +6,7 @@ import BigNumber from 'bignumber.js';
 import BN from 'bn.js';
 
 export default function useBalance(tokenAddress: any, decimals: any) {
+  // initial balance
   const [balance, setBalance] = useState('0');
 
   const { account, library } = useWeb3React();
@@ -37,8 +38,6 @@ export default function useBalance(tokenAddress: any, decimals: any) {
               .balanceOf(account)
               .call()
               .then((value: any) => {
-                // console.log('value', value);
-
                 resolve(new BN(value));
               })
               .catch((error: any) => {
@@ -54,7 +53,6 @@ export default function useBalance(tokenAddress: any, decimals: any) {
 
     async function run() {
       const bn = await getBalance();
-      // console.log(bn);
 
       if (!isCancelled) {
         const pow = new BigNumber('10').pow(new BigNumber(decimals));

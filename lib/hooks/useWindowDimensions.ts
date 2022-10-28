@@ -1,11 +1,13 @@
+// hook to get current window width & height
 import { useState, useEffect } from 'react';
 
 export default function useWindowDimensions() {
   interface Dimensions {
-    width: any;
-    height: any;
+    width: number | undefined;
+    height: number | undefined;
   }
 
+  // initial window dimensions
   const [windowDimensions, setWindowDimensions] = useState<Dimensions>({
     width: undefined,
     height: undefined,
@@ -20,10 +22,12 @@ export default function useWindowDimensions() {
         });
       };
 
+      // add listener when resize is triggered
       window.addEventListener('resize', handleResize);
 
       handleResize();
 
+      // remove listener when resize is stopped
       return () => window.removeEventListener('resize', handleResize);
     }
   }, []);
