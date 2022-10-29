@@ -1,8 +1,19 @@
 import Link from 'next/link';
 import React from 'react';
+import { useRouter } from 'next/router';
+
 import { navItems } from '../../../data/static/nav';
+import ConnectWalletBtn from '../button/ConnectWalletBtn';
+import MenuBtn from '../button/MenuBtn';
 
 export default function Nav() {
+  const router: any = useRouter();
+  // returns if the current path is active or not
+  const isActive = (path: string) => {
+    if (router.asPath === path) return 'active';
+    return '';
+  };
+
   return (
     <>
       <div className='nav-container'>
@@ -22,12 +33,15 @@ export default function Nav() {
           <section className='col nav-btn-wrapper'>
             {navItems.map((item) => (
               <Link href={item.path} key={item.id}>
-                <a>{item.name}</a>
+                <a className={`nav-btn ${isActive(item.path)}`}>{item.name}</a>
               </Link>
             ))}
           </section>
           {/* nav menu section */}
-          <section className='col menu-wrapper'></section>
+          <section className='col menu-wrapper'>
+            <ConnectWalletBtn />
+            <MenuBtn />
+          </section>
         </div>
       </div>
 
@@ -43,19 +57,23 @@ export default function Nav() {
           position: sticky;
           top: 0;
           left: 0;
+          padding: 0px 30px;
+          z-index: 111111;
         }
 
         .nav-content-wrapper {
           display: flex;
           flex-direction: row;
           width: 1280px;
+          gap: 30px;
         }
         .col {
-          flex: 1;
+          display: flex;
+          flex: 2;
           align-items: center;
+          transition: all 0.2s ease;
         }
-        .logo-wrapper {
-        }
+
         .logo {
           height: 32px;
           object-fit: contain;
@@ -70,7 +88,61 @@ export default function Nav() {
           align-items: center;
           justify-content: center;
         }
-        @media (max-width: 768px) {
+
+        .nav-btn {
+        }
+
+        .nav-btn::after {
+          display: block;
+          content: attr(title);
+          font-weight: bold;
+          overflow: hidden;
+          visibility: hidden;
+          height: 0;
+        }
+
+        .nav-btn.active {
+          color: var(--primary);
+          font-weight: bold;
+        }
+
+        .menu-wrapper {
+          display: flex;
+          justify-content: flex-end;
+          gap: 10px;
+        }
+
+        @media (max-width: 960px) {
+          .logo-wrapper,
+          .menu-wrapper {
+            flex: 1;
+          }
+        }
+
+        @media (max-width: 840px) {
+          .desktop-logo {
+            display: none;
+          }
+          .mobile-logo {
+            display: inline-block;
+          }
+        }
+
+        @media (max-width: 730px) {
+          .desktop-logo {
+            display: inline-block;
+          }
+          .mobile-logo {
+            display: none;
+          }
+          .nav-btn-wrapper {
+            display: none;
+          }
+          .menu-wrapper {
+            flex: 4;
+          }
+        }
+        @media (max-width: 500px) {
           .desktop-logo {
             display: none;
           }

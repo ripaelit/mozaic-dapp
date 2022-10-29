@@ -1,4 +1,4 @@
-type vault = {
+type token = {
   id: any;
   name: string;
   icon: string;
@@ -7,11 +7,13 @@ type vault = {
 export interface ProductType {
   id: any;
   name: string;
-  vault: vault[];
+  icon: string;
+  color: string;
+  vault: token[];
   apy: number;
-  max_cap: number;
-  curr_dep: number;
-  price_change?: number;
-  position: number;
-  currency: string;
+  tokenName: string;
+  maxCap: number;
+  currentDeposit: number;
+  priceChange?: number;
+  position: number | undefined;
 }

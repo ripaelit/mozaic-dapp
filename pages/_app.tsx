@@ -1,5 +1,6 @@
 import '../styles/globals.scss';
 import '../styles/layout.scss';
+import '../styles/colors.scss';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { store } from '../lib/redux/configureStore';
