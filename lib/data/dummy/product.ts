@@ -52,7 +52,7 @@ export const productsData = [
       {
         id: 3,
         name: 'AVAX',
-        icon: '/assets/icons/token/ico.op.svg',
+        icon: '/assets/icons/token/ico.avax.svg',
       },
     ],
     apy: 21.34,

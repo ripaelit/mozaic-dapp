@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import DesktopMenu from '../menu/DesktopMenu';
 
 // nav hamburger menu
 export default function MenuBtn() {
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+
   return (
     <>
-      <div className='menu-btn-container'>
+      <div onClick={() => setShowMenu(!showMenu)} className='menu-btn-container'>
         <div className='hover-bg'></div>
         <img src='/assets/icons/menu/ico.menu.btn.svg' alt='' />
       </div>
+      {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
       <style jsx>{`
         .menu-btn-container {
           position: relative;

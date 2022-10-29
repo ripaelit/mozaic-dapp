@@ -6,14 +6,13 @@ import Slider from '../common/Slider';
 
 // product card component
 export default function ProductCard({ product }: { product: ProductType }) {
-  const id = product.id;
-
   return (
     <>
       <Link
         href={{
           pathname: `/products/${product.name.replace(' ', '-')}`,
-          query: { id: product.id },
+          // pathname: `/products/`,
+          query: { id: product.id, name: product.name },
         }}>
         <div className='product-card-container'>
           <div className='gradient-overlay'></div>
