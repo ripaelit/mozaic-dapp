@@ -11,7 +11,6 @@ export default function ProductCard({ product }: { product: ProductType }) {
       <Link
         href={{
           pathname: `/products/${product.name.replace(' ', '-')}`,
-          // pathname: `/products/`,
           query: { id: product.id, name: product.name },
         }}>
         <div className='product-card-container'>
