@@ -7,14 +7,14 @@ export default function DesktopMenu({ showMenu, setShowMenu }: any) {
     <>
       <div className='arrow'></div>
       <div className='menu-container'>
-        <OutsideClickHandler onOutsideClick={() => setShowMenu(false)}>
-          {menuItems.map((item) => (
-            <div onClick={() => setShowMenu(false)} key={item.id} className='menu-item-wrapper'>
-              <img src={item.icon} alt='' />
-              <p>{item.name}</p>
-            </div>
-          ))}
-        </OutsideClickHandler>
+        {/* <OutsideClickHandler onOutsideClick={() => setShowMenu(false)}> */}
+        {menuItems.map((item) => (
+          <div onClick={() => setShowMenu(false)} key={item.id} className='menu-item-wrapper'>
+            <img src={item.icon} alt='' />
+            <p>{item.name}</p>
+          </div>
+        ))}
+        {/* </OutsideClickHandler> */}
       </div>
       <style jsx>{`
         .arrow {

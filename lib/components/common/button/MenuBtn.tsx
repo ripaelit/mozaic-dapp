@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import OutsideClickHandler from 'react-outside-click-handler';
 import DesktopMenu from '../menu/DesktopMenu';
 
 // nav hamburger menu
@@ -7,11 +8,14 @@ export default function MenuBtn() {
 
   return (
     <>
-      <div onClick={() => setShowMenu(!showMenu)} className='menu-btn-container'>
-        <div className='hover-bg'></div>
-        <img src='/assets/icons/menu/ico.menu.btn.svg' alt='' />
-      </div>
-      {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
+      {' '}
+      <OutsideClickHandler onOutsideClick={() => setShowMenu(false)}>
+        <div onClick={() => setShowMenu(!showMenu)} className='menu-btn-container'>
+          <div className='hover-bg'></div>
+          <img src='/assets/icons/menu/ico.menu.btn.svg' alt='' />
+        </div>
+        {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
+      </OutsideClickHandler>
       <style jsx>{`
         .menu-btn-container {
           position: relative;
