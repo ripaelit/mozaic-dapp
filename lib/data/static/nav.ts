@@ -1,6 +1,6 @@
-import { menuItemType, navItemType } from '../../types/common';
+import { MenuItemType, NavItemTyoe } from '../../types/common';
 
-export const navItems: navItemType[] = [
+export const navItems: NavItemTyoe[] = [
   {
     id: 0,
     name: 'Products',
@@ -23,7 +23,7 @@ export const navItems: navItemType[] = [
   },
 ];
 
-export const menuItems: menuItemType[] = [
+export const menuItems: MenuItemType[] = [
   {
     id: 0,
     name: 'Mozaic',
