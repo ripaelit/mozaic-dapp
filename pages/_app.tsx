@@ -6,6 +6,10 @@ import { Provider } from 'react-redux';
 import { store } from '../lib/redux/configureStore';
 import Head from 'next/head';
 import AppLayout from '../lib/AppLayout';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // Application wrapper
 const AppContainer = ({ children }: { children: JSX.Element }) => {
