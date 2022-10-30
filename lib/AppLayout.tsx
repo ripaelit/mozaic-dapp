@@ -13,7 +13,6 @@ export default function AppLayout({ children }: { children: JSX.Element }) {
           display: flex;
           flex-direction: column;
           min-width: 100vw;
-          justify-content: center;
           align-items: center;
           min-height: 100%;
           padding: 0 30px;
