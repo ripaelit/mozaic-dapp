@@ -14,7 +14,11 @@ const Home: NextPage = () => {
         <PageTitle title='Our Products' />
         <ProductList />
       </main>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .products-container {
+          height: 100%;
+        }
+      `}</style>
     </>
   );
 };
