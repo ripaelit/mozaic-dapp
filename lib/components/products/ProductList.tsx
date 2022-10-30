@@ -38,6 +38,7 @@ export default function ProductList() {
       <div className='product-list-container'>
         {!loading ? (
           !error ? (
+            // product list
             productList &&
             productList!.map((product) => <ProductCard key={product.id} product={product} />)
           ) : (

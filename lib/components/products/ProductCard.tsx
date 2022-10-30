@@ -18,10 +18,14 @@ export default function ProductCard({ product }: { product: ProductType }) {
           <div className='product-icon-wrapper'>
             <img className='product-icon' src={product.icon} alt='' />
           </div>
-          <ProductTitle product={product} />
-          <ProductAPY product={product} />
-          <Deposit product={product} />
-          <Position product={product} />
+          <section className='top'>
+            <ProductTitle product={product} />
+            <ProductAPY product={product} />
+            <Deposit product={product} />
+          </section>
+          <section className='bottom'>
+            <Position product={product} />
+          </section>
         </div>
       </Link>
       <style jsx>{`
@@ -31,6 +35,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
           flex-direction: column;
           max-width: 360px;
           width: 100%;
+          height: 530px;
           min-width: 320px;
           margin-top: 60px;
           padding: 20px;
@@ -41,6 +46,12 @@ export default function ProductCard({ product }: { product: ProductType }) {
           cursor: pointer;
           border: 2px solid var(--cardBgPrimary);
           transition: all 0.2s ease;
+          justify-content: space-between;
+        }
+        section {
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
         }
 
         .product-card-container:hover {
@@ -194,22 +205,24 @@ const Deposit = ({ product }: { product: ProductType }) => {
           </h4>
         </div>
         {/* price change */}
-        <div className='label-wrapper'>
-          <p className='label'>24h Price Change:</p>
-          <div className='price-change'>
-            {product.priceChange !== 0 && (
-              <img
-                src={
-                  product.priceChange! > 0
-                    ? '/assets/icons/ico.up.svg'
-                    : '/assets/icons/ico.down.svg'
-                }
-                alt=''
-              />
-            )}
-            <h4 className='price-change-counter'>{product.priceChange}%</h4>
+        {product.priceChange && (
+          <div className='label-wrapper'>
+            <p className='label'>24h Price Change:</p>
+            <div className='price-change'>
+              {product.priceChange !== 0 && (
+                <img
+                  src={
+                    product.priceChange! > 0
+                      ? '/assets/icons/ico.up.svg'
+                      : '/assets/icons/ico.down.svg'
+                  }
+                  alt=''
+                />
+              )}
+              <h4 className='price-change-counter'>{product.priceChange}%</h4>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <style jsx>{`
         .current-dep-container {
