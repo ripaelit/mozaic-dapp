@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "json-server": "json-server --watch ./lib/data/dummy/db.json --port 8080"
   },
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
