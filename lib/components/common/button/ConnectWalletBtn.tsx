@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function ConnectWalletBtn() {
+export default function ConnectWalletBtn({
+  setShowConnectWalletModal,
+  showConnectWalletModal,
+}: {
+  setShowConnectWalletModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showConnectWalletModal: boolean;
+}) {
   const walletIcons = [
     {
       state: 'not-connected',
@@ -22,9 +28,19 @@ export default function ConnectWalletBtn() {
   const [currentWallet, setCurrentWallet] = useState(walletIcons[0].icon);
   const [walletStateText, setWalletStateText] = useState('Connect Wallet');
 
+  useEffect(() => {
+    showConnectWalletModal
+      ? setWalletStateText('Connecting...')
+      : setWalletStateText('Connect Wallet');
+  }, [showConnectWalletModal]);
+
   return (
     <>
-      <div className='wallet-btn-container solid'>
+      <div
+        className='wallet-btn-container solid'
+        onClick={() => {
+          setShowConnectWalletModal(true);
+        }}>
         <img className='wallet-btn-icon' src={currentWallet} alt='' />
         <p className='btn-text'>{walletStateText}</p>
       </div>

@@ -1,0 +1,59 @@
+import React from 'react';
+
+export default function PrimaryBtn({
+  text = 'Button',
+  type = 'default',
+  icon,
+  onClick = () => {
+    console.log('button pressed');
+  },
+}: {
+  text?: string;
+  type?: string;
+  icon?: string;
+  onClick?: Function;
+}) {
+  return (
+    <>
+      <div className={`primary-btn-container ${type}`}>
+        <div className='btn-bg'></div>
+        {icon && <img src={icon} alt='' />}
+        <p>{text}</p>
+      </div>
+      <style jsx>{`
+        .primary-btn-container {
+          position: relative;
+          width: 100%;
+          border-radius: 30px;
+          height: 60px;
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+          font-weight: 600;
+          cursor: pointer;
+          border: 1px solid;
+          user-select: none;
+        }
+
+        .default {
+          color: var(--bg);
+          background-color: var(--textPrimary);
+          border-color: var(--textPrimary);
+        }
+
+        .default:hover {
+          background-color: var(--textPrimaryT1);
+          color: var(--textPrimary);
+        }
+
+        .default:active {
+          background-color: var(--textPrimaryT1);
+          color: var(--primary);
+          border-color: var(--primary);
+        }
+      `}</style>
+    </>
+  );
+}
