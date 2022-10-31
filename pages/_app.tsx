@@ -26,6 +26,7 @@ const AppContainer = ({ children }: { children: JSX.Element }) => {
           --primary: #f3deb7;
           --primaryDark: #eec083;
           --textPrimary: #ffffff;
+          --textPrimaryT1: #ffffff20;
           --textSecondary: #777e91;
           --textLabel: #b1b5c3;
           --alert: #ffd500;

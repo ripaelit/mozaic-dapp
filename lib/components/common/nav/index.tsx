@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { navItems } from '../../../data/static/nav';
 import ConnectWalletBtn from '../button/ConnectWalletBtn';
 import MenuBtn from '../button/MenuBtn';
+import ConnectWalletModal from '../modal/ConnectWalletModal';
 
 export default function Nav() {
   const router: any = useRouter();
@@ -13,6 +14,8 @@ export default function Nav() {
     if (router.asPath === path) return 'active';
     return '';
   };
+
+  const [showConnectWalletModal, setShowConnectWalletModal] = useState<boolean>(false);
 
   return (
     <>
@@ -39,11 +42,15 @@ export default function Nav() {
           </section>
           {/* nav menu section */}
           <section className='col menu-wrapper'>
-            <ConnectWalletBtn />
+            <ConnectWalletBtn
+              setShowConnectWalletModal={setShowConnectWalletModal}
+              showConnectWalletModal={showConnectWalletModal}
+            />
             <MenuBtn />
           </section>
         </div>
       </div>
+      {showConnectWalletModal && <ConnectWalletModal setShowModal={setShowConnectWalletModal} />}
 
       <style jsx>{`
         .nav-container {

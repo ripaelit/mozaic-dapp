@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Modal from '../lib/components/common/modal/Modal';
 import PageTitle from '../lib/components/common/PageTitle';
 import ProductList from '../lib/components/products/ProductList';
 
@@ -16,7 +17,11 @@ const Home: NextPage = () => {
       </main>
       <style jsx>{`
         .products-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           height: 100%;
+          width: 100%;
         }
       `}</style>
     </>
