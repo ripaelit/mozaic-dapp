@@ -22,6 +22,7 @@ export default function PageTitle({
       </div>
       <style jsx>{`
         .page-title-container {
+          width: 100%;
           margin-top: 30px;
           margin-bottom: 30px;
           display: flex;
