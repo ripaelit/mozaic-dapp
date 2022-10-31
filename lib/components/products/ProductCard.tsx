@@ -47,6 +47,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
           border: 2px solid var(--cardBgPrimary);
           transition: all 0.2s ease;
           justify-content: space-between;
+          user-select: none;
         }
         section {
           display: flex;
@@ -55,7 +56,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
         }
 
         .product-card-container:hover {
-          box-shadow: 0px 34px 100px -16px ${product.color + 80};
+          box-shadow: 0px 20px 50px -16px ${product.color + 80};
           z-index: 1;
           transform: scale(1.0125);
         }

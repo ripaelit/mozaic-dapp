@@ -47,8 +47,8 @@ export default function ProductList() {
           )
         ) : (
           // on loading this loader component will be shown
-
           <>
+            <ProductCardLoader />
             <ProductCardLoader />
             <ProductCardLoader />
           </>
@@ -56,15 +56,16 @@ export default function ProductList() {
       </div>
       <style jsx>{`
         .product-list-container {
-          width: 100%;
           height: 100%;
+          width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-direction: row;
-          gap: 30px;
           flex-wrap: wrap;
-          margin-bottom: 96px;
+          gap: 30px;
+          padding-bottom: 96px;
+          overflow-y: hidden;
         }
       `}</style>
     </>
