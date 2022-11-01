@@ -7,12 +7,14 @@ export default function DesktopMenu({ showMenu, setShowMenu }: any) {
     <>
       <div className='arrow'></div>
       <div className='menu-container'>
+        {/* <OutsideClickHandler onOutsideClick={() => setShowMenu(false)}> */}
         {menuItems.map((item) => (
           <div onClick={() => setShowMenu(false)} key={item.id} className='menu-item-wrapper'>
             <img src={item.icon} alt='' />
             <p>{item.name}</p>
           </div>
         ))}
+        {/* </OutsideClickHandler> */}
       </div>
       <style jsx>{`
         .arrow {
@@ -20,15 +22,15 @@ export default function DesktopMenu({ showMenu, setShowMenu }: any) {
           height: 20px;
           border-radius: 8px 0 0 0;
           position: absolute;
-          top: 54px;
-          right: 12px;
+          top: 74px;
+          right: 40px;
           transform: rotate(45deg);
           background-color: var(--cardBgPrimary);
         }
         .menu-container {
           position: absolute;
-          top: 64px;
-          right: -10px;
+          top: 84px;
+          right: 20px;
           display: flex;
           flex-direction: column;
           width: 280px;
