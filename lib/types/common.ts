@@ -1,4 +1,6 @@
-export type NavItemTyoe = {
+// nav item types
+
+export type NavItemType = {
   id: any;
   name: string;
   path: string;
@@ -11,8 +13,34 @@ export type MenuItemType = {
   icon: string;
 };
 
+// loader error types
+
 export type LoadErrorType = {
   message: string;
   status: number;
   code: string;
+};
+
+// modal button types
+
+export enum ModalBtnType {
+  default = 'default',
+  disabled = 'disabled',
+  warning = 'warning',
+  inProgress = 'inProgress',
+}
+
+export type DefaultBtnType = {
+  text: string;
+  icon?: string;
+  type?: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+};
+
+// wallet item types
+
+export type WalletItemType = {
+  id: any;
+  name: string;
+  icon: string;
 };
