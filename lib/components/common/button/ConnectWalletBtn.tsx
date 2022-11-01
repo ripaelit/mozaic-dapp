@@ -1,4 +1,8 @@
+import { useWeb3React } from '@web3-react/core';
+import { InjectedConnector } from '@web3-react/injected-connector';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import WalletDetailMenu from '../menu/WalletDetailMenu';
 
 export default function ConnectWalletBtn({
   setShowConnectWalletModal,
@@ -7,44 +11,83 @@ export default function ConnectWalletBtn({
   setShowConnectWalletModal: React.Dispatch<React.SetStateAction<boolean>>;
   showConnectWalletModal: boolean;
 }) {
+  const web3reactContext = useWeb3React();
+
   const walletIcons = [
     {
       state: 'not-connected',
-      wallet: '',
+      connector: '',
       icon: '/assets/icons/menu/button/ico.addWallet.svg',
     },
     {
       state: 'connected',
-      wallet: 'metamask',
-      icon: '/assets/icons/menu/button/ico.wallet.metamask.svg',
+      connector: 'metamask',
+      icon: '/assets/icons/wallet/ico.wallet.metamask.svg',
     },
     {
       state: 'not-connected',
-      wallet: 'wallet-connect',
-      icon: '/assets/icons/menu/button/ico.wallet.walletconnect.svg',
+      connector: 'wallet-connect',
+      icon: '/assets/icons/wallet/ico.wallet.walletconnect.svg',
     },
   ];
 
   const [currentWallet, setCurrentWallet] = useState(walletIcons[0].icon);
   const [walletStateText, setWalletStateText] = useState('Connect Wallet');
+  const [showWalletDetailMenu, setShowWalletDetailMenu] = useState(false);
 
   useEffect(() => {
-    showConnectWalletModal
-      ? setWalletStateText('Connecting...')
-      : setWalletStateText('Connect Wallet');
-  }, [showConnectWalletModal]);
+    !web3reactContext.account
+      ? showConnectWalletModal
+        ? setWalletStateText('Connecting...')
+        : setWalletStateText('Connect Wallet')
+      : setWalletStateText(
+          '...' +
+            web3reactContext.account.substring(
+              web3reactContext.account.length,
+              web3reactContext.account.length - 5
+            )
+        );
+    console.log(JSON.stringify(web3reactContext.connector));
+  }, [showConnectWalletModal, web3reactContext.account]);
+
+  const onWalletBtnClick = () => {
+    !web3reactContext.account
+      ? setShowConnectWalletModal(true)
+      : setShowWalletDetailMenu(!showWalletDetailMenu);
+  };
+
+  // dispatch notification on wallet connect
+  useEffect(() => {
+    console.log(web3reactContext.account);
+
+    web3reactContext.account &&
+      toast.success(`Wallet ${web3reactContext.account} connected!`, {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
+  }, [web3reactContext.account]);
 
   return (
     <>
-      <div
-        className='wallet-btn-container solid'
-        onClick={() => {
-          setShowConnectWalletModal(true);
-        }}>
-        <img className='wallet-btn-icon' src={currentWallet} alt='' />
-        <p className='btn-text'>{walletStateText}</p>
+      <div className='wallet-container'>
+        <div className='wallet-btn-container solid' onClick={onWalletBtnClick}>
+          <img className='wallet-btn-icon' src={currentWallet} alt='' />
+          <p className='btn-text'>{walletStateText}</p>
+        </div>
+        {showWalletDetailMenu && (
+          <WalletDetailMenu showMenu={showWalletDetailMenu} setShowMenu={setShowWalletDetailMenu} />
+        )}
       </div>
       <style jsx>{`
+        .wallet-container {
+          position: relative;
+        }
         .wallet-btn-container {
           display: flex;
           flex-direction: row;
@@ -70,6 +113,12 @@ export default function ConnectWalletBtn({
         .solid:hover {
           background-color: transparent;
           color: var(--textPrimary);
+        }
+
+        .solid:active {
+          background-color: transparent;
+          border: 1px solid var(--primary);
+          color: var(--primary);
         }
 
         .solid > .wallet-btn-icon {

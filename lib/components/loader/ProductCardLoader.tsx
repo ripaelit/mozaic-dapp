@@ -24,7 +24,6 @@ export default function ProductCardLoader() {
           flex-direction: column;
           max-width: 360px;
           width: 100%;
-          min-width: 320px;
           margin-top: 60px;
           padding: 20px;
           padding-top: 48px;

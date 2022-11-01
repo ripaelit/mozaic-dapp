@@ -1,6 +1,6 @@
-import { MenuItemType, NavItemTyoe } from '../../types/common';
+import { MenuItemType, NavItemType, WalletItemType } from '../../types/common';
 
-export const navItems: NavItemTyoe[] = [
+export const navItems: NavItemType[] = [
   {
     id: 0,
     name: 'Products',
@@ -53,5 +53,18 @@ export const menuItems: MenuItemType[] = [
     name: 'Governance',
     path: '/',
     icon: '/assets/icons/menu/ico.menu.governance.svg',
+  },
+];
+
+export const wallets: WalletItemType[] = [
+  {
+    id: 0,
+    name: 'Metamask',
+    icon: '/assets/icons/wallet/ico.wallet.metamask.svg',
+  },
+  {
+    id: 1,
+    name: 'Wallet Connect',
+    icon: '/assets/icons/wallet/ico.wallet.walletconnect.svg',
   },
 ];
