@@ -9,16 +9,20 @@ export default function MenuBtn() {
   return (
     <>
       {' '}
-      <OutsideClickHandler onOutsideClick={() => setShowMenu(false)}>
-        <div onClick={() => setShowMenu(!showMenu)} className='menu-btn-container'>
-          <div className='hover-bg'></div>
-          <img src='/assets/icons/menu/ico.menu.btn.svg' alt='' />
-        </div>
-        {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
-      </OutsideClickHandler>
+      <div className='menu-btn-container'>
+        <OutsideClickHandler onOutsideClick={() => setShowMenu(false)}>
+          <div onClick={() => setShowMenu(!showMenu)} className='menu-btn-wrapper'>
+            <div className='hover-bg'></div>
+            <img src='/assets/icons/menu/ico.menu.btn.svg' alt='' />
+          </div>
+          {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
+        </OutsideClickHandler>
+      </div>
       <style jsx>{`
         .menu-btn-container {
           position: relative;
+        }
+        .menu-btn-wrapper {
           width: 48px;
           height: 48px;
           transition: all 0.2s ease;
@@ -39,11 +43,11 @@ export default function MenuBtn() {
           transition: all 0.2s ease;
         }
 
-        .menu-btn-container:hover > .hover-bg {
+        .menu-btn-wrapper:hover > .hover-bg {
           opacity: 0.3;
         }
 
-        .menu-btn-container:active > .hover-bg {
+        .menu-btn-wrapper:active > .hover-bg {
           opacity: 0.3;
           background-color: transparent;
         }

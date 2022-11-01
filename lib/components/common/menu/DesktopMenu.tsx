@@ -22,15 +22,15 @@ export default function DesktopMenu({ showMenu, setShowMenu }: any) {
           height: 20px;
           border-radius: 8px 0 0 0;
           position: absolute;
-          top: 74px;
-          right: 40px;
+          top: 54px;
+          right: 12px;
           transform: rotate(45deg);
           background-color: var(--cardBgPrimary);
         }
         .menu-container {
           position: absolute;
-          top: 84px;
-          right: 20px;
+          top: 64px;
+          right: -10px;
           display: flex;
           flex-direction: column;
           width: 280px;
