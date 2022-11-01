@@ -1,29 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { DefaultBtnType, ModalBtnType } from '../../../types/common';
 import PrimaryBtn from '../button/PrimaryBtn';
 
 export default function Modal({
   title = 'Modal Title',
+  width = '600px',
   children,
-  onClick,
   setModalVisibility,
-  btnText,
   showBtn = true,
+  modalBtn = {
+    text: 'Modal Button',
+    type: ModalBtnType.default,
+    onClick: () => {
+      console.log('modal button pressed');
+    },
+  },
 }: {
   title: string;
+  width?: string;
   children: JSX.Element;
-  onClick?: Function;
   setModalVisibility: Function;
-  btnText?: string;
   showBtn?: boolean;
+  modalBtn?: DefaultBtnType;
 }) {
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     setShowModal(true);
   }, []);
 
+  // close modal function
   const closeModal = () => {
-    setModalVisibility(false);
+    setShowModal(false);
+    setTimeout(() => {
+      setModalVisibility(false);
+    }, 500);
   };
 
   return (
@@ -40,7 +51,7 @@ export default function Modal({
             <div className='modal-body-wrapper'>{children}</div>
             {showBtn && (
               <div className='default-btn-wrapper'>
-                <PrimaryBtn onClick={onClick} text={btnText} />
+                <PrimaryBtn {...modalBtn} />
               </div>
             )}
           </div>
@@ -58,7 +69,7 @@ export default function Modal({
           justify-content: center;
           background-color: #00000080;
           z-index: 10;
-          transition: all 0.5s ease;
+          transition: backdrop-filter 0.5s ease;
         }
 
         .show-overlay {
@@ -69,8 +80,8 @@ export default function Modal({
           display: flex;
           flex-direction: column;
           gap: 32px;
-          width: 600px;
-          max-width: 600px;
+          max-width: ${width};
+          width: 100vw;
           background-color: var(--cardBgPrimary);
           padding: 32px;
           border-radius: 20px;
@@ -108,6 +119,12 @@ export default function Modal({
 
         .close-btn-container:active {
           border-color: var(--alert);
+        }
+
+        @media screen and (max-width: 430px) {
+          .modal-container {
+            padding: 32px 16px;
+          }
         }
       `}</style>
     </>
