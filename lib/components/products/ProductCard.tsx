@@ -36,7 +36,6 @@ export default function ProductCard({ product }: { product: ProductType }) {
           max-width: 360px;
           width: 100%;
           height: 530px;
-          min-width: 320px;
           margin-top: 60px;
           padding: 20px;
           padding-top: 48px;
@@ -57,7 +56,6 @@ export default function ProductCard({ product }: { product: ProductType }) {
 
         .product-card-container:hover {
           box-shadow: 0px 20px 50px -16px ${product.color + 80};
-          z-index: 1;
           transform: scale(1.0125);
         }
 
@@ -248,6 +246,10 @@ const Deposit = ({ product }: { product: ProductType }) => {
             : product.priceChange! < 0
             ? 'var(--alertNegative)'
             : 'var(--textPrimary)'};
+          text-align: right;
+        }
+        h4 {
+          text-align: right;
         }
       `}</style>
     </>

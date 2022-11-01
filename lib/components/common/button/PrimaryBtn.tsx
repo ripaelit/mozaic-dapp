@@ -1,4 +1,5 @@
 import React from 'react';
+import { DefaultBtnType, ModalBtnType } from '../../../types/common';
 
 export default function PrimaryBtn({
   text = 'Button',
@@ -7,15 +8,12 @@ export default function PrimaryBtn({
   onClick = () => {
     console.log('button pressed');
   },
-}: {
-  text?: string;
-  type?: string;
-  icon?: string;
-  onClick?: Function;
-}) {
+}: DefaultBtnType) {
   return (
     <>
-      <div className={`primary-btn-container ${type}`}>
+      <div
+        className={`primary-btn-container ${type}`}
+        onClick={type === ModalBtnType.disabled ? undefined : onClick}>
         <div className='btn-bg'></div>
         {icon && <img src={icon} alt='' />}
         <p>{text}</p>
@@ -53,6 +51,13 @@ export default function PrimaryBtn({
           color: var(--primary);
           border-color: var(--primary);
         }
+
+        .disabled {
+          background-color: var(--textPrimaryT1);
+          border-color: var(--textPrimaryT1);
+          cursor: default;
+          font-weight: 400;
+          color: var(--textLabel);
       `}</style>
     </>
   );

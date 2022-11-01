@@ -1,6 +1,9 @@
 import '../styles/globals.scss';
 import '../styles/layout.scss';
 import '../styles/colors.scss';
+import { Web3ReactProvider } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
+import Web3 from 'web3';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { store } from '../lib/redux/configureStore';
@@ -46,12 +49,18 @@ const AppContainer = ({ children }: { children: JSX.Element }) => {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const getLibrary = (provider: any) => {
+    const library = new Web3(provider);
+    return library;
+  };
   return (
     // Redux wrapper
     <Provider store={store}>
-      <AppContainer>
-        <Component {...pageProps} />
-      </AppContainer>
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <AppContainer>
+          <Component {...pageProps} />
+        </AppContainer>
+      </Web3ReactProvider>
     </Provider>
   );
 }
