@@ -12,7 +12,7 @@ export default function MenuBox({ children }: { children: JSX.Element }) {
           border-radius: 8px 0 0 0;
           position: absolute;
           top: 54px;
-          right: 12px;
+          right: 16px;
           transform: rotate(45deg);
           background-color: var(--cardBgPrimary);
           transition: all 0.2s ease;
@@ -30,6 +30,13 @@ export default function MenuBox({ children }: { children: JSX.Element }) {
           backdrop-filter: blur(16px);
           border-radius: 16px;
           background-color: var(--cardBgPrimary);
+        }
+
+        @media screen and (max-width: 460px) {
+          .menu-container {
+            width: calc(100vw - 50px);
+            right: -64px;
+          }
         }
       `}</style>
     </>

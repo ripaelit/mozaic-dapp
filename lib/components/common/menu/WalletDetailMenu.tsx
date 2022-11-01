@@ -70,6 +70,8 @@ export default function WalletDetailMenu({ showMenu, setShowMenu }: any) {
           display: flex;
           gap: 16px;
           cursor: pointer;
+          justify-content: space-between;
+          align-items: center;
         }
 
         .wallet-details:hover {
