@@ -1,6 +1,7 @@
 import '../styles/globals.scss';
 import '../styles/layout.scss';
 import '../styles/colors.scss';
+import '../styles/notification.scss';
 import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import Web3 from 'web3';
@@ -10,8 +11,12 @@ import { store } from '../lib/redux/configureStore';
 import Head from 'next/head';
 import AppLayout from '../lib/AppLayout';
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
 
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL
+  ? process.env.NEXT_PUBLIC_BASE_URL
+  : 'http://localhost:8080';
+
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // Application wrapper
@@ -56,6 +61,18 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     // Redux wrapper
     <Provider store={store}>
+      <ToastContainer
+        position='bottom-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='dark'
+      />
       <Web3ReactProvider getLibrary={getLibrary}>
         <AppContainer>
           <Component {...pageProps} />

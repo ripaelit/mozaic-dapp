@@ -1,5 +1,6 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { wallets } from '../../../data/static/nav';
 import { injected, resetWalletConnector, walletconnect } from '../../../helpers/connectors';
 import { DefaultBtnType, ModalBtnType } from '../../../types/common';
@@ -18,23 +19,15 @@ export default function ConnectWalletModal({ setShowModal }: { setShowModal: Fun
 
   const [modalBtn, setModalBtn] = useState<DefaultBtnType>(initialBtn);
 
-  //web3react context
-  const checkInfo = async () => {
-    try {
-      console.log('web3reactContext');
-      console.log(web3reactContext);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   //web3react metamask
   const connectMetamask = async () => {
     try {
-      await web3reactContext.activate(injected).then(() => {
-        setShowModal(false);
-      });
-      checkInfo();
+      await web3reactContext
+        .activate(injected)
+        .then(() => {
+          setShowModal(false);
+        })
+        .then();
     } catch (error) {
       console.log(error);
     }
@@ -57,15 +50,6 @@ export default function ConnectWalletModal({ setShowModal }: { setShowModal: Fun
       setSelectedWallet(null);
     } else {
       setSelectedWallet(wallet);
-    }
-  };
-
-  const handleConnectWallet = (wallet: number): void => {
-    if (wallet === 0) {
-      connectMetamask();
-    }
-    if (wallet === 1) {
-      connectWalletConnect();
     }
   };
 
