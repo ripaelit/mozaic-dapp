@@ -34,7 +34,7 @@ export type DefaultBtnType = {
   text: string;
   icon?: string;
   type?: string;
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClick: undefined | React.MouseEventHandler<HTMLDivElement>;
 };
 
 // wallet item types
