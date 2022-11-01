@@ -1,6 +1,7 @@
 import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from '@web3-react/injected-connector';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import WalletDetailMenu from '../menu/WalletDetailMenu';
 
 export default function ConnectWalletBtn({
@@ -54,6 +55,23 @@ export default function ConnectWalletBtn({
       ? setShowConnectWalletModal(true)
       : setShowWalletDetailMenu(!showWalletDetailMenu);
   };
+
+  // dispatch notification on wallet connect
+  useEffect(() => {
+    console.log(web3reactContext.account);
+
+    web3reactContext.account &&
+      toast.success(`Wallet ${web3reactContext.account} connected!`, {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
+  }, [web3reactContext.account]);
 
   return (
     <>

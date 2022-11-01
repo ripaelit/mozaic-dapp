@@ -1,6 +1,7 @@
 import { useWeb3React } from '@web3-react/core';
 import React from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { toast } from 'react-toastify';
 import Separator from '../Separator';
 import MenuBox from './MenuBox';
 
@@ -17,19 +18,30 @@ export default function WalletDetailMenu({ showMenu, setShowMenu }: any) {
   const handleWalletRemoval = (): void => {
     removeWallet();
     setShowMenu(false);
-    // dispatchNotification({
-    //   type: 'ERROR',
-    //   message: `Wallet disconnected!`,
-    // });
+    toast.warning(`Wallet disconnected!`, {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    });
   };
 
   function copy() {
     setShowMenu(false);
-
-    // dispatch({
-    //   type: 'SUCCESS',
-    //   message: 'Wallet address copied to clipboard!',
-    // });
+    toast.info(`Wallet address copied to clipboard.`, {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    });
     navigator.clipboard.writeText(web3reactContext.account!);
   }
   return (
