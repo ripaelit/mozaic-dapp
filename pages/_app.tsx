@@ -44,6 +44,7 @@ const AppContainer = ({ children }: { children: JSX.Element }) => {
           --tabActive: #272b30;
           --tabInactive: #111315;
           --cardBgPrimary: #1e1f25;
+          --cardBgPrimaryT1: #1e1f25c1;
           --inputBtnBgPrimary: #23262f;
           --sliderGrad: linear-gradient(90deg, #f7931a 0%, #eec083 100%);
           --bg: #141518;

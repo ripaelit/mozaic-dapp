@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import DesktopMenu from '../menu/DesktopMenu';
+import MobileMenu from '../menu/MobileMenu';
 
 // nav hamburger menu
 export default function MenuBtn() {
@@ -15,9 +16,11 @@ export default function MenuBtn() {
           <div className='desktop-menu-wrapper'>
             {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
           </div>
-          {/* {showMenu && <DesktopMenu setShowMenu={setShowMenu} />} */}
         </div>
       </OutsideClickHandler>
+      <div className='mobile-menu-wrapper'>
+        <MobileMenu setSMenuVisibility={setShowMenu} menuVisibility={showMenu} />
+      </div>
       <style jsx>{`
         .menu-btn-container {
           position: relative;
@@ -58,6 +61,19 @@ export default function MenuBtn() {
           width: 100%;
           position: absolute;
           bottom: 0;
+        }
+
+        .mobile-menu-wrapper {
+          display: none;
+        }
+
+        @media (max-width: 730px) {
+          .desktop-menu-wrapper {
+            display: none;
+          }
+          .mobile-menu-wrapper {
+            display: block;
+          }
         }
       `}</style>
     </>

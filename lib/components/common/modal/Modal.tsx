@@ -59,7 +59,7 @@ export default function Modal({
       </div>
       <style jsx>{`
         .modal-bg-overlay {
-          position: absolute;
+          position: fixed;
           top: 0;
           left: 0;
           width: 100vw;
