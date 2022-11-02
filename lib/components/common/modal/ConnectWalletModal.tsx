@@ -1,7 +1,7 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { wallets } from '../../../data/static/nav';
+import { wallets } from '../../../data/static/wallet';
 import { injected, resetWalletConnector, walletconnect } from '../../../helpers/connectors';
 import { DefaultBtnType, ModalBtnType } from '../../../types/common';
 import Modal from './Modal';
@@ -22,14 +22,11 @@ export default function ConnectWalletModal({ setShowModal }: { setShowModal: Fun
   //web3react metamask
   const connectMetamask = async () => {
     try {
-      await web3reactContext
-        .activate(injected)
-        .then(() => {
-          setShowModal(false);
-        })
-        .then();
+      await web3reactContext.activate(injected).then(() => {
+        setShowModal(false);
+      });
     } catch (error) {
-      console.log(error);
+      console.log('err', error);
     }
   };
 

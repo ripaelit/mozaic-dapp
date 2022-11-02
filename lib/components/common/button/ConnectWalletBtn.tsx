@@ -1,6 +1,8 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { networks, networkIdleStates } from '../../../data/static/wallet';
+import { NetworkItemType } from '../../../types/common';
 import WalletDetailMenu from '../menu/WalletDetailMenu';
 
 export default function ConnectWalletBtn({
@@ -12,41 +14,30 @@ export default function ConnectWalletBtn({
 }) {
   const web3reactContext = useWeb3React();
 
-  const walletIcons = [
-    {
-      state: 'not-connected',
-      connector: '',
-      icon: '/assets/icons/menu/button/ico.addWallet.svg',
-    },
-    {
-      state: 'connected',
-      connector: 'metamask',
-      icon: '/assets/icons/wallet/ico.wallet.metamask.svg',
-    },
-    {
-      state: 'not-connected',
-      connector: 'wallet-connect',
-      icon: '/assets/icons/wallet/ico.wallet.walletconnect.svg',
-    },
-  ];
-
-  const [currentWallet, setCurrentWallet] = useState(walletIcons[0].icon);
+  // initial network
+  const [currentNetwork, setCurrentNetwork] = useState<NetworkItemType>(networks[0]);
   const [walletStateText, setWalletStateText] = useState('Connect Wallet');
   const [showWalletDetailMenu, setShowWalletDetailMenu] = useState(false);
 
   useEffect(() => {
-    !web3reactContext.account
-      ? showConnectWalletModal
-        ? setWalletStateText('Connecting...')
-        : setWalletStateText('Connect Wallet')
-      : setWalletStateText(
-          '...' +
-            web3reactContext.account.substring(
-              web3reactContext.account.length,
-              web3reactContext.account.length - 5
-            )
-        );
-    console.log(JSON.stringify(web3reactContext.connector));
+    if (!web3reactContext.account) {
+      if (showConnectWalletModal) {
+        setWalletStateText(networkIdleStates[1].name);
+        setCurrentNetwork(networkIdleStates[1]);
+      }
+      if (!showConnectWalletModal) {
+        setWalletStateText(networkIdleStates[0].name);
+        setCurrentNetwork(networkIdleStates[0]);
+      }
+    } else {
+      setWalletStateText(
+        '...' +
+          web3reactContext.account.substring(
+            web3reactContext.account.length,
+            web3reactContext.account.length - 5
+          )
+      );
+    }
   }, [showConnectWalletModal, web3reactContext.account]);
 
   const onWalletBtnClick = () => {
@@ -74,13 +65,39 @@ export default function ConnectWalletBtn({
 
   // dispatch notification & change icon on mainNet change
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(web3reactContext.chainId);
+
+    if (!web3reactContext.chainId) {
+      setCurrentNetwork(networkIdleStates[0]);
+      return;
+    } else {
+      networks.map((item) => {
+        if (item.chainID === web3reactContext.chainId) {
+          setCurrentNetwork(item);
+          toast.info(`Connected to ${item.name} network`, {
+            position: 'bottom-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+          });
+          return;
+        }
+      });
+    }
+  }, [web3reactContext.chainId]);
 
   return (
     <>
       <div className='wallet-container'>
-        <div className='wallet-btn-container solid' onClick={onWalletBtnClick}>
-          <img className='wallet-btn-icon' src={currentWallet} alt='' />
+        <div
+          className={`wallet-btn-container ${!web3reactContext.account ? 'solid' : 'outlined'}`}
+          onClick={onWalletBtnClick}>
+          <img className='network-icon' src={currentNetwork.icon} alt='' />
           <p className='btn-text'>{walletStateText}</p>
         </div>
         <div className='wallet-detail-menu-wrapper'>
@@ -88,6 +105,7 @@ export default function ConnectWalletBtn({
             <WalletDetailMenu
               showMenu={showWalletDetailMenu}
               setShowMenu={setShowWalletDetailMenu}
+              currentNetwork={currentNetwork}
             />
           )}
         </div>
@@ -105,18 +123,24 @@ export default function ConnectWalletBtn({
           height: 48px;
           max-width: 190px;
           align-items: center;
-          border-radius: 12px;
+          border-radius: 30px;
           font-weight: 500;
           font-size: 0.95rem;
           line-height: 1rem;
-          padding: 0 16px;
           transition: all 0.2s ease;
+        }
+
+        .network-icon {
+          height: 16px;
+          width: 16px;
+          object-fit: contain;
         }
 
         .solid {
           background-color: var(--textPrimary);
           color: var(--bg);
           border: 1px solid var(--textPrimary);
+          padding: 0 16px;
         }
 
         .solid:hover {
@@ -130,19 +154,37 @@ export default function ConnectWalletBtn({
           color: var(--primary);
         }
 
-        .solid > .wallet-btn-icon {
+        .solid > .network-icon {
           transition: all 0.2s ease;
         }
 
-        .solid:hover > .wallet-btn-icon {
+        .solid:hover > .network-icon {
           filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(325deg) brightness(102%)
             contrast(101%);
         }
 
-        .wallet-btn-icon {
-          height: 16px;
-          width: 16px;
-          object-fit: contain;
+        .outlined {
+          background-color: transparent;
+          color: var(--textLabel);
+          border: 1px solid var(--textLabel);
+          padding: 0 16px 0px 12px;
+        }
+
+        .outlined > .network-icon {
+          transition: all 0.2s ease;
+          height: 24px;
+          width: 24px;
+        }
+
+        .outlined:hover {
+          background-color: transparent;
+          color: var(--primary);
+          border: 1px solid var(--primary);
+        }
+
+        .outlined:hover > .network-icon {
+          filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(325deg) brightness(102%)
+            contrast(101%);
         }
 
         .wallet-detail-menu-wrapper {
