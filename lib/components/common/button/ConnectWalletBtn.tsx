@@ -15,10 +15,11 @@ export default function ConnectWalletBtn({
   const web3reactContext = useWeb3React();
 
   // initial network
-  const [currentNetwork, setCurrentNetwork] = useState<NetworkItemType>(networks[0]);
+  const [currentNetwork, setCurrentNetwork] = useState<NetworkItemType>(networkIdleStates[0]);
   const [walletStateText, setWalletStateText] = useState('Connect Wallet');
   const [showWalletDetailMenu, setShowWalletDetailMenu] = useState(false);
 
+  // change wallet button text based on current status
   useEffect(() => {
     if (!web3reactContext.account) {
       if (showConnectWalletModal) {
