@@ -8,13 +8,15 @@ export default function MenuBtn() {
 
   return (
     <>
-      {' '}
       <OutsideClickHandler onOutsideClick={() => setShowMenu(false)}>
         <div onClick={() => setShowMenu(!showMenu)} className='menu-btn-container'>
           <div className='hover-bg'></div>
           <img src='/assets/icons/menu/ico.menu.btn.svg' alt='' />
+          <div className='desktop-menu-wrapper'>
+            {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
+          </div>
+          {/* {showMenu && <DesktopMenu setShowMenu={setShowMenu} />} */}
         </div>
-        {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
       </OutsideClickHandler>
       <style jsx>{`
         .menu-btn-container {
@@ -23,7 +25,11 @@ export default function MenuBtn() {
           height: 48px;
           transition: all 0.2s ease;
           cursor: pointer;
-          transition: all 0.2s ease;
+        }
+
+        img {
+          margin: 0;
+          padding: 0;
         }
 
         .hover-bg {
@@ -46,6 +52,12 @@ export default function MenuBtn() {
         .menu-btn-container:active > .hover-bg {
           opacity: 0.3;
           background-color: transparent;
+        }
+
+        .desktop-menu-wrapper {
+          width: 100%;
+          position: absolute;
+          bottom: 0;
         }
       `}</style>
     </>
