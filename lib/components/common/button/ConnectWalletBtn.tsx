@@ -1,5 +1,4 @@
 import { useWeb3React } from '@web3-react/core';
-import { InjectedConnector } from '@web3-react/injected-connector';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import WalletDetailMenu from '../menu/WalletDetailMenu';
@@ -58,7 +57,7 @@ export default function ConnectWalletBtn({
 
   // dispatch notification on wallet connect
   useEffect(() => {
-    console.log(web3reactContext.account);
+    console.log(web3reactContext);
 
     web3reactContext.account &&
       toast.success(`Wallet ${web3reactContext.account} connected!`, {
@@ -73,6 +72,10 @@ export default function ConnectWalletBtn({
       });
   }, [web3reactContext.account]);
 
+  // dispatch notification & change icon on mainNet change
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <div className='wallet-container'>
@@ -80,12 +83,18 @@ export default function ConnectWalletBtn({
           <img className='wallet-btn-icon' src={currentWallet} alt='' />
           <p className='btn-text'>{walletStateText}</p>
         </div>
-        {showWalletDetailMenu && (
-          <WalletDetailMenu showMenu={showWalletDetailMenu} setShowMenu={setShowWalletDetailMenu} />
-        )}
+        <div className='wallet-detail-menu-wrapper'>
+          {showWalletDetailMenu && (
+            <WalletDetailMenu
+              showMenu={showWalletDetailMenu}
+              setShowMenu={setShowWalletDetailMenu}
+            />
+          )}
+        </div>
       </div>
       <style jsx>{`
         .wallet-container {
+          height: 48px;
           position: relative;
         }
         .wallet-btn-container {
@@ -134,6 +143,12 @@ export default function ConnectWalletBtn({
           height: 16px;
           width: 16px;
           object-fit: contain;
+        }
+
+        .wallet-detail-menu-wrapper {
+          width: 100%;
+          position: absolute;
+          bottom: 0;
         }
 
         @media (max-width: 420px) {
