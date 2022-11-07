@@ -8,17 +8,17 @@ export const productsData = [
       {
         id: 0,
         name: 'USDC',
-        icon: '/assets/icons/token/ico.usdc.svg',
+        icon: '/assets/icons/assets/ico.usdc.svg',
       },
       {
         id: 1,
         name: 'USDT',
-        icon: '/assets/icons/token/ico.usdt.svg',
+        icon: '/assets/icons/assets/ico.usdt.svg',
       },
       {
         id: 2,
         name: 'BUSD',
-        icon: '/assets/icons/token/ico.busd.svg',
+        icon: '/assets/icons/assets/ico.busd.svg',
       },
     ],
     apy: 11.6,
@@ -37,22 +37,22 @@ export const productsData = [
       {
         id: 0,
         name: 'ETH',
-        icon: '/assets/icons/token/ico.eth.svg',
+        icon: '/assets/icons/assets/ico.eth.svg',
       },
       {
         id: 1,
         name: 'BNB',
-        icon: '/assets/icons/token/ico.bnb.svg',
+        icon: '/assets/icons/assets/ico.bnb.svg',
       },
       {
         id: 2,
         name: 'OP',
-        icon: '/assets/icons/token/ico.op.svg',
+        icon: '/assets/icons/assets/ico.op.svg',
       },
       {
         id: 3,
         name: 'AVAX',
-        icon: '/assets/icons/token/ico.avax.svg',
+        icon: '/assets/icons/assets/ico.avax.svg',
       },
     ],
     apy: 21.34,
