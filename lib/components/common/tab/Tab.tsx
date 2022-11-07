@@ -40,6 +40,7 @@ export default function Tab({
         }
         .tab-item {
           width: 100px;
+          flex: 1;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -52,6 +53,18 @@ export default function Tab({
           background-color: var(--tabActive);
           box-shadow: 0px 4px 8px -4px rgba(0, 0, 0, 0.25), inset 0px -1px 1px rgba(0, 0, 0, 0.04),
             inset 0px 2px 0px rgba(255, 255, 255, 0.06);
+        }
+
+        @media screen and (max-width: 625px) {
+          .tab-container {
+            width: 100%;
+          }
+        }
+        @media screen and (max-width: 425px) {
+          .tab-item {
+            width: auto;
+            padding: 0 10px 0 10px;
+          }
         }
       `}</style>
     </>
