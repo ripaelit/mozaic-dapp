@@ -1,5 +1,5 @@
 import React from 'react';
-import { knowledgeBaseData } from '../../data/static/productInDepthData';
+import { knowledgeBaseData } from '../../data/static/productInDepth';
 import PrimaryCard from '../common/card/PrimaryCard';
 
 export default function KnowledgeBase() {
