@@ -34,6 +34,7 @@ export default function PrimaryCard({
               {title.indicatorVisible && <div className='solid-indicator'></div>}
               <h2>{title.text}</h2>
             </div>
+            {tab && tab}
           </div>
         )}
         {!description ? children : <p className='card-description'>{description}</p>}
@@ -49,6 +50,13 @@ export default function PrimaryCard({
           width: ${width};
           ${style ? style : ''}
         }
+        .card-title-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
         .title-text-wrapper {
           display: flex;
           align-items: center;
@@ -62,6 +70,11 @@ export default function PrimaryCard({
         }
         .card-description {
           color: var(--textSecondary);
+        }
+        @media screen and (max-width: 425px) {
+          .product-info-card-container {
+            padding: 32px 16px 32px 16px;
+          }
         }
       `}</style>
     </>
