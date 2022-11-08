@@ -191,7 +191,7 @@ export default function Chart({ timeline = '1d' }: { timeline: string }) {
     const refTime = new Date().getTime() - distance;
     for (let i = 0; i < series.length; i++) {
       const filteredData = series[i].data.filter((time) => refTime < time[0]);
-      data.push({ ...dataStream, data: filteredData });
+      data.push({ ...series[i], data: filteredData });
     }
     setDataStream(data);
   };
