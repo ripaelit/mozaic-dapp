@@ -1,12 +1,13 @@
 import React from 'react';
-import Separator from '../common/Separator';
+import { strategies, tokenDetailsTableItems } from '../../data/static/productInDepth';
+import ProgressBar from '../common/progressBar/ProgressBar';
 
 const tokenData = [
   {
     id: 0,
     name: 'USDC',
     icon: '/assets/icons/assets/ico.usdc.svg',
-    allocation: 54,
+    allocation: 30,
     apy: 0.0,
     strategy: 0,
   },
@@ -14,7 +15,7 @@ const tokenData = [
     id: 1,
     name: 'USDT',
     icon: '/assets/icons/assets/ico.usdt.svg',
-    allocation: 54,
+    allocation: 79,
     apy: -21.4,
     strategy: 1,
   },
@@ -25,54 +26,6 @@ const tokenData = [
     allocation: 54,
     apy: 12.1,
     strategy: 2,
-  },
-];
-
-const strategies = [
-  {
-    id: 0,
-    name: 'None',
-    icon: '/assets/icons/products/productInDepth/ico.none.svg',
-    className: 'none',
-  },
-  {
-    id: 1,
-    name: 'Lending',
-    icon: '/assets/icons/products/productInDepth/ico.lending.svg',
-    className: 'lending',
-  },
-  {
-    id: 2,
-    name: 'Staking',
-    icon: '/assets/icons/products/productInDepth/ico.staking.svg',
-    className: 'staking',
-  },
-];
-
-const tokenDetailsTableItems = [
-  {
-    id: 0,
-    name: 'Asset Name',
-    sortable: true,
-    className: 'asset-name',
-  },
-  {
-    id: 1,
-    name: 'Allocation',
-    sortable: true,
-    className: 'allocation',
-  },
-  {
-    id: 2,
-    name: 'APY',
-    sortable: true,
-    className: 'apy',
-  },
-  {
-    id: 3,
-    name: 'Strategy',
-    sortable: false,
-    className: 'strategy',
   },
 ];
 
@@ -97,7 +50,6 @@ export default function TokenDetails() {
             </tr>
           </thead>
 
-          <div className='test'></div>
           <tbody>
             {tokenData.map((asset) => (
               <tr key={asset.id}>
@@ -105,15 +57,18 @@ export default function TokenDetails() {
                   <img src={asset.icon} alt='' /> <p>{asset.name}</p>
                 </td>
                 <td className={'allocation-body'}>
-                  <p>{asset.allocation}%</p>
+                  <div className='allocation-body-wrapper'>
+                    <p>{asset.allocation}%</p>
+                    <ProgressBar value={asset.allocation} />
+                  </div>
                 </td>
                 <td className={'apy-body'}>{asset.apy}%</td>
                 <td className={'strategy-body'}>
                   {strategies.map((strategy) => (
                     <React.Fragment key={strategy.id}>
                       {strategy.id === asset.strategy && (
-                        <div className={`strategy-item-wrapper ${strategy.className}`}>
-                          <div className='strategy-item'>
+                        <div className={`strategy-item-wrapper `}>
+                          <div className={`strategy-item ${strategy.className}`}>
                             <img src={strategy.icon} alt='' />
                             <p>{strategy.name}</p>
                           </div>
@@ -132,13 +87,13 @@ export default function TokenDetails() {
           width: 30%;
         }
         .col-2 {
-          width: 40%;
+          width: 30%;
         }
         .col-3 {
           width: 20%;
         }
         .col-4 {
-          width: 10%;
+          width: 20%;
         }
         .token-detail-container {
           width: 100%;
@@ -150,8 +105,15 @@ export default function TokenDetails() {
         .table-header {
           font-size: 0.875rem;
           height: 80px;
-          margin-bottom: 16px;
         }
+
+        tbody::before {
+          line-height: 1.5em;
+          display: block;
+          content: '-';
+          color: transparent;
+        }
+
         th {
           font-weight: 300;
           color: var(--textSecondary);
@@ -180,6 +142,11 @@ export default function TokenDetails() {
           gap: 16px;
           align-items: center;
         }
+        .allocation-body-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+        }
         .strategy-item-wrapper {
           display: flex;
           font-size: 0.75rem;
@@ -189,18 +156,32 @@ export default function TokenDetails() {
         }
         .strategy-item {
           display: flex;
-          background-color: red;
           width: 96px;
           gap: 6px;
           padding: 8px 12px;
           border-radius: 8px;
         }
+
+        .strategy-item.none {
+          background: #ef5db51a;
+        }
+        .strategy-item.lending {
+          background: #5d5fef1a;
+        }
+        .strategy-item.staking {
+          background: #e8ef5d1a;
+        }
+
         @media (max-width: 600px) {
           .strategy-item {
-            width: auto;
+            width: min-content;
+            padding: 8px;
           }
           .strategy-item > p {
             display: none;
+          }
+          .allocation-body-wrapper {
+            gap: 16px;
           }
         }
         @media (max-width: 450px) {
@@ -208,6 +189,7 @@ export default function TokenDetails() {
             display: none;
           }
         }
+
         @media screen and (max-width: 375px) {
           th {
             padding: 0 4px 0 4px;
