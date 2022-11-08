@@ -3,8 +3,9 @@ import Head from 'next/head';
 import PageTitle from '../../lib/components/common/PageTitle';
 import { useRouter } from 'next/router';
 import KnowledgeBase from '../../lib/components/productInDepth/KnowledgeBase';
-import PrimaryCard from '../../lib/components/common/card/PrimaryCard';
 import ProductDetails from '../../lib/components/productInDepth/ProductDetails';
+import ProductSummary from '../../lib/components/productInDepth/ProductSummary';
+import ProductChart from '../../lib/components/productInDepth/charts/ProductChart';
 
 export default function Product() {
   const router = useRouter();
@@ -32,6 +33,8 @@ export default function Product() {
             icon: '/assets/icons/ico.back.svg',
           }}
         />
+        <ProductChart />
+        <ProductSummary />
         <ProductDetails />
         <KnowledgeBase />
       </main>
@@ -43,6 +46,7 @@ export default function Product() {
           height: 100%;
           width: 100%;
           gap: 32px;
+          padding-bottom: 96px;
         }
       `}</style>
     </>
