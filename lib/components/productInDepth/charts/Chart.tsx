@@ -1,16 +1,9 @@
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
-import { generateChart } from '../../../data/dummy/RandomChartData';
+import { ChartDataType } from '../../../types/product';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
-
-const series = [
-  { name: 'Yo Bro', id: 0, data: generateChart(150, 1) },
-  { name: 'Yo Sis', id: 1, data: generateChart(150, 1) },
-  { name: 'Yo mama', id: 1, data: generateChart(150, 1) },
-  { name: 'Yo dada', id: 1, data: generateChart(150, 1) },
-];
 
 const options: any = {
   chart: {
@@ -29,13 +22,13 @@ const options: any = {
       enabled: true,
       opacity: 1,
       blur: 2,
-      color: ['#E91E63', '#FF9800', '#ae93fA', '#66DA26', '#546E7A'],
+      color: ['#FF9800', '#E91E63', '#ae93fA', '#66DA26', '#546E7A'],
       top: 0,
       left: 0,
     },
     theme: 'dark',
   },
-  colors: ['#E91E63', '#FF9800', '#ae93fA', '#66DA26', '#546E7A'],
+  colors: ['#FF9800', '#E91E63', '#ae93fA', '#66DA26', '#546E7A'],
 
   stroke: {
     curve: 'smooth',
@@ -47,10 +40,8 @@ const options: any = {
     borderColor: 'var(--graphGrid)',
     strokeDashArray: [5, 2],
     position: 'back',
-    xaxis: {
-      lines: {
-        show: true,
-      },
+    lines: {
+      show: true,
     },
     yaxis: {
       lines: {
@@ -81,7 +72,6 @@ const options: any = {
   },
   xaxis: {
     type: 'datetime',
-    // min: new Date('01 Mar 2021').getTime(),
     min: undefined,
     max: new Date().getTime(),
     tickAmount: 10,
@@ -99,6 +89,8 @@ const options: any = {
   },
   yaxis: {
     labels: {
+      offsetX: -16,
+      offsetY: 0,
       style: {
         colors: 'var(--textSecondary)',
       },
@@ -137,19 +129,22 @@ const options: any = {
     show: true,
     position: 'top',
     horizontalAlign: 'left',
-    markers: {
-      customHTML: function () {
-        return '<p>Hello</p>';
-      },
-    },
+    markers: {},
   },
 };
 
-export default function Chart({ timeline = '1d' }: { timeline: string }) {
+export default function Chart({
+  timeline = '1d',
+  series,
+}: {
+  timeline: string;
+  series: ChartDataType[];
+}) {
   const [chartOptions, setChartOptions] = useState(options);
   const [dataStream, setDataStream] = useState(series);
   const now = new Date();
 
+  // filter chart data by timeline
   const filterBy = (timeline: string) => {
     switch (timeline) {
       case '1d':
@@ -241,70 +236,3 @@ export default function Chart({ timeline = '1d' }: { timeline: string }) {
     </>
   );
 }
-
-// filter chart data by timeline
-// const updateData = (timeline: string) => {
-//   // const ApexCharts = window.ApexCharts;
-//   switch (timeline) {
-//     case '1d':
-//       ApexCharts.exec(
-//         'area-datetime',
-//         'zoomX',
-//         new Date(now.getTime() - 8.64e7).getTime(),
-//         now.getTime()
-//       );
-//       break;
-//     case '1w':
-//       ApexCharts.exec(
-//         'area-datetime',
-//         'zoomX',
-//         new Date(now.getTime() - 6.048e8).getTime(),
-//         now.getTime()
-//       );
-//       break;
-//     case '1mo':
-//       ApexCharts.exec(
-//         'area-datetime',
-//         'zoomX',
-//         new Date(now.getTime() - 2.628e9).getTime(),
-//         now.getTime()
-//       );
-//       break;
-//     case '3mo':
-//       ApexCharts.exec(
-//         'area-datetime',
-//         'zoomX',
-//         new Date(now.getTime() - 7.884e9).getTime(),
-//         now.getTime()
-//       );
-//       break;
-//     case '6mo':
-//       ApexCharts.exec(
-//         'area-datetime',
-//         'zoomX',
-//         new Date(now.getTime() - 1.577e10).getTime(),
-//         now.getTime()
-//       );
-//       break;
-//     case '1y':
-//       ApexCharts.exec(
-//         'area-datetime',
-//         'zoomX',
-//         new Date(now.setFullYear(now.getFullYear() - 1)).getTime(),
-//         now.getTime()
-//       );
-//       break;
-//     case 'ytd':
-//       ApexCharts.exec(
-//         'area-datetime',
-//         'zoomX',
-//         new Date(now.getFullYear(), 0, 1).getTime(),
-//         now.getTime()
-//       );
-//       break;
-//     case 'all':
-//       ApexCharts.exec('area-datetime', 'zoomX', new Date('23 Jan 2012').getTime(), now.getTime());
-//       break;
-//     default:
-//   }
-// };
