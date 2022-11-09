@@ -84,3 +84,9 @@ let product = {
     ],
   },
 };
+
+export interface ChartDataType {
+  id: any;
+  name: string;
+  data: number[][];
+}
