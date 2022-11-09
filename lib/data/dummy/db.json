@@ -61,5 +61,76 @@
       "priceChange": 5.6
     }
   ],
-  "productDetails": []
+  "productDetails": [
+    {
+      "id": 0,
+      "name": "Stable Coin",
+      "icon": "/assets/icons/products/ico.stablecoin.svg",
+      "color": "#2EBAC6",
+      "balance": 2558,
+      "chartData": {
+        "vaultApy": [{}]
+      },
+      "summary": [
+        {
+          "id": 0,
+          "name": "Assets under management",
+          "icon": "/assets/icons/products/productInDepth/ico.managedassets.svg",
+          "value": 75000,
+          "prefix": "$"
+        },
+        {
+          "id": 1,
+          "name": "Average monthly return",
+          "icon": "/assets/icons/products/productInDepth/ico.avaragemonthlyreturn.svg",
+          "value": 23,
+          "suffix": "%"
+        },
+        {
+          "id": 2,
+          "name": "Last months average APY",
+          "icon": "/assets/icons/products/productInDepth/ico.lastmonthsapy.svg",
+          "value": 6,
+          "suffix": "%"
+        },
+        {
+          "id": 3,
+          "name": "Predicted APY",
+          "icon": "/assets/icons/products/productInDepth/ico.predictedapy.svg",
+          "value": 4,
+          "suffix": "%"
+        }
+      ],
+      "details": {
+        "tokenDetails": [
+          {
+            "id": 0,
+            "name": "USDC",
+            "icon": "/assets/icons/assets/ico.usdc.svg",
+            "allocation": 30,
+            "apy": 0,
+            "strategy": 0
+          },
+          {
+            "id": 1,
+            "name": "USDT",
+            "icon": "/assets/icons/assets/ico.usdt.svg",
+            "allocation": 79,
+            "apy": -21.4,
+            "strategy": 1
+          },
+          {
+            "id": 2,
+            "name": "BUSD",
+            "icon": "/assets/icons/assets/ico.busd.svg",
+            "allocation": 54,
+            "apy": 12.1,
+            "strategy": 2
+          }
+        ],
+        "matrixDetails": {},
+        "strategyDetails": {}
+      }
+    }
+  ]
 }
