@@ -10,8 +10,8 @@ export default function ProductCard({ product }: { product: ProductType }) {
     <>
       <Link
         href={{
-          pathname: `/products/${product.name.replace(' ', '-')}`,
-          query: { id: product.id, name: product.name },
+          pathname: `/products/${product.name.toLowerCase().replace(' ', '-')}`,
+          query: { id: product.id },
         }}>
         <div className='product-card-container'>
           <div className='gradient-overlay'></div>
