@@ -23,7 +23,6 @@ export default function ProductList() {
         }, 3000);
       })
       .catch((err) => {
-        console.log(err);
         setError({
           message: err.message,
           status: err.status,
