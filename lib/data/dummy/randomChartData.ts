@@ -1,5 +1,5 @@
 export const generateChart = (count: number, interval: number, startFrom?: number) => {
-  let arr = [];
+  let arr: any = [];
   const timeGap = interval * 3.6e6;
   let time = startFrom ? startFrom : new Date().getTime();
   for (let i = 0; i < count; i++) {
