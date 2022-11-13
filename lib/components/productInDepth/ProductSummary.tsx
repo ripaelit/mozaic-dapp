@@ -55,10 +55,13 @@ export default function ProductSummary() {
       <style jsx>{`
         .product-summary-container {
           display: flex;
+          gap: 16px;
+          flex-wrap: wrap;
         }
         .product-summary-wrapper {
           display: flex;
           flex: 1;
+          min-width: 240px;
           align-items: center;
           gap: 16px;
         }
