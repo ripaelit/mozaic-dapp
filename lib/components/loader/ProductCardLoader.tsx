@@ -30,7 +30,7 @@ export default function ProductCardLoader() {
           border-radius: 15px;
           background-color: var(--cardBgPrimary);
           gap: 30px;
-          cursor: pointer;
+          cursor: default;
           border: 2px solid var(--cardBgPrimary);
           transition: all 0.2s ease;
           animation: opacity 2s ease infinite;
@@ -46,19 +46,6 @@ export default function ProductCardLoader() {
           100% {
             opacity: 0.25;
           }
-        }
-
-        .product-card-loader-container:hover {
-          box-shadow: 0px 34px 100px -16px var(--textSecondary);
-          z-index: 1;
-          transform: scale(1.0125);
-        }
-
-        .product-card-loader-container:active {
-          box-shadow: 0px 14px 20px -16px var(--textSecondary);
-          z-index: 1;
-          transform: scale(1);
-          border: 2px solid var(--textSecondary);
         }
 
         .product-icon-wrapper {
