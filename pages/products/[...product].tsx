@@ -14,7 +14,6 @@ import PageErrorReloader from '../../lib/components/common/error/PageErrorReload
 export default function Product() {
   const router = useRouter();
   const query: any = router.query;
-  console.log(query);
 
   // loading state
   const [loading, setLoading] = useState<boolean>(true);
@@ -98,6 +97,7 @@ export default function Product() {
           display: flex;
           width: 100%;
           gap: 32px;
+          flex-wrap: wrap;
         }
       `}</style>
     </>
