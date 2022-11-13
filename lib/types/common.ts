@@ -52,4 +52,4 @@ export type NetworkItemType = {
   icon: string;
 };
 
-export type TabItem = { id: any; name: string };
+export type TabItem = { id: any; name: string; value?: string };

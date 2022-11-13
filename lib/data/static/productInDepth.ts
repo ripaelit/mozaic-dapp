@@ -13,6 +13,8 @@ export const knowledgeBaseData = [
   },
 ];
 
+export const productChartOption = [];
+
 // token Details
 
 export const tokenDetailsTableItems = [

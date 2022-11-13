@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DepositeWithdrawBtn from '../common/button/DepositeWithdrawBtn';
+import DepositWithdrawBtn from '../common/button/DepositWithdrawBtn';
 import PrimaryCard from '../common/card/PrimaryCard';
 
 export default function ProductInfo({ product }: any) {
@@ -16,12 +16,19 @@ export default function ProductInfo({ product }: any) {
                 <img src={product.icon} alt='' />
                 <h2>{product.name}</h2>
               </div>
-              <div className='balance'>
+              <div className='balance b-d'>
                 <p>Balance</p>
                 <h1>${product.balance}</h1>
               </div>
             </div>
-            <DepositeWithdrawBtn />
+
+            <div className='deposit-withdraw-btn-wrapper'>
+              <div className='balance b-t'>
+                <p>Balance</p>
+                <h1>${product.balance}</h1>
+              </div>
+              <DepositWithdrawBtn />
+            </div>
           </div>
         </PrimaryCard>
       </div>
@@ -73,6 +80,65 @@ export default function ProductInfo({ product }: any) {
         }
         .balance > p {
           color: var(--textSecondary);
+        }
+
+        .balance.b-t {
+          display: none;
+        }
+
+        .deposit-withdraw-btn-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 8px;
+          width: 100%;
+        }
+
+        @media screen and (max-width: 850px) and (min-width: 600px) {
+          .product-info-container {
+            width: 100%;
+          }
+
+          .product-info-wrapper {
+            flex-direction: row;
+            justify-content: space-between;
+          }
+          .basic-info {
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+          }
+          .product {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+          }
+
+          .balance {
+            gap: 8px;
+            flex-direction: row;
+          }
+          .balance > h1 {
+            font-size: 1.8rem;
+          }
+          .product > img {
+            width: 64px;
+            height: 64px;
+          }
+          .balance.b-t {
+            display: flex;
+          }
+          .balance.b-d {
+            display: none;
+          }
+        }
+
+        @media screen and (max-width: 825px) {
+          .product-info-container {
+            width: 100%;
+          }
         }
       `}</style>
     </>

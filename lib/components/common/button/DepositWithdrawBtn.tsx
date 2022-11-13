@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import DepositModal from '../modal/depositModal';
 
-export default function DepositeWithdrawBtn() {
+export default function DepositWithdrawBtn() {
+  const [openDepositModal, setOpenDepositModal] = useState(false);
+  const [openWithdrawModal, setOpenWithdrawModal] = useState(false);
+
   return (
     <>
       <div className='transaction-btn-container'>
-        <div className='btn deposit-btn'>Deposit</div>
+        <div
+          className='btn deposit-btn'
+          onClick={() => {
+            setOpenDepositModal(true);
+          }}>
+          Deposit
+        </div>
         <div className='btn withdraw-btn'>Withdraw</div>
       </div>
+      {openDepositModal && <DepositModal setOpenDepositModal={setOpenDepositModal} />}
       <style jsx>{`
         .transaction-btn-container {
           width: 100%;
@@ -34,6 +45,11 @@ export default function DepositeWithdrawBtn() {
           box-shadow: 0px 4px 8px -4px rgba(0, 0, 0, 0.25), inset 0px -1px 1px rgba(0, 0, 0, 0.04),
             inset 0px 2px 0px rgba(255, 255, 255, 0.06);
           border-radius: 8px;
+        }
+        @media screen and (max-width: 600px) {
+          .transaction-btn-container {
+            max-width: none;
+          }
         }
       `}</style>
     </>

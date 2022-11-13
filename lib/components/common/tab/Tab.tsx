@@ -3,18 +3,20 @@ import { TabItem } from '../../../types/common';
 import { activeChecker } from '../../../utils/common';
 
 export default function Tab({
-  data,
+  tabs,
   currentTab,
   setCurrentTab,
+  style,
 }: {
-  data: TabItem[];
+  tabs: TabItem[];
   currentTab: TabItem;
   setCurrentTab: Dispatch<SetStateAction<TabItem>>;
+  style?: string;
 }) {
   return (
     <>
       <div className='tab-container'>
-        {data.map((tab) => (
+        {tabs.map((tab) => (
           <div
             key={tab.id}
             className={`tab-item ${activeChecker(tab.name, currentTab.name)}`}
@@ -37,6 +39,8 @@ export default function Tab({
           font-size: 0.875rem;
           border-radius: 12px;
           transition: all 0.2s ease;
+          user-select: none;
+          ${style ? style : ''}
         }
         .tab-item {
           width: 100px;
@@ -53,6 +57,7 @@ export default function Tab({
           background-color: var(--tabActive);
           box-shadow: 0px 4px 8px -4px rgba(0, 0, 0, 0.25), inset 0px -1px 1px rgba(0, 0, 0, 0.04),
             inset 0px 2px 0px rgba(255, 255, 255, 0.06);
+          font-weight: bold;
         }
 
         @media screen and (max-width: 625px) {
