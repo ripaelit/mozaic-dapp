@@ -20,7 +20,7 @@ export default function Modal({
   title: string;
   width?: string;
   children: JSX.Element;
-  setModalVisibility: Function;
+  setModalVisibility: React.Dispatch<React.SetStateAction<boolean>>;
   showBtn?: boolean;
   modalBtn?: DefaultBtnType;
 }) {

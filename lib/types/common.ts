@@ -51,3 +51,5 @@ export type NetworkItemType = {
   name: string;
   icon: string;
 };
+
+export type TabItem = { id: any; name: string; value?: string };
