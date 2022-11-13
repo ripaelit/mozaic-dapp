@@ -1,10 +1,12 @@
+import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
-import { TabItem } from '../../../../types/common';
+import { ModalBtnType, TabItem } from '../../../../types/common';
 import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
 import InputBox from '../../input/InputBox';
 import InputWithLabel from '../../input/InputWithLabel';
 import Separator from '../../Separator';
 import Tab from '../../tab/Tab';
+import ConnectWalletModal from '../ConnectWalletModal';
 import Modal from '../Modal';
 import MultiAssets from './MultiAssetsDeposit';
 import SingleAsset from './SingleAssetDeposit';
@@ -44,17 +46,6 @@ const vault = [
   },
 ];
 
-const initialSingleAssetDepositData = {
-  asset: {
-    id: 0,
-    name: '',
-    address: '',
-    decimals: 0,
-    amount: NaN,
-  },
-  totalDepositAmount: 0,
-};
-
 const description = `Add liquidity in underlying pool tokens. First, approve required token to power index smart contract and then click supply.`;
 
 export default function DepositModal({
@@ -62,22 +53,71 @@ export default function DepositModal({
 }: {
   setOpenDepositModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const initialSingleAssetDepositData = {
+    asset: {
+      id: 0,
+      name: '',
+      address: '',
+      decimals: 0,
+      amount: '',
+    },
+    slippage: 0.6,
+    totalDepositAmount: '',
+  };
+
+  const initialMultiAssetsDepositData = {
+    assets: vault.map((asset) => ({
+      id: asset.id,
+      name: asset.name,
+      address: asset.address,
+      decimals: asset.decimals,
+      amount: '',
+      approval: 0,
+    })),
+
+    slippage: 0.6,
+    totalDepositAmount: '',
+  };
+
+  const web3reactContext = useWeb3React();
+
+  const [showConnectWalletModal, setShowConnectWalletModal] = useState<boolean>(false);
+
   const [depositType, setDepositType] = useState(assetTypes[0]);
   const [singleAssetDepositData, setSingleAssetDepositData] = useState(
     initialSingleAssetDepositData
   );
-  const [multiAssetDepositData, setMultiAssetDepositData] = useState();
+  const [multiAssetsDepositData, setMultiAssetsDepositData] = useState(
+    initialMultiAssetsDepositData
+  );
 
   useEffect(() => {
-    console.log('single asset', singleAssetDepositData);
+    // console.log('single asset', singleAssetDepositData);
   }, [singleAssetDepositData]);
   useEffect(() => {
-    console.log('multi assets', multiAssetDepositData);
-  }, [multiAssetDepositData]);
+    // console.log('multi assets', multiAssetsDepositData);
+  }, [multiAssetsDepositData]);
 
   return (
     <>
-      <Modal setModalVisibility={setOpenDepositModal} title='Deposit'>
+      <Modal
+        setModalVisibility={setOpenDepositModal}
+        title='Deposit'
+        modalBtn={
+          !web3reactContext.account
+            ? {
+                text: 'Connect Wallet',
+                type: ModalBtnType.warning,
+                onClick: () => {
+                  setShowConnectWalletModal(true);
+                },
+              }
+            : {
+                text: 'Deposit',
+                type: ModalBtnType.default,
+                onClick: () => {},
+              }
+        }>
         <div className='deposit-modal-wrapper'>
           <Tab
             currentTab={depositType}
@@ -95,14 +135,17 @@ export default function DepositModal({
                 setSingleAssetDepositData={setSingleAssetDepositData}
               />
             )}
-            {/* {depositType.value === 'multi' && (
+            {depositType.value === 'multi' && (
               <MultiAssets
                 vault={vault}
-                multiAssetDepositData={multiAssetDepositData}
-                setMultiAssetDepositData={setMultiAssetDepositData}
+                multiAssetsDepositData={multiAssetsDepositData}
+                setMultiAssetsDepositData={setMultiAssetsDepositData}
               />
-            )} */}
+            )}
           </div>
+          {showConnectWalletModal && (
+            <ConnectWalletModal setShowModal={setShowConnectWalletModal} />
+          )}
         </div>
       </Modal>
       <style jsx>{`
