@@ -6,12 +6,16 @@ export default function InputBox({
   onChange,
   rightElement,
   readOnly = false,
+  placeholder,
+  index,
 }: {
   inputValue: number;
   onChange?: Function;
   inputType?: string;
   rightElement?: JSX.Element;
   readOnly?: boolean;
+  placeholder?: string;
+  index?: number;
 }) {
   return (
     <>
@@ -21,8 +25,9 @@ export default function InputBox({
           min={0}
           readOnly={readOnly}
           value={inputValue}
+          placeholder={placeholder}
           onChange={(e) => {
-            onChange ? onChange(e) : null;
+            onChange ? onChange(e, index && index) : null;
           }}
         />
         <div className='right-element-wrapper'>{rightElement}</div>
@@ -54,6 +59,11 @@ export default function InputBox({
         input::-webkit-inner-spin-button {
           -webkit-appearance: none;
           margin: 0;
+        }
+
+        input::placeholder {
+          font-size: 1rem;
+          padding-left: 8px;
         }
 
         .input-box-container:focus-within {
