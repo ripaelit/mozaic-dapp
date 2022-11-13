@@ -1,9 +1,6 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
 import { ModalBtnType, TabItem } from '../../../../types/common';
-import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
-import InputBox from '../../input/InputBox';
-import InputWithLabel from '../../input/InputWithLabel';
 import Separator from '../../Separator';
 import Tab from '../../tab/Tab';
 import ConnectWalletModal from '../ConnectWalletModal';
