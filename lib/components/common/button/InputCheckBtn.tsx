@@ -10,6 +10,7 @@ export default function InputCheckBtn({
   onMax,
   currentAsset,
   currentDepositData,
+  index,
 }: {
   type?: string;
   text?: string;
@@ -18,6 +19,7 @@ export default function InputCheckBtn({
   onMax?: Function;
   currentAsset: any;
   currentDepositData?: any;
+  index?: number;
 }) {
   const [maxBalance] = useBalance(currentAsset.address, currentAsset.decimals);
   return (
@@ -30,7 +32,7 @@ export default function InputCheckBtn({
           type !== 'max'
             ? onClick
             : () => {
-                onMax!(maxBalance);
+                onMax!(maxBalance, index);
               }
         }>
         {type === 'max' ? 'Max' : text}
