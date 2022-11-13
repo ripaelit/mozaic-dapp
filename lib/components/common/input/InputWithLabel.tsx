@@ -9,6 +9,7 @@ export default function InputWithLabel({
   labelRightElement,
   label = 'Label',
   readOnly,
+  placeholder,
 }: {
   inputValue: number;
   onChange?: Function;
@@ -17,6 +18,7 @@ export default function InputWithLabel({
   labelRightElement?: JSX.Element;
   label: string;
   readOnly?: boolean;
+  placeholder?: string;
 }) {
   return (
     <>
@@ -31,6 +33,7 @@ export default function InputWithLabel({
           inputType={inputType}
           rightElement={rightElement}
           readOnly={readOnly}
+          placeholder={placeholder}
         />
       </div>
       <style jsx>{`
