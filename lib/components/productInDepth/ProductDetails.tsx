@@ -36,7 +36,7 @@ export default function ProductDetails() {
         style={`
             width: 100%;
         `}
-        tab={<Tab data={tabs} currentTab={currentTab} setCurrentTab={setCurrentTab} />}>
+        tab={<Tab tabs={tabs} currentTab={currentTab} setCurrentTab={setCurrentTab} />}>
         {currentTab.name === 'Token' ? (
           <TokenDetails />
         ) : currentTab.name === 'Matrix' ? (
