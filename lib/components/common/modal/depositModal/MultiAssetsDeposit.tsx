@@ -32,6 +32,19 @@ export default function MultiAssets({
     });
   };
 
+  // set Approval status
+  const setApproval = (value: number, index: number) => {
+    const tempAssetDepositData = assetDepositData;
+    tempAssetDepositData.assets[index] = {
+      ...tempAssetDepositData.assets[index],
+      approval: tempAssetDepositData.assets[index].approval === value ? 0 : value,
+    };
+
+    setAssetDepositData({
+      ...tempAssetDepositData,
+    });
+  };
+
   // on input grab the input data
   // on asset change generate the deposit data based on the conversion rate
 
@@ -74,6 +87,20 @@ export default function MultiAssets({
               placeholder={`Enter ${asset.name} amount`}
               rightElement={
                 <>
+                  <InputCheckBtn
+                    text='Approve'
+                    index={index}
+                    value={1}
+                    onClick={setApproval}
+                    active={assetDepositData.assets[index].approval === 1}
+                  />
+                  <InputCheckBtn
+                    text='Infinity Approve'
+                    index={index}
+                    value={Infinity}
+                    onClick={setApproval}
+                    active={assetDepositData.assets[index].approval === Infinity}
+                  />
                   <InputCheckBtn
                     type='max'
                     index={index}
