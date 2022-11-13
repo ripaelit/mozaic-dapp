@@ -4,6 +4,7 @@ import InputCheckBtn from '../../button/InputCheckBtn';
 import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
 import InputBox from '../../input/InputBox';
 import InputWithLabel from '../../input/InputWithLabel';
+import SlippageEditor from '../../input/SlippageEditor';
 
 export default function SingleAsset({
   vault,
@@ -12,6 +13,25 @@ export default function SingleAsset({
 }: any) {
   const [selectedAsset, setSelectedAsset] = useState(vault[0]);
   const [assetDepositData, setAssetDepositData] = useState(singleAssetDepositData);
+
+  // set maximum balance for deposit data
+  const setMaxBalance = (maxBalance: string) => {
+    setAssetDepositData({
+      ...assetDepositData,
+      asset: {
+        ...assetDepositData.asset,
+        amount: parseFloat(maxBalance),
+      },
+    });
+  };
+
+  // set slippage amount
+  const setSlippage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAssetDepositData({
+      ...assetDepositData,
+      slippage: e.target.value,
+    });
+  };
 
   // on input grab the input data
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,24 +69,13 @@ export default function SingleAsset({
     setSingleAssetDepositData(assetDepositData);
   }, [assetDepositData]);
 
-  // set maximum balance for deposit data
-  const setMaxBalance = (maxBalance: string) => {
-    setAssetDepositData({
-      ...assetDepositData,
-      asset: {
-        ...assetDepositData.asset,
-        amount: parseFloat(maxBalance),
-      },
-    });
-    console.log('click', maxBalance);
-  };
-
   return (
     <>
       <InputWithLabel
         label='Enter Amount'
         inputValue={assetDepositData.asset.amount}
         onChange={onInput}
+        placeholder={`Enter ${selectedAsset.name} amount`}
         rightElement={
           <>
             <InputCheckBtn
@@ -86,6 +95,9 @@ export default function SingleAsset({
       <InputWithLabel
         readOnly={true}
         label='mCORE Amount'
+        labelRightElement={
+          <SlippageEditor onChange={setSlippage} value={assetDepositData.slippage} />
+        }
         rightElement={<p>mCore</p>}
         inputValue={assetDepositData.totalDepositAmount}
       />
