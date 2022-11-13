@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import useBalance from '../../../../hooks/useBalance';
 import InputCheckBtn from '../../button/InputCheckBtn';
 import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
-import InputBox from '../../input/InputBox';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
 
