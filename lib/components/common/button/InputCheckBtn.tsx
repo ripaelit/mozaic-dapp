@@ -9,7 +9,7 @@ export default function InputCheckBtn({
   onClick,
   onMax,
   currentAsset,
-  currentDepositData,
+  currentAmount,
   index,
   value,
 }: {
@@ -19,7 +19,7 @@ export default function InputCheckBtn({
   onClick?: Function;
   onMax?: Function;
   currentAsset?: any;
-  currentDepositData?: any;
+  currentAmount?: any;
   index?: number;
   value?: number;
 }) {
@@ -31,13 +31,7 @@ export default function InputCheckBtn({
     <>
       <div
         className={`check-btn-container ${
-          type === 'max'
-            ? maxBalance == currentDepositData.amount
-              ? 'active'
-              : ''
-            : active
-            ? 'active'
-            : ''
+          type === 'max' ? (maxBalance == currentAmount ? 'active' : '') : active ? 'active' : ''
         }`}
         onClick={
           type !== 'max'
