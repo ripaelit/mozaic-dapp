@@ -3,7 +3,6 @@ import '../styles/layout.scss';
 import '../styles/colors.scss';
 import '../styles/notification.scss';
 import { Web3ReactProvider } from '@web3-react/core';
-import { Web3Provider } from '@ethersproject/providers';
 import Web3 from 'web3';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
