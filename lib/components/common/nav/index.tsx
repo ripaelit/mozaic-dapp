@@ -65,7 +65,7 @@ export default function Nav() {
           top: 0;
           left: 0;
           padding: 0px 30px;
-          z-index: 111111;
+          z-index: 11111;
         }
 
         .nav-content-wrapper {
