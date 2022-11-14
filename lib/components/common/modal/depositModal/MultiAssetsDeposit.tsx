@@ -33,11 +33,11 @@ export default function MultiAssets({
   };
 
   // set Approval status
-  const setApproval = (value: number, index: number) => {
+  const setApproval = (value: boolean, index: number) => {
     const tempAssetDepositData = assetDepositData;
     tempAssetDepositData.assets[index] = {
       ...tempAssetDepositData.assets[index],
-      approval: tempAssetDepositData.assets[index].approval === value ? 0 : value,
+      approval: !tempAssetDepositData.assets[index].approval,
     };
 
     setAssetDepositData({
@@ -59,7 +59,7 @@ export default function MultiAssets({
 
     for (let i = 0; i < tempAssetDepositData.assets.length; i++) {
       const assetData = tempAssetDepositData.assets[i];
-      const asset = vault[i];
+      const asset = vault.assets[i];
       sum =
         sum +
         parseFloat(assetData.amount ? assetData.amount : 0) *
@@ -77,7 +77,7 @@ export default function MultiAssets({
   }, [assetDepositData]);
   return (
     <>
-      {vault.map((asset: any, index: any) => {
+      {vault.assets.map((asset: any, index: any) => {
         return (
           <React.Fragment key={index}>
             <InputBox
@@ -92,25 +92,17 @@ export default function MultiAssets({
                     index={index}
                     value={1}
                     onClick={setApproval}
-                    active={assetDepositData.assets[index].approval === 1}
-                  />
-                  <InputCheckBtn
-                    text='Infinity Approve'
-                    index={index}
-                    value={Infinity}
-                    onClick={setApproval}
-                    active={assetDepositData.assets[index].approval === Infinity}
+                    active={assetDepositData.assets[index].approval}
                   />
                   <InputCheckBtn
                     type='max'
                     index={index}
                     onMax={setMaxBalance}
                     currentAsset={asset}
-                    currentDepositData={assetDepositData.assets[index]}
+                    currentAmount={assetDepositData.assets[index].amount}
                   />
                   <div className='asset-display'>
                     <img src={asset.icon} alt='' />
-                    {/* <p>{asset.name}</p> */}
                   </div>
                 </>
               }
@@ -124,7 +116,7 @@ export default function MultiAssets({
         labelRightElement={
           <SlippageEditor onChange={setSlippage} value={assetDepositData.slippage} />
         }
-        rightElement={<p>mCore</p>}
+        rightElement={<p>{vault.name}</p>}
         inputValue={assetDepositData.totalDepositAmount}
       />
       <style jsx>{`

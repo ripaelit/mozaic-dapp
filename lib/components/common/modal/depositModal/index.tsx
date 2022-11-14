@@ -13,35 +13,43 @@ const assetTypes: TabItem[] = [
   { id: 1, name: 'Multi Assets', value: 'multi' },
 ];
 
-const vault = [
-  {
-    id: 0,
-    name: 'USDC',
-    icon: '/assets/icons/assets/ico.usdc.svg',
-    address: '',
-    decimals: 0,
-    conversionRateUSD: 1,
-    conversionRate: 1,
-  },
-  {
-    id: 1,
-    name: 'USDT',
-    icon: '/assets/icons/assets/ico.usdt.svg',
-    address: '',
-    decimals: 0,
-    conversionRateUSD: 1,
-    conversionRate: 2,
-  },
-  {
-    id: 2,
-    name: 'BUSD',
-    icon: '/assets/icons/assets/ico.busd.svg',
-    address: '',
-    decimals: 0,
-    conversionRateUSD: 1,
-    conversionRate: 3,
-  },
-];
+const vault = {
+  id: 0,
+  name: 'mCORE',
+  address: '',
+  decimals: 0,
+  conversionRateUSD: 1,
+  conversionRate: 1,
+  assets: [
+    {
+      id: 0,
+      name: 'USDC',
+      icon: '/assets/icons/assets/ico.usdc.svg',
+      address: '',
+      decimals: 0,
+      conversionRateUSD: 1,
+      conversionRate: 1,
+    },
+    {
+      id: 1,
+      name: 'USDT',
+      icon: '/assets/icons/assets/ico.usdt.svg',
+      address: '',
+      decimals: 0,
+      conversionRateUSD: 1,
+      conversionRate: 2,
+    },
+    {
+      id: 2,
+      name: 'BUSD',
+      icon: '/assets/icons/assets/ico.busd.svg',
+      address: '',
+      decimals: 0,
+      conversionRateUSD: 1,
+      conversionRate: 3,
+    },
+  ],
+};
 
 const description = `Add liquidity in underlying pool tokens. First, approve required token to power index smart contract and then click supply.`;
 
@@ -59,11 +67,13 @@ export default function DepositModal({
       amount: '',
     },
     slippage: 0.6,
+    address: '',
+    decimals: 0,
     totalDepositAmount: '',
   };
 
   const initialMultiAssetsDepositData = {
-    assets: vault.map((asset) => ({
+    assets: vault.assets.map((asset) => ({
       id: asset.id,
       name: asset.name,
       address: asset.address,
@@ -73,6 +83,8 @@ export default function DepositModal({
     })),
 
     slippage: 0.6,
+    address: '',
+    decimals: 0,
     totalDepositAmount: '',
   };
 
