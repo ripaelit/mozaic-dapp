@@ -68,7 +68,7 @@ export default function Modal({
           align-items: center;
           justify-content: center;
           background-color: #00000080;
-          z-index: 10;
+          z-index: 1000;
           transition: backdrop-filter 0.5s ease;
         }
 
@@ -86,6 +86,10 @@ export default function Modal({
           padding: 32px;
           border-radius: 20px;
           transition: all 0.5s ease;
+          max-height: calc(100vh - 90px);
+          overflow: auto;
+          z-index: 999999;
+          margin-top: 90px;
         }
 
         .hide-modal {
@@ -124,6 +128,12 @@ export default function Modal({
         @media screen and (max-width: 430px) {
           .modal-container {
             padding: 32px 16px;
+          }
+        }
+        @media screen and (max-height: 900px) {
+          .modal-container {
+            padding: 16px 16px;
+            gap: 16px;
           }
         }
       `}</style>
