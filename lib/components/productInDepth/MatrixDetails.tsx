@@ -4,62 +4,55 @@ const matrixData = [
   {
     id: 0,
     name: 'Return Month-to-date',
-    currentValue: 37.8,
-    previousValue: 15,
+    value: -5.5,
     icon: '/assets/icons/products/productInDepth/matrix/ico.returnmonth.svg',
   },
   {
     id: 1,
     name: 'Return Quarter-To-Date',
-    currentValue: 37.8,
-    previousValue: 15,
+    value: 6.6,
     icon: '/assets/icons/products/productInDepth/matrix/ico.returnquarter.svg',
   },
   {
     id: 2,
     name: 'Return Year-To-Date',
-    currentValue: 37.8,
-    previousValue: 15,
+    value: 8.4,
     icon: '/assets/icons/products/productInDepth/matrix/ico.returnyear.svg',
   },
   {
     id: 3,
     name: 'Return Inception-To-Date',
-    currentValue: 37.8,
-    previousValue: 15,
+    value: 15.5,
     icon: '/assets/icons/products/productInDepth/matrix/ico.returninception.svg',
   },
   {
     id: 4,
     name: 'Average Month',
-    currentValue: 37.8,
-    previousValue: 15,
+    value: -8.9,
     icon: '/assets/icons/products/productInDepth/matrix/ico.avaragemonth.svg',
   },
   {
     id: 5,
     name: 'Best Month',
-    currentValue: 37.8,
-    previousValue: 15,
+    value: 14.6,
     icon: '/assets/icons/products/productInDepth/matrix/ico.bestmonth.svg',
   },
   {
     id: 6,
     name: 'Worst Month',
-    currentValue: 37.8,
-    previousValue: 15,
+    value: -37.8,
     icon: '/assets/icons/products/productInDepth/matrix/ico.worstmonth.svg',
   },
   {
     id: 7,
-    name: 'Positive Month',
-    value: 37.8,
+    name: 'Positive Months',
+    value: [5],
     icon: '/assets/icons/products/productInDepth/matrix/ico.positivemonth.svg',
   },
   {
     id: 8,
     name: 'Length of Track Record',
-    value: 37.8,
+    value: [1, 5],
     icon: '/assets/icons/products/productInDepth/matrix/ico.lengthtrack.svg',
   },
 ];
@@ -87,8 +80,6 @@ export default function MatrixDetails() {
           <colgroup>
             <col className='col-1' />
             <col className='col-2' />
-            <col className='col-3' />
-            <col className='col-4' />
           </colgroup>
           <thead className='table-header'>
             <tr>
@@ -105,7 +96,45 @@ export default function MatrixDetails() {
                 <td className={'asset-name-body'}>
                   <img src={item.icon} alt='' /> <p>{item.name}</p>
                 </td>
-                <td className={'performance-body'}>{item.value ? item.value : ''}%</td>
+                <td className={'performance-body'}>
+                  <div
+                    className='performance-wrapper'
+                    style={{
+                      color:
+                        typeof item.value === 'number' && item.value! > 0
+                          ? 'var(--alertPositive)'
+                          : item.value! < 0
+                          ? 'var(--alertNegative)'
+                          : 'var(--textPrimary)',
+                      textAlign: 'right',
+                    }}>
+                    {typeof item.value === 'number' && (
+                      <div className='performance-item'>
+                        <p className='counter'>{item.value}%</p>
+                        {item.value !== 0 && (
+                          <img
+                            src={
+                              item.value! > 0
+                                ? '/assets/icons/ico.up.svg'
+                                : '/assets/icons/ico.down.svg'
+                            }
+                            alt=''
+                          />
+                        )}
+                      </div>
+                    )}
+                    {typeof item.value === 'object' && (
+                      <>
+                        {item.value.length === 1 && <p>{item.value[0]} months</p>}
+                        {item.value.length === 2 && (
+                          <p>
+                            {item.value[0]} to {item.value[1]} months
+                          </p>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -151,6 +180,24 @@ export default function MatrixDetails() {
         .performance,
         .performance-body {
           text-align: right;
+        }
+
+        .performance-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+
+        .performance-item {
+          display: flex;
+          align-items: center;
+          height: min-content;
+          flex-direction: row;
+          justify-content: center;
+          padding: 8px;
+          background-color: var(--inputBtnBgPrimary);
+          min-width: 30%;
+          border-radius: 8px;
         }
         td {
           height: 65px;
