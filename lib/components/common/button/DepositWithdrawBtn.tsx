@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DepositModal from '../modal/depositModal';
+import WithdrawModal from '../modal/withdrawModal';
 
 export default function DepositWithdrawBtn() {
   const [openDepositModal, setOpenDepositModal] = useState(false);
@@ -15,9 +16,16 @@ export default function DepositWithdrawBtn() {
           }}>
           Deposit
         </div>
-        <div className='btn withdraw-btn'>Withdraw</div>
+        <div
+          className='btn withdraw-btn'
+          onClick={() => {
+            setOpenWithdrawModal(true);
+          }}>
+          Withdraw
+        </div>
       </div>
       {openDepositModal && <DepositModal setOpenDepositModal={setOpenDepositModal} />}
+      {openWithdrawModal && <WithdrawModal setOpenWithdrawModal={setOpenWithdrawModal} />}
       <style jsx>{`
         .transaction-btn-container {
           width: 100%;

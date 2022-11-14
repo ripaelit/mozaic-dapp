@@ -1,5 +1,6 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
+import OutsideClickHandler from 'react-outside-click-handler';
 import { toast } from 'react-toastify';
 import { networks, networkIdleStates } from '../../../data/static/wallet';
 import { NetworkItemType } from '../../../types/common';
@@ -49,7 +50,7 @@ export default function ConnectWalletBtn({
 
   // dispatch notification on wallet connect
   useEffect(() => {
-    console.log(web3reactContext);
+    // console.log(web3reactContext);
 
     web3reactContext.account &&
       toast.success(`Wallet ${web3reactContext.account} connected!`, {
@@ -67,7 +68,7 @@ export default function ConnectWalletBtn({
   // dispatch notification & change icon on mainNet change
 
   useEffect(() => {
-    console.log(web3reactContext.chainId);
+    // console.log(web3reactContext.chainId);
 
     if (!web3reactContext.chainId) {
       setCurrentNetwork(networkIdleStates[0]);
@@ -94,23 +95,28 @@ export default function ConnectWalletBtn({
 
   return (
     <>
-      <div className='wallet-container'>
-        <div
-          className={`wallet-btn-container ${!web3reactContext.account ? 'solid' : 'outlined'}`}
-          onClick={onWalletBtnClick}>
-          <img className='network-icon' src={currentNetwork.icon} alt='' />
-          <p className='btn-text'>{walletStateText}</p>
+      <OutsideClickHandler
+        onOutsideClick={() => {
+          setShowWalletDetailMenu(false);
+        }}>
+        <div className='wallet-container'>
+          <div
+            className={`wallet-btn-container ${!web3reactContext.account ? 'solid' : 'outlined'}`}
+            onClick={onWalletBtnClick}>
+            <img className='network-icon' src={currentNetwork.icon} alt='' />
+            <p className='btn-text'>{walletStateText}</p>
+          </div>
+          <div className='wallet-detail-menu-wrapper'>
+            {showWalletDetailMenu && (
+              <WalletDetailMenu
+                showMenu={showWalletDetailMenu}
+                setShowMenu={setShowWalletDetailMenu}
+                currentNetwork={currentNetwork}
+              />
+            )}
+          </div>
         </div>
-        <div className='wallet-detail-menu-wrapper'>
-          {showWalletDetailMenu && (
-            <WalletDetailMenu
-              showMenu={showWalletDetailMenu}
-              setShowMenu={setShowWalletDetailMenu}
-              currentNetwork={currentNetwork}
-            />
-          )}
-        </div>
-      </div>
+      </OutsideClickHandler>
       <style jsx>{`
         .wallet-container {
           height: 48px;
@@ -197,6 +203,9 @@ export default function ConnectWalletBtn({
         @media (max-width: 420px) {
           .btn-text {
             display: none;
+          }
+          .outlined {
+            padding: 12px;
           }
         }
       `}</style>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import useBalance from '../../../../hooks/useBalance';
 import InputCheckBtn from '../../button/InputCheckBtn';
 import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
-import InputBox from '../../input/InputBox';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
 
@@ -11,7 +9,7 @@ export default function SingleAsset({
   singleAssetDepositData,
   setSingleAssetDepositData,
 }: any) {
-  const [selectedAsset, setSelectedAsset] = useState(vault[0]);
+  const [selectedAsset, setSelectedAsset] = useState(vault.assets[0]);
   const [assetDepositData, setAssetDepositData] = useState(singleAssetDepositData);
 
   // set maximum balance for deposit data
@@ -82,10 +80,10 @@ export default function SingleAsset({
               type='max'
               onMax={setMaxBalance}
               currentAsset={selectedAsset}
-              currentDepositData={assetDepositData.asset}
+              currentAmount={assetDepositData.asset.amount}
             />
             <DropdownWithIcon
-              options={vault}
+              options={vault.assets}
               selectedOption={selectedAsset}
               setSelectedOption={setSelectedAsset}
             />
@@ -98,7 +96,7 @@ export default function SingleAsset({
         labelRightElement={
           <SlippageEditor onChange={setSlippage} value={assetDepositData.slippage} />
         }
-        rightElement={<p>mCore</p>}
+        rightElement={<p>{vault.name}</p>}
         inputValue={assetDepositData.totalDepositAmount}
       />
     </>

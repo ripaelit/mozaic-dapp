@@ -9,7 +9,6 @@ const RPC_URLS = {
 // metamask
 export const injected = new InjectedConnector(<any>{
   supportedChainIds: [1, 10, 56, 43114, 250, 137, 42161],
-  // supportedChainIds: [1, 3, 4, 5, 42, 56, 97, 1337],
 });
 
 // walletconnect
@@ -27,3 +26,11 @@ export function resetWalletConnector(connector: any) {
     connector.walletConnectProvider = undefined;
   }
 }
+
+// Ethereum - 1
+// Optimism - 10
+// Binance Smart Chain - 56
+// Avalalanche - 43114
+// Fantom - 250
+// Polygon - 137
+// Arbitrum - 42161

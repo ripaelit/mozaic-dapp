@@ -6,7 +6,11 @@ import { injected, resetWalletConnector, walletconnect } from '../../../helpers/
 import { DefaultBtnType, ModalBtnType } from '../../../types/common';
 import Modal from './Modal';
 
-export default function ConnectWalletModal({ setShowModal }: { setShowModal: Function }) {
+export default function ConnectWalletModal({
+  setShowModal,
+}: {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const web3reactContext = useWeb3React();
   const [selectedWallet, setSelectedWallet] = useState<any>(null);
 

@@ -5,8 +5,8 @@ import Separator from '../../Separator';
 import Tab from '../../tab/Tab';
 import ConnectWalletModal from '../ConnectWalletModal';
 import Modal from '../Modal';
-import MultiAssets from './MultiAssetsDeposit';
-import SingleAsset from './SingleAssetDeposit';
+import MultiAssets from './MultiAssetsWithdraw';
+import SingleAsset from './SingleAssetWithdraw';
 
 const assetTypes: TabItem[] = [
   { id: 0, name: 'Single Asset', value: 'single' },
@@ -51,14 +51,14 @@ const vault = {
   ],
 };
 
-const description = `Add liquidity in underlying pool tokens. First, approve required token to power index smart contract and then click supply.`;
+const description = `Remove liquidity in one transaction. Your mCORE will automatically swap to one of the underlying pool tokens.`;
 
-export default function DepositModal({
-  setOpenDepositModal,
+export default function WithdrawModal({
+  setOpenWithdrawModal,
 }: {
-  setOpenDepositModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenWithdrawModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const initialSingleAssetDepositData = {
+  const initialSingleAssetWithdrawData = {
     asset: {
       id: 0,
       name: '',
@@ -69,10 +69,10 @@ export default function DepositModal({
     slippage: 0.6,
     address: '',
     decimals: 0,
-    totalDepositAmount: '',
+    totalWithdrawAmount: '',
   };
 
-  const initialMultiAssetsDepositData = {
+  const initialMultiAssetsWithdrawData = {
     assets: vault.assets.map((asset) => ({
       id: asset.id,
       name: asset.name,
@@ -81,37 +81,38 @@ export default function DepositModal({
       amount: '',
       approval: 0,
     })),
-
     slippage: 0.6,
     address: '',
     decimals: 0,
-    totalDepositAmount: '',
+    totalWithdrawAmount: '',
   };
 
   const web3reactContext = useWeb3React();
 
   const [showConnectWalletModal, setShowConnectWalletModal] = useState<boolean>(false);
 
-  const [depositType, setDepositType] = useState(assetTypes[0]);
-  const [singleAssetDepositData, setSingleAssetDepositData] = useState(
-    initialSingleAssetDepositData
+  const [withdrawType, setWithdrawType] = useState(assetTypes[0]);
+  const [singleAssetWithdrawData, setSingleAssetWithdrawData] = useState(
+    initialSingleAssetWithdrawData
   );
-  const [multiAssetsDepositData, setMultiAssetsDepositData] = useState(
-    initialMultiAssetsDepositData
+  const [multiAssetsWithdrawData, setMultiAssetsWithdrawData] = useState(
+    initialMultiAssetsWithdrawData
   );
 
-  useEffect(() => {
-    // console.log('single asset', singleAssetDepositData);
-  }, [singleAssetDepositData]);
-  useEffect(() => {
-    // console.log('multi assets', multiAssetsDepositData);
-  }, [multiAssetsDepositData]);
+  const withdrawFunds = () => {
+    if (withdrawType.value === 'single') {
+      console.log('single asset', singleAssetWithdrawData);
+    }
+    if (withdrawType.value === 'multi') {
+      console.log('multi assets', multiAssetsWithdrawData);
+    }
+  };
 
   return (
     <>
       <Modal
-        setModalVisibility={setOpenDepositModal}
-        title='Deposit'
+        setModalVisibility={setOpenWithdrawModal}
+        title='Withdraw'
         modalBtn={
           !web3reactContext.account
             ? {
@@ -122,33 +123,33 @@ export default function DepositModal({
                 },
               }
             : {
-                text: 'Deposit',
+                text: 'Withdraw',
                 type: ModalBtnType.default,
-                onClick: () => {},
+                onClick: withdrawFunds,
               }
         }>
-        <div className='deposit-modal-wrapper'>
+        <div className='withdraw-modal-wrapper'>
           <Tab
-            currentTab={depositType}
-            setCurrentTab={setDepositType}
+            currentTab={withdrawType}
+            setCurrentTab={setWithdrawType}
             tabs={assetTypes}
             style={'height:64px;'}
           />
           <p className='description'>{description}</p>
           <Separator />
-          <div className='deposit-modal-content-wrapper single-asset'>
-            {depositType.value === 'single' && (
+          <div className='withdraw-modal-content-wrapper single-asset'>
+            {withdrawType.value === 'single' && (
               <SingleAsset
                 vault={vault}
-                singleAssetDepositData={singleAssetDepositData}
-                setSingleAssetDepositData={setSingleAssetDepositData}
+                singleAssetWithdrawData={singleAssetWithdrawData}
+                setSingleAssetWithdrawData={setSingleAssetWithdrawData}
               />
             )}
-            {depositType.value === 'multi' && (
+            {withdrawType.value === 'multi' && (
               <MultiAssets
                 vault={vault}
-                multiAssetsDepositData={multiAssetsDepositData}
-                setMultiAssetsDepositData={setMultiAssetsDepositData}
+                multiAssetsWithdrawData={multiAssetsWithdrawData}
+                setMultiAssetsWithdrawData={setMultiAssetsWithdrawData}
               />
             )}
           </div>
@@ -158,8 +159,8 @@ export default function DepositModal({
         </div>
       </Modal>
       <style jsx>{`
-        .deposit-modal-wrapper,
-        .deposit-modal-content-wrapper {
+        .withdraw-modal-wrapper,
+        .withdraw-modal-content-wrapper {
           display: flex;
           flex-direction: column;
           gap: 16px;

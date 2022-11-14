@@ -9,28 +9,35 @@ export default function InputCheckBtn({
   onClick,
   onMax,
   currentAsset,
-  currentDepositData,
+  currentAmount,
   index,
+  value,
 }: {
   type?: string;
   text?: string;
   active?: boolean;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: Function;
   onMax?: Function;
-  currentAsset: any;
-  currentDepositData?: any;
+  currentAsset?: any;
+  currentAmount?: any;
   index?: number;
+  value?: number;
 }) {
-  const [maxBalance] = useBalance(currentAsset.address, currentAsset.decimals);
+  const [maxBalance] = useBalance(
+    currentAsset && currentAsset.address,
+    currentAsset && currentAsset.decimals
+  );
   return (
     <>
       <div
-        className={`max-btn-container ${
-          type === 'max' ? (maxBalance == currentDepositData.amount ? 'active' : '') : active
+        className={`check-btn-container ${
+          type === 'max' ? (maxBalance == currentAmount ? 'active' : '') : active ? 'active' : ''
         }`}
         onClick={
           type !== 'max'
-            ? onClick
+            ? () => {
+                onClick!(value, index);
+              }
             : () => {
                 onMax!(maxBalance, index);
               }
@@ -38,17 +45,31 @@ export default function InputCheckBtn({
         {type === 'max' ? 'Max' : text}
       </div>
       <style jsx>{`
-        .max-btn-container {
-          padding: 10px;
+        .check-btn-container {
+          padding: 0 10px;
           background-color: var(--inputBtnBgPrimary);
           cursor: pointer;
           color: var(--textSecondary);
           user-select: none;
           border-radius: 8px;
+          font-size: 0.75rem;
+          line-height: 0.9rem;
+          text-align: center;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
         .active {
           color: var(--primary);
-          background-color: var(--primaryT1;
+          font-weight: bold;
+          background-color: var(--primaryT1);
+        }
+        @media screen and (max-width: 500px) {
+          .check-btn-container {
+            padding: 0 5px;
+            font-size: 0.6rem;
+          }
         }
       `}</style>
     </>
