@@ -5,6 +5,7 @@ type Option = {
   id: any;
   name: string;
   value: string;
+  icon?: string;
 };
 
 export default function DropdownWithIcon({
