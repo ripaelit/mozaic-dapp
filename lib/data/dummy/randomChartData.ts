@@ -11,4 +11,3 @@ export const generateChart = (count: number, interval: number, startFrom?: numbe
 
   return arr;
 };
-4;

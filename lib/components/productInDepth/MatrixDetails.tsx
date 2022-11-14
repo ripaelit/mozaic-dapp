@@ -1,62 +1,5 @@
 import React from 'react';
 
-const matrixData = [
-  {
-    id: 0,
-    name: 'Return Month-to-date',
-    value: -5.5,
-    icon: '/assets/icons/products/productInDepth/matrix/ico.returnmonth.svg',
-  },
-  {
-    id: 1,
-    name: 'Return Quarter-To-Date',
-    value: 6.6,
-    icon: '/assets/icons/products/productInDepth/matrix/ico.returnquarter.svg',
-  },
-  {
-    id: 2,
-    name: 'Return Year-To-Date',
-    value: 8.4,
-    icon: '/assets/icons/products/productInDepth/matrix/ico.returnyear.svg',
-  },
-  {
-    id: 3,
-    name: 'Return Inception-To-Date',
-    value: 15.5,
-    icon: '/assets/icons/products/productInDepth/matrix/ico.returninception.svg',
-  },
-  {
-    id: 4,
-    name: 'Average Month',
-    value: -8.9,
-    icon: '/assets/icons/products/productInDepth/matrix/ico.avaragemonth.svg',
-  },
-  {
-    id: 5,
-    name: 'Best Month',
-    value: 14.6,
-    icon: '/assets/icons/products/productInDepth/matrix/ico.bestmonth.svg',
-  },
-  {
-    id: 6,
-    name: 'Worst Month',
-    value: -37.8,
-    icon: '/assets/icons/products/productInDepth/matrix/ico.worstmonth.svg',
-  },
-  {
-    id: 7,
-    name: 'Positive Months',
-    value: [5],
-    icon: '/assets/icons/products/productInDepth/matrix/ico.positivemonth.svg',
-  },
-  {
-    id: 8,
-    name: 'Length of Track Record',
-    value: [1, 5],
-    icon: '/assets/icons/products/productInDepth/matrix/ico.lengthtrack.svg',
-  },
-];
-
 const matrixDetailsTableItem = [
   {
     id: 0,
@@ -72,7 +15,7 @@ const matrixDetailsTableItem = [
   },
 ];
 
-export default function MatrixDetails() {
+export default function MatrixDetails({ matrixData }: any) {
   return (
     <>
       <div className='matrix-details-container'>
@@ -91,7 +34,7 @@ export default function MatrixDetails() {
             </tr>
           </thead>
           <tbody>
-            {matrixData.map((item) => (
+            {matrixData.map((item: any) => (
               <tr key={item.id}>
                 <td className={'asset-name-body'}>
                   <img src={item.icon} alt='' /> <p>{item.name}</p>

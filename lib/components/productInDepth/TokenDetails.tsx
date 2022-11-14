@@ -2,34 +2,7 @@ import React from 'react';
 import { strategies, tokenDetailsTableItems } from '../../data/static/productInDepth';
 import ProgressBar from '../common/progressBar/ProgressBar';
 
-const tokenData = [
-  {
-    id: 0,
-    name: 'USDC',
-    icon: '/assets/icons/assets/ico.usdc.svg',
-    allocation: 30,
-    apy: 0.0,
-    strategy: 0,
-  },
-  {
-    id: 1,
-    name: 'USDT',
-    icon: '/assets/icons/assets/ico.usdt.svg',
-    allocation: 79,
-    apy: -21.4,
-    strategy: 1,
-  },
-  {
-    id: 2,
-    name: 'BUSD',
-    icon: '/assets/icons/assets/ico.busd.svg',
-    allocation: 54,
-    apy: 12.1,
-    strategy: 2,
-  },
-];
-
-export default function TokenDetails() {
+export default function TokenDetails({ tokenData }: any) {
   return (
     <>
       <div className='token-details-container'>
@@ -51,7 +24,7 @@ export default function TokenDetails() {
           </thead>
 
           <tbody>
-            {tokenData.map((asset) => (
+            {tokenData.map((asset: any) => (
               <tr key={asset.id}>
                 <td className={'asset-name-body'}>
                   <img src={asset.icon} alt='' /> <p>{asset.name}</p>

@@ -1,31 +1,16 @@
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { generateChart } from '../../../data/dummy/randomChartData';
 import { sortByTimelineTabItems } from '../../../data/static/productInDepth';
 import PrimaryCard from '../../common/card/PrimaryCard';
 import DropdownText from '../../common/input/dropdown/DropdownText';
 import FilterTab from '../../common/tab/FilterTab';
-const Chart = dynamic(() => import('./Chart'), {
-  ssr: false,
-});
+import Chart from './Chart';
 
-const series = [{ name: 'Test', id: 0, data: generateChart(1500, 4) }];
-const options = [
-  {
-    id: 0,
-    name: 'Vault APY',
-    value: 'vault-apy',
-  },
-  {
-    id: 1,
-    name: 'Share Price',
-    value: 'share-price',
-  },
-];
-
-export default function ProductChart({ style }: { style?: string }) {
+export default function ProductChart({ style, chartData }: { style?: string; chartData: any }) {
   const [timeline, setTimeline] = useState(sortByTimelineTabItems[0]);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(chartData[0]);
+
   return (
     <>
       <div className='product-chart-container'>
@@ -33,7 +18,7 @@ export default function ProductChart({ style }: { style?: string }) {
           <div className='product-chart-container'>
             <div className='product-chart-options-wrapper'>
               <DropdownText
-                options={options}
+                options={chartData}
                 selectedOption={selectedOption}
                 setSelectedOption={setSelectedOption}
               />
@@ -43,7 +28,7 @@ export default function ProductChart({ style }: { style?: string }) {
                 setCurrentTab={setTimeline}
               />
             </div>
-            <Chart timeline={timeline.value} series={series} />
+            <Chart timeline={timeline.value} series={[selectedOption]} />
           </div>
         </PrimaryCard>
       </div>

@@ -4,13 +4,7 @@ import { sortByTimelineTabItems } from '../../data/static/productInDepth';
 import FilterTab from '../common/tab/FilterTab';
 import Chart from './charts/Chart';
 
-const series = [
-  { name: 'USDC', id: 0, data: generateChart(1500, 4) },
-  { name: 'USDT', id: 1, data: generateChart(1500, 4) },
-  { name: 'BUSD', id: 1, data: generateChart(1500, 4) },
-];
-
-export default function StrategyDetails({ style }: any) {
+export default function StrategyDetails({ style, strategyData }: any) {
   const [timeline, setTimeline] = useState(sortByTimelineTabItems[0]);
 
   return (
@@ -24,13 +18,17 @@ export default function StrategyDetails({ style }: any) {
               setCurrentTab={setTimeline}
             />
           </div>
-          <Chart timeline={timeline.value} series={series} />
+          <Chart timeline={timeline.value} series={strategyData} />
         </div>
       </div>
       <style jsx>{`
         .strategy-details-container {
           width: 100%;
-          ${style ? style : ''}
+          ${style ? style : ''};
+        }
+        .product-chart-options-wrapper {
+          display: flex;
+          justify-content: flex-end;
         }
       `}</style>
     </>

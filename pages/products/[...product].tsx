@@ -17,6 +17,7 @@ export default function Product() {
 
   // loading state
   const [loading, setLoading] = useState<boolean>(true);
+
   // error state
   const [error, setError] = useState<null | LoadErrorType>(null);
 
@@ -63,13 +64,14 @@ export default function Product() {
               <div className='product-head-wrapper'>
                 <ProductInfo product={productData} />
                 <ProductChart
+                  chartData={productData.chart}
                   style={`
                     flex: 1;
                 `}
                 />
               </div>
               <ProductSummary />
-              <ProductDetails />
+              <ProductDetails data={productData} />
               <KnowledgeBase />
             </>
           ) : (

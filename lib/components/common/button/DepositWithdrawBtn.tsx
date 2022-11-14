@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DepositModal from '../modal/depositModal';
 import WithdrawModal from '../modal/withdrawModal';
 
-export default function DepositWithdrawBtn() {
+export default function DepositWithdrawBtn({ vault }: any) {
   const [openDepositModal, setOpenDepositModal] = useState(false);
   const [openWithdrawModal, setOpenWithdrawModal] = useState(false);
 
@@ -24,8 +24,10 @@ export default function DepositWithdrawBtn() {
           Withdraw
         </div>
       </div>
-      {openDepositModal && <DepositModal setOpenDepositModal={setOpenDepositModal} />}
-      {openWithdrawModal && <WithdrawModal setOpenWithdrawModal={setOpenWithdrawModal} />}
+      {openDepositModal && <DepositModal vault={vault} setOpenDepositModal={setOpenDepositModal} />}
+      {openWithdrawModal && (
+        <WithdrawModal vault={vault} setOpenWithdrawModal={setOpenWithdrawModal} />
+      )}
       <style jsx>{`
         .transaction-btn-container {
           width: 100%;

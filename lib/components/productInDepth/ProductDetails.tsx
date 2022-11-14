@@ -6,7 +6,7 @@ import MatrixDetails from './MatrixDetails';
 import StrategyDetails from './StrategyDetails';
 import TokenDetails from './TokenDetails';
 
-export default function ProductDetails() {
+export default function ProductDetails({ data }: any) {
   const tabs: TabItem[] = [
     {
       id: 0,
@@ -38,11 +38,11 @@ export default function ProductDetails() {
         `}
         tab={<Tab tabs={tabs} currentTab={currentTab} setCurrentTab={setCurrentTab} />}>
         {currentTab.name === 'Token' ? (
-          <TokenDetails />
+          <TokenDetails tokenData={data.details.tokenDetails} />
         ) : currentTab.name === 'Matrix' ? (
-          <MatrixDetails />
+          <MatrixDetails matrixData={data.details.matrixDetails} />
         ) : currentTab.name === 'Strategy' ? (
-          <StrategyDetails />
+          <StrategyDetails strategyData={data.details.strategyDetails} />
         ) : (
           <></>
         )}

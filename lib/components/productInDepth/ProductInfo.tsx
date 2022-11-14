@@ -27,7 +27,7 @@ export default function ProductInfo({ product }: any) {
                 <p>Balance</p>
                 <h1>${product.balance}</h1>
               </div>
-              <DepositWithdrawBtn />
+              <DepositWithdrawBtn vault={product.vault} />
             </div>
           </div>
         </PrimaryCard>
