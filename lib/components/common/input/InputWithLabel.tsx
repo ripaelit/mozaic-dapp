@@ -1,5 +1,6 @@
 import React from 'react';
 import InputBox from './InputBox';
+import InputLabel from './InputLabel';
 
 export default function InputWithLabel({
   inputType = 'number',
@@ -23,10 +24,7 @@ export default function InputWithLabel({
   return (
     <>
       <div className='input-box-with-label-container'>
-        <div className='label-wrapper'>
-          <p className='label'>{label}</p>
-          <div className='label-right-element'>{labelRightElement}</div>
-        </div>
+        <InputLabel label={label} labelRightElement={labelRightElement} />
         <InputBox
           inputValue={inputValue}
           onChange={onChange}
