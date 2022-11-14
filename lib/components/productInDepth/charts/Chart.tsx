@@ -142,6 +142,7 @@ export default function Chart({
 }) {
   const [chartOptions, setChartOptions] = useState(options);
   const [dataStream, setDataStream] = useState(series);
+
   const now = new Date();
 
   // filter chart data by timeline
@@ -194,6 +195,11 @@ export default function Chart({
   useEffect(() => {
     filterBy(timeline);
   }, [timeline]);
+
+  useEffect(() => {
+    setDataStream(series);
+    filterBy(timeline);
+  }, [series]);
 
   return (
     <>
