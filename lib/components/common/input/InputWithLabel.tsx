@@ -11,8 +11,9 @@ export default function InputWithLabel({
   label = 'Label',
   readOnly,
   placeholder,
+  datePicker,
 }: {
-  inputValue: number;
+  inputValue: any;
   onChange?: Function;
   inputType?: string;
   rightElement?: JSX.Element;
@@ -20,6 +21,7 @@ export default function InputWithLabel({
   label: string;
   readOnly?: boolean;
   placeholder?: string;
+  datePicker?: boolean;
 }) {
   return (
     <>
@@ -32,6 +34,7 @@ export default function InputWithLabel({
           rightElement={rightElement}
           readOnly={readOnly}
           placeholder={placeholder}
+          datePicker={datePicker}
         />
       </div>
       <style jsx>{`
