@@ -7,11 +7,13 @@ export default function Tab({
   currentTab,
   setCurrentTab,
   style,
+  itemStyle,
 }: {
   tabs: TabItem[];
   currentTab: TabItem;
   setCurrentTab: Dispatch<SetStateAction<TabItem>>;
   style?: string;
+  itemStyle?: string;
 }) {
   return (
     <>
@@ -23,7 +25,8 @@ export default function Tab({
             onClick={() => {
               setCurrentTab(tab);
             }}>
-            <p>{tab.name}</p>
+            <p className='desktop'>{tab.name}</p>
+            <p className='mobile'>{tab.shortName && tab.shortName}</p>
           </div>
         ))}
       </div>
@@ -52,12 +55,26 @@ export default function Tab({
           cursor: pointer;
           transition: all 0.2s ease;
           border-radius: 6px;
+          ${itemStyle ? itemStyle : ''}
         }
         .tab-item.active {
           background-color: var(--tabActive);
           box-shadow: 0px 4px 8px -4px rgba(0, 0, 0, 0.25), inset 0px -1px 1px rgba(0, 0, 0, 0.04),
             inset 0px 2px 0px rgba(255, 255, 255, 0.06);
           font-weight: bold;
+        }
+
+        .mobile {
+          display: none;
+        }
+
+        @media screen and (max-width: 1000px) {
+          .mobile {
+            ${currentTab.shortName ? 'display: inline-block;' : ''}
+          }
+          .desktop {
+            ${currentTab.shortName ? 'display: none;' : ''}
+          }
         }
 
         @media screen and (max-width: 625px) {

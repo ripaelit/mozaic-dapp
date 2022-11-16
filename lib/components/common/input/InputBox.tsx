@@ -8,28 +8,42 @@ export default function InputBox({
   readOnly = false,
   placeholder,
   index,
+  datePicker,
 }: {
-  inputValue: number;
+  inputValue: any;
   onChange?: Function;
   inputType?: string;
   rightElement?: JSX.Element;
   readOnly?: boolean;
   placeholder?: string;
   index?: number;
+  datePicker?: boolean;
 }) {
   return (
     <>
       <div className='input-box-container'>
-        <input
-          type={inputType}
-          min={0}
-          readOnly={readOnly}
-          value={inputValue}
-          placeholder={placeholder}
-          onChange={(e) => {
-            onChange ? onChange(e, index && index) : null;
-          }}
-        />
+        {!datePicker ? (
+          <input
+            type={inputType}
+            min={0}
+            readOnly={readOnly}
+            value={inputValue}
+            placeholder={placeholder}
+            onChange={(e) => {
+              onChange ? onChange(e, index && index) : null;
+            }}
+          />
+        ) : (
+          <input
+            type='date'
+            readOnly={readOnly}
+            value={inputValue}
+            placeholder={placeholder}
+            onChange={(e) => {
+              onChange ? onChange(e) : null;
+            }}
+          />
+        )}
         <div className='right-element-wrapper'>{rightElement}</div>
       </div>
       <style jsx>{`
@@ -55,10 +69,21 @@ export default function InputBox({
           ${readOnly ? 'cursor: default;' : ''}
         }
 
-        input::-webkit-outer-spin-button,
+        ${!datePicker
+          ? `input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
           -webkit-appearance: none;
-          margin: 0;
+          margin: 0;}`
+          : ''}
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+          color: rgba(0, 0, 0, 0);
+          opacity: 1;
+          display: block;
+          background: url('/assets/icons/ico.datepicker.svg') no-repeat;
+          width: 20px;
+          height: 20px;
+          border-width: thin;
         }
 
         input::placeholder {

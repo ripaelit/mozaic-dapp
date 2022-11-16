@@ -10,6 +10,7 @@ import ProductInfo from '../../lib/components/productInDepth/ProductInfo';
 import axios from 'axios';
 import { LoadErrorType } from '../../lib/types/common';
 import PageErrorReloader from '../../lib/components/common/error/PageErrorReloader';
+import TitleBtn from '../../lib/components/common/button/TitleBtn';
 
 export default function Product() {
   const router = useRouter();
@@ -52,10 +53,11 @@ export default function Product() {
       <main className='product-container'>
         <PageTitle
           title={!productData ? 'Loading...' : productData.name!}
-          button={{
-            text: 'Back to Products',
-            icon: '/assets/icons/ico.back.svg',
-          }}
+          rightElement={
+            <TitleBtn
+              button={{ text: 'Back to Products', icon: '/assets/icons/ico.back.svg', href: '/' }}
+            />
+          }
         />
         {!loading ? (
           !error ? (
