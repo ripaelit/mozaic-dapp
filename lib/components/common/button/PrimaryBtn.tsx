@@ -58,6 +58,24 @@ export default function PrimaryBtn({
           cursor: default;
           font-weight: 400;
           color: var(--textLabel);
+        }
+
+        .warning {
+          background-color: transparent;
+          border-color: var(--alert);
+          font-weight: 400;
+          color: var(--alert);
+        }
+        .warning:hover {
+          background-color: var(--textPrimaryT1);
+          color: var(--primary);
+          border-color: var(--primary);
+        }
+
+        .warning:active {
+          border-color: var(--textPrimaryT1);
+          color: var(--textPrimary);
+        }
       `}</style>
     </>
   );

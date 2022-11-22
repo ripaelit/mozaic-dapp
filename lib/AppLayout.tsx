@@ -22,6 +22,12 @@ export default function AppLayout({ children }: { children: JSX.Element }) {
           max-width: 1280px;
           height: 100%;
           padding: 0 30px;
+          transition: all 0.2s ease;
+        }
+        @media screen and (max-width: 425px) {
+          .app-container {
+            padding: 0 16px;
+          }
         }
       `}</style>
     </>

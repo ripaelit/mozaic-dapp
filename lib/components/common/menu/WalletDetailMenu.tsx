@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import Separator from '../Separator';
 import MenuBox from './MenuBox';
 
-export default function WalletDetailMenu({ showMenu, setShowMenu }: any) {
+export default function WalletDetailMenu({ showMenu, setShowMenu, currentNetwork }: any) {
   const web3reactContext = useWeb3React();
   const removeWallet = (): void => {
     try {
@@ -46,24 +46,28 @@ export default function WalletDetailMenu({ showMenu, setShowMenu }: any) {
   }
   return (
     <>
-      <OutsideClickHandler
-        onOutsideClick={() => {
-          setShowMenu(false);
-        }}>
-        <MenuBox>
-          <div className='wallet-detail-menu-container'>
-            <p className='label'>Connected Wallet:</p>
-            <div className='wallet-details' onClick={copy}>
-              <p className='wallet-address'>{web3reactContext.account}</p>
-              <img className='copy' src='/assets/icons/wallet/ico.copy.svg' alt='' />
-            </div>
-            <Separator />
-            <div className='disconnect-wallet-btn' onClick={handleWalletRemoval}>
-              <p>Disconnect Wallet</p>
-            </div>
+      <MenuBox>
+        <div className='wallet-detail-menu-container'>
+          <p className='label'>Connected network:</p>
+          <p>{currentNetwork.name}</p>
+          <p className='label'>Connected Wallet:</p>
+          <div className='wallet-details' onClick={copy}>
+            <p className='wallet-address'>
+              {web3reactContext!.account!.substring(0, 5) +
+                '...' +
+                web3reactContext!.account!.substring(
+                  web3reactContext!.account!.length,
+                  web3reactContext!.account!.length - 5
+                )}
+            </p>
+            <img className='copy' src='/assets/icons/wallet/ico.copy.svg' alt='' />
           </div>
-        </MenuBox>
-      </OutsideClickHandler>
+          <Separator />
+          <div className='disconnect-wallet-btn' onClick={handleWalletRemoval}>
+            <p>Disconnect Wallet</p>
+          </div>
+        </div>
+      </MenuBox>
       <style jsx>{`
         .wallet-detail-menu-container {
           display: flex;
@@ -91,7 +95,7 @@ export default function WalletDetailMenu({ showMenu, setShowMenu }: any) {
         }
 
         .wallet-address {
-          font-size: 12px;
+          font-size: 14px;
           color: var(--primary);
         }
 

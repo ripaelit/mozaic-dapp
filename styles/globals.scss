@@ -23,3 +23,27 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+::-webkit-scrollbar {
+  width: 3px;
+  position: absolute;
+  left: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  position: absolute;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--textSecondary);
+  opacity: 0.3;
+  border-radius: 1.5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(219, 219, 219);
+}

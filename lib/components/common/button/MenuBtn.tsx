@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import DesktopMenu from '../menu/DesktopMenu';
+import MobileMenu from '../menu/MobileMenu';
 
 // nav hamburger menu
 export default function MenuBtn() {
@@ -8,14 +9,18 @@ export default function MenuBtn() {
 
   return (
     <>
-      {' '}
       <OutsideClickHandler onOutsideClick={() => setShowMenu(false)}>
         <div onClick={() => setShowMenu(!showMenu)} className='menu-btn-container'>
           <div className='hover-bg'></div>
           <img src='/assets/icons/menu/ico.menu.btn.svg' alt='' />
+          <div className='desktop-menu-wrapper'>
+            {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
+          </div>
         </div>
-        {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
       </OutsideClickHandler>
+      <div className='mobile-menu-wrapper'>
+        <MobileMenu setSMenuVisibility={setShowMenu} menuVisibility={showMenu} />
+      </div>
       <style jsx>{`
         .menu-btn-container {
           position: relative;
@@ -23,7 +28,11 @@ export default function MenuBtn() {
           height: 48px;
           transition: all 0.2s ease;
           cursor: pointer;
-          transition: all 0.2s ease;
+        }
+
+        img {
+          margin: 0;
+          padding: 0;
         }
 
         .hover-bg {
@@ -46,6 +55,25 @@ export default function MenuBtn() {
         .menu-btn-container:active > .hover-bg {
           opacity: 0.3;
           background-color: transparent;
+        }
+
+        .desktop-menu-wrapper {
+          width: 100%;
+          position: absolute;
+          bottom: 0;
+        }
+
+        .mobile-menu-wrapper {
+          display: none;
+        }
+
+        @media (max-width: 730px) {
+          .desktop-menu-wrapper {
+            display: none;
+          }
+          .mobile-menu-wrapper {
+            display: block;
+          }
         }
       `}</style>
     </>

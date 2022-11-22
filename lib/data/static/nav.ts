@@ -55,16 +55,3 @@ export const menuItems: MenuItemType[] = [
     icon: '/assets/icons/menu/ico.menu.governance.svg',
   },
 ];
-
-export const wallets: WalletItemType[] = [
-  {
-    id: 0,
-    name: 'Metamask',
-    icon: '/assets/icons/wallet/ico.wallet.metamask.svg',
-  },
-  {
-    id: 1,
-    name: 'Wallet Connect',
-    icon: '/assets/icons/wallet/ico.wallet.walletconnect.svg',
-  },
-];

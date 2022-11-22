@@ -44,3 +44,12 @@ export type WalletItemType = {
   name: string;
   icon: string;
 };
+
+export type NetworkItemType = {
+  id: any;
+  chainID: number | null;
+  name: string;
+  icon: string;
+};
+
+export type TabItem = { id: any; name: string; shortName?: string; value?: any };

@@ -11,15 +11,15 @@ export default function MenuBox({ children }: { children: JSX.Element }) {
           height: 20px;
           border-radius: 8px 0 0 0;
           position: absolute;
-          top: 54px;
-          right: 16px;
+          top: 8px;
+          right: 12px;
           transform: rotate(45deg);
           background-color: var(--cardBgPrimary);
           transition: all 0.2s ease;
         }
         .menu-container {
           position: absolute;
-          top: 64px;
+          top: 18px;
           right: -10px;
           display: flex;
           flex-direction: column;
