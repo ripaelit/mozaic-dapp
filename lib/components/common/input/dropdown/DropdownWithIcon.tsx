@@ -67,10 +67,9 @@ export default function DropdownWithIcon({
 
         .dropdown-wrapper {
           display: flex;
-          width: 100%;
           justify-content: space-between;
           align-items: center;
-          width: 150px;
+          min-width: 120px;
           max-width: max-content;
           padding: 8px 8px 8px 8px;
           background-color: var(--inputBtnBgPrimary);
@@ -111,7 +110,7 @@ export default function DropdownWithIcon({
         }
 
         .dropdown-options-wrapper {
-          top: calc(100% + 8px);
+          bottom: calc(100% + 8px);
           right: 0;
           position: absolute;
           display: flex;
@@ -143,6 +142,10 @@ export default function DropdownWithIcon({
         }
 
         @media screen and (max-width: 450px) {
+          .dropdown-wrapper {
+            min-width: max-content;
+          }
+
           .dropdown-selected-item > p {
             display: none;
           }

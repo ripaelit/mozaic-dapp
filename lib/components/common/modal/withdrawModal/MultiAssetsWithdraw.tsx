@@ -105,6 +105,8 @@ export default function MultiAssets({
           color: var(--textLabel);
           padding: 8px;
           background-color: var(--inputBtnBgPrimary);
+          border-radius: 8px;
+          width: 96px;
         }
       `}</style>
     </>
