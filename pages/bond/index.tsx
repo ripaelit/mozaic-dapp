@@ -1,3 +1,4 @@
+import { useWeb3React } from '@web3-react/core';
 import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -11,6 +12,7 @@ import { LoadErrorType } from '../../lib/types/common';
 export default function Bond() {
   const router = useRouter();
   const query: any = router.query;
+  const web3reactContext = useWeb3React();
 
   // loading state
   const [loading, setLoading] = useState<boolean>(true);
@@ -83,7 +85,7 @@ export default function Bond() {
             </div>
           }
         />
-        <MyBonds />
+        {web3reactContext.account && <MyBonds />}
         <AvailableBonds />
         <KnowledgeBase />
       </main>
