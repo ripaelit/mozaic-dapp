@@ -20,7 +20,7 @@ export default function ProductList() {
         setTimeout(() => {
           setProductList(res.data);
           setLoading(false);
-        }, 3000);
+        }, 500);
       })
       .catch((err) => {
         setError({
