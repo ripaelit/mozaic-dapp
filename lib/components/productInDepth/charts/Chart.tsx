@@ -9,9 +9,8 @@ const options: any = {
   chart: {
     id: 'area-datetime',
     type: 'area',
-    stacked: true,
+    stacked: false,
     height: 350,
-
     toolbar: {
       show: false,
     },
@@ -99,6 +98,7 @@ const options: any = {
   },
   tooltip: {
     theme: 'dark',
+    shared: true,
     x: {
       format: 'dd MMM yyyy',
     },
