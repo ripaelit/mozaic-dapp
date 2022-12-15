@@ -17,6 +17,11 @@ const options: any = {
     zoom: {
       autoScaleYaxis: true,
     },
+    // brush: {
+    //   enabled: true,
+    //   target: 0,
+    //   autoScaleYaxis: false
+    // },
     dropShadow: {
       enabled: true,
       opacity: 1,
@@ -71,6 +76,16 @@ const options: any = {
   },
   xaxis: {
     type: 'datetime',
+    // title: {
+    //   text: 'hello',
+    //   style: {
+    //     color: 'red',
+    //     fontSize: '12px',
+    //     fontFamily: 'Helvetica, Arial, sans-serif',
+    //     fontWeight: 600,
+    //     cssClass: 'apexcharts-yaxis-title',
+    //   },
+    // },
     min: undefined,
     max: new Date().getTime(),
     tickAmount: 10,
@@ -87,6 +102,19 @@ const options: any = {
     },
   },
   yaxis: {
+    title: {
+      show: true,
+      text: 'lalala',
+      align: 'right',
+      rotate: -90,
+      offsetX: 0,
+      offsetY: 0,
+      style: {
+        color: 'white',
+        fontSize: '12px',
+        cssClass: 'apexcharts-yaxis-title',
+      },
+    },
     labels: {
       offsetX: -16,
       offsetY: 0,
@@ -205,13 +233,17 @@ export default function Chart({
     <>
       <div className='chart-container'>
         <ReactApexChart options={chartOptions} series={dataStream} type='area' height={350} />
-        <div className='bar-bg-wrapper'>
+        {/* <div className='bar-bg-wrapper'>
           <img src='/assets/icons/products/productInDepth/bg.bar.svg' alt='' />
-        </div>
+        </div> */}
       </div>
       <style jsx global>{`
         .apexcharts-svg {
           background: transparent !important;
+        }
+        .apexcharts-yaxis-title {
+          color: red;
+          background: red;
         }
       `}</style>
 
@@ -219,24 +251,6 @@ export default function Chart({
         .chart-container {
           width: 100%;
           position: relative;
-        }
-
-        .bar-bg-wrapper {
-          position: absolute;
-          display: flex;
-          justify-content: center;
-          overflow: hidden;
-          height: 48px;
-          width: 80%;
-          object-fit: cover;
-          bottom: 47px;
-          z-index: 0;
-          mix-blend-mode: screen;
-          opacity: 0.3;
-          left: 36px;
-          pointer-events: none;
-        }
-        .bar-bg-wrapper > img {
         }
       `}</style>
     </>
