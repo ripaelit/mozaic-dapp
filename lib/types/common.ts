@@ -9,8 +9,10 @@ export type NavItemType = {
 export type MenuItemType = {
   id: any;
   name: string;
-  path: string;
+  path?: string;
   icon: string;
+  newWindow?: boolean;
+  link?: boolean;
 };
 
 // loader error types
