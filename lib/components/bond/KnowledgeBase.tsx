@@ -48,6 +48,7 @@ export default function KnowledgeBase() {
           width: 100%;
           display: flex;
           gap: 20px;
+          flex-wrap: wrap;
         }
         .knowledgebase-card-wrapper {
           flex: 1;
@@ -79,6 +80,11 @@ export default function KnowledgeBase() {
         .icons {
           display: flex;
           justify-content: space-between;
+        }
+        @media (max-width: 768px) {
+          .knowledgebase-container {
+            flex-direction: column;
+          }
         }
       `}</style>
     </>
