@@ -3,7 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { menuItems, navItems } from '../../../data/static/nav';
 
-export default function MobileMenu({ setSMenuVisibility, menuVisibility }: any) {
+export default function MobileMenu({
+  setSMenuVisibility,
+  menuVisibility,
+  setShowFeedbackModal,
+  setSubject,
+}: any) {
   const router: any = useRouter();
   // returns if the current path is active or not
   const isActive = (path: string) => {
@@ -35,12 +40,27 @@ export default function MobileMenu({ setSMenuVisibility, menuVisibility }: any) 
           ))}
         </section>
         <section className='nav-menu-item-wrapper'>
-          {menuItems.map((item) => (
-            <div onClick={() => setShowMenu(false)} key={item.id} className='menu-item-wrapper'>
-              <img src={item.icon} alt='' />
-              <p>{item.name}</p>
-            </div>
-          ))}
+          {menuItems.map((item) =>
+            item.link ? (
+              <Link key={item.id} href={item.path!} target={item.newWindow ? '_blank' : '_self'}>
+                <div onClick={() => setShowMenu(false)} className='menu-item-wrapper'>
+                  <img src={item.icon} alt='' />
+                  <p>{item.name}</p>
+                </div>
+              </Link>
+            ) : (
+              <div
+                onClick={() => {
+                  setSubject(item.name);
+                  setShowFeedbackModal(true);
+                  setShowMenu(false);
+                }}
+                className='menu-item-wrapper'>
+                <img src={item.icon} alt='' />
+                <p>{item.name}</p>
+              </div>
+            )
+          )}
         </section>
       </div>
       <style jsx>{`

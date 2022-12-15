@@ -33,6 +33,7 @@ export default function MenuBtn() {
           menuVisibility={showMenu}
           setShowMenu={setShowMenu}
           setSubject={setFeedbackType}
+          setShowFeedbackModal={setShowFeedbackModal}
         />
       </div>
       {showFeedbackModal && (
