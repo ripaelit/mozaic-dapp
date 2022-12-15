@@ -31,7 +31,7 @@ export default function ProductDetails({ data }: any) {
           text: 'Details',
           visible: true,
           indicatorVisible: true,
-          color: '#B5E4CA',
+          color: '#CABDFF',
         }}
         style={`
             width: 100%;
