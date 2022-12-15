@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import DesktopMenu from '../menu/DesktopMenu';
 import MobileMenu from '../menu/MobileMenu';
+import FeedbackModal from '../modal/feedbackModal';
 
 // nav hamburger menu
 export default function MenuBtn() {
   const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [showFeedbackModal, setShowFeedbackModal] = useState<boolean>(false);
+  const [feedbackType, setFeedbackType] = useState<string>('');
 
   return (
     <>
@@ -14,13 +17,28 @@ export default function MenuBtn() {
           <div className='hover-bg'></div>
           <img src='/assets/icons/menu/ico.menu.btn.svg' alt='' />
           <div className='desktop-menu-wrapper'>
-            {showMenu && <DesktopMenu setShowMenu={setShowMenu} />}
+            {showMenu && (
+              <DesktopMenu
+                setShowMenu={setShowMenu}
+                setSubject={setFeedbackType}
+                setShowFeedbackModal={setShowFeedbackModal}
+              />
+            )}
           </div>
         </div>
       </OutsideClickHandler>
       <div className='mobile-menu-wrapper'>
-        <MobileMenu setSMenuVisibility={setShowMenu} menuVisibility={showMenu} />
+        <MobileMenu
+          setSMenuVisibility={setShowMenu}
+          menuVisibility={showMenu}
+          setShowMenu={setShowMenu}
+          setSubject={setFeedbackType}
+        />
       </div>
+      {showFeedbackModal && (
+        <FeedbackModal title={feedbackType} setShowModal={setShowFeedbackModal} />
+      )}
+
       <style jsx>{`
         .menu-btn-container {
           position: relative;
