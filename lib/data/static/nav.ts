@@ -11,11 +11,11 @@ export const navItems: NavItemType[] = [
     name: 'Stake',
     path: '/stake',
   },
-  {
-    id: 2,
-    name: 'Vote',
-    path: '/vote',
-  },
+  // {
+  //   id: 2,
+  //   name: 'Vote',
+  //   path: '/vote',
+  // },
   {
     id: 3,
     name: 'Bond',
@@ -33,25 +33,28 @@ export const menuItems: MenuItemType[] = [
   {
     id: 1,
     name: 'General Feedback',
-    path: '/',
+    path: '',
     icon: '/assets/icons/menu/ico.menu.feedback.svg',
+    link: false,
   },
   {
     id: 2,
     name: 'Bug Report',
-    path: '/',
+    path: '',
     icon: '/assets/icons/menu/ico.menu.bug.svg',
+    link: false,
   },
   {
     id: 3,
-    name: 'User',
-    path: '/',
+    name: 'Doc',
+    path: 'https://docs.mozaic.finance/',
     icon: '/assets/icons/menu/ico.menu.user.svg',
+    newWindow: true,
   },
-  {
-    id: 4,
-    name: 'Governance',
-    path: '/',
-    icon: '/assets/icons/menu/ico.menu.governance.svg',
-  },
+  // {
+  //   id: 4,
+  //   name: 'Governance',
+  //   path: '/',
+  //   icon: '/assets/icons/menu/ico.menu.governance.svg',
+  // },
 ];
