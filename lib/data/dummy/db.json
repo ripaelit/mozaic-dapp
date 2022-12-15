@@ -377,7 +377,7 @@
         },
         {
           "id": 1,
-          "name": "Share Price",
+          "name": "Price",
           "data": [
             [1667326063500, 49],
             [1667336863500, 28],
@@ -684,7 +684,7 @@
       ],
       "vault": {
         "id": 0,
-        "name": "mCORE",
+        "name": "USDM",
         "address": "",
         "decimals": 0,
         "conversionRateUSD": 1,
@@ -779,7 +779,7 @@
         "matrixDetails": [
           {
             "id": 0,
-            "name": "Return Month-to-date",
+            "name": "Return Month-to-Date",
             "value": -5.5,
             "icon": "/assets/icons/products/productInDepth/matrix/ico.returnmonth.svg"
           },
@@ -2069,7 +2069,7 @@
         },
         {
           "id": 1,
-          "name": "Share Price",
+          "name": "Price",
           "data": [
             [1667326063500, 49],
             [1667336863500, 28],
@@ -2488,7 +2488,7 @@
         "matrixDetails": [
           {
             "id": 0,
-            "name": "Return Month-to-date",
+            "name": "Return Month-to-Date",
             "value": -5.5,
             "icon": "/assets/icons/products/productInDepth/matrix/ico.returnmonth.svg"
           },

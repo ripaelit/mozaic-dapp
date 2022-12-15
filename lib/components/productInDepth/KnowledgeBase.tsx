@@ -13,7 +13,7 @@ export default function KnowledgeBase() {
               text: item.title,
               visible: true,
               indicatorVisible: true,
-              color: 'var(--primary)',
+              color: '#B5E4CA',
             }}
             style={`
             width: 100%;

@@ -9,6 +9,7 @@ export default function InputBox({
   placeholder,
   index,
   datePicker,
+  textarea,
 }: {
   inputValue: any;
   onChange?: Function;
@@ -18,31 +19,43 @@ export default function InputBox({
   placeholder?: string;
   index?: number;
   datePicker?: boolean;
+  textarea?: boolean;
 }) {
   return (
     <>
       <div className='input-box-container'>
-        {!datePicker ? (
-          <input
-            type={inputType}
-            min={0}
+        {!textarea ? (
+          !datePicker ? (
+            <input
+              type={inputType}
+              min={0}
+              readOnly={readOnly}
+              value={inputValue}
+              placeholder={placeholder}
+              onChange={(e) => {
+                onChange ? onChange(e, index && index) : null;
+              }}
+            />
+          ) : (
+            <input
+              type='date'
+              readOnly={readOnly}
+              value={inputValue}
+              placeholder={placeholder}
+              onChange={(e) => {
+                onChange ? onChange(e) : null;
+              }}
+            />
+          )
+        ) : (
+          <textarea
+            className='textarea'
             readOnly={readOnly}
             value={inputValue}
             placeholder={placeholder}
             onChange={(e) => {
               onChange ? onChange(e, index && index) : null;
-            }}
-          />
-        ) : (
-          <input
-            type='date'
-            readOnly={readOnly}
-            value={inputValue}
-            placeholder={placeholder}
-            onChange={(e) => {
-              onChange ? onChange(e) : null;
-            }}
-          />
+            }}></textarea>
         )}
         <div className='right-element-wrapper'>{rightElement}</div>
       </div>
@@ -50,6 +63,7 @@ export default function InputBox({
         .input-box-container {
           width: 100%;
           height: 64px;
+          ${textarea ? 'height: 160px;' : ''}
           padding: 12px;
           border: 1px solid var(--outlinePrimary);
           border-radius: 10px;
@@ -94,6 +108,15 @@ export default function InputBox({
         .input-box-container:focus-within {
           border-color: var(--primaryT1);
           background-color: var(--textPrimaryT2);
+        }
+
+        .textarea {
+          width: 100%;
+          background-color: transparent;
+          color: var(--textPrimary);
+          outline: none !important;
+          border: none !important;
+          font-family: inherit;
         }
 
         .right-element-wrapper {

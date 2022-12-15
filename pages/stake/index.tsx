@@ -1,13 +1,6 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
-import InputCheckBtn from '../../lib/components/common/button/InputCheckBtn';
-import PrimaryBtn from '../../lib/components/common/button/PrimaryBtn';
-import PrimaryCard from '../../lib/components/common/card/PrimaryCard';
-import InputWithLabel from '../../lib/components/common/input/InputWithLabel';
 import PageTitle from '../../lib/components/common/PageTitle';
-import Separator from '../../lib/components/common/Separator';
-import Slider from '../../lib/components/common/Slider';
-import Tab from '../../lib/components/common/tab/Tab';
 import DetailsSection from '../../lib/components/stake/DetailsSection';
 import LockSection from '../../lib/components/stake/LockSection';
 import OverviewSection from '../../lib/components/stake/OverviewSection';

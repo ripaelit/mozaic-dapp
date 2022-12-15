@@ -15,7 +15,7 @@ const OverviewSection = ({ data }: any) => {
             <div key={item.id} className='overview-item-wrapper'>
               <div className='left'>
                 <img src={item.icon} alt='' />
-                <p>{`MOZ locked for ${item.duration} year`}</p>
+                <p>{`MOZ locked for ${item.duration} ${item.duration > 1 ? 'years' : 'year'}`}</p>
               </div>
               <div className='right'>
                 {item.amount}

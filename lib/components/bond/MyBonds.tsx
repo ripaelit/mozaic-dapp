@@ -63,55 +63,61 @@ export default function MyBonds() {
           visible: true,
           indicatorVisible: false,
         }}>
-        <table>
-          <colgroup>
-            {myBondTableItems.map((item, index) => (
-              <col key={item.id} className={'col-' + index} />
-            ))}
-          </colgroup>
-          <thead className='table-header'>
-            <tr>
-              {myBondTableItems.map((item) => (
-                <th key={item.id} className={item.className}>
-                  {item.name}
-                </th>
+        <div className='table-container'>
+          <table>
+            <colgroup>
+              {myBondTableItems.map((item, index) => (
+                <col key={item.id} className={'col-' + index} />
               ))}
-            </tr>
-          </thead>
-          <tbody>
-            {myBondTableData.map((item) => (
-              <tr key={item.id}>
-                <td className='bond-body-wrapper'>
-                  <div className='bond-wrapper'>
-                    <div className='icon-wrapper'>
-                      {item.icon.map((icon, index) => (
-                        <img className='icon' key={index} src={icon} alt='' />
-                      ))}
-                    </div>
-                    <h4>{item.name}</h4>
-                  </div>
-                </td>
-                <td className='claimable-body-wrapper'>
-                  <div className='claimable-wrapper'>
-                    <img className='icon' src={item.icon[0]} alt='' />
-                    <p>{item.claimable}</p>
-                  </div>
-                </td>
-                <td className='pending-body-wrapper'>
-                  <p>{item.pending}</p>
-                </td>
-                <td className='vestingtime-body-wrapper'>
-                  <p>{item.vestingTime} Days</p>
-                </td>
-                <td className='claim-body-wrapper'>
-                  <BondBtn text='Claim' onClick={() => {}} />
-                </td>
+            </colgroup>
+            <thead className='table-header'>
+              <tr>
+                {myBondTableItems.map((item) => (
+                  <th key={item.id} className={item.className}>
+                    {item.name}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {myBondTableData.map((item) => (
+                <tr key={item.id}>
+                  <td className='bond-body-wrapper'>
+                    <div className='bond-wrapper'>
+                      <div className='icon-wrapper'>
+                        {item.icon.map((icon, index) => (
+                          <img className='icon' key={index} src={icon} alt='' />
+                        ))}
+                      </div>
+                      <h4>{item.name}</h4>
+                    </div>
+                  </td>
+                  <td className='claimable-body-wrapper'>
+                    <div className='claimable-wrapper'>
+                      <img className='icon' src={item.icon[0]} alt='' />
+                      <p>{item.claimable}</p>
+                    </div>
+                  </td>
+                  <td className='pending-body-wrapper'>
+                    <p>{item.pending}</p>
+                  </td>
+                  <td className='vestingtime-body-wrapper'>
+                    <p>{item.vestingTime} Days</p>
+                  </td>
+                  <td className='claim-body-wrapper'>
+                    <BondBtn text='Claim' onClick={() => {}} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </PrimaryCard>
       <style jsx>{`
+        .table-container {
+          width: 100%;
+          overflow: auto;
+        }
         table {
           width: 100%;
           border-spacing: 0;

@@ -18,18 +18,30 @@ const availableBondTableItems = [
   },
   {
     id: 2,
+    name: 'Discount',
+    sortable: true,
+    className: 'discount',
+  },
+  {
+    id: 3,
     name: 'ROI',
     sortable: true,
     className: 'roi',
   },
   {
-    id: 3,
+    id: 4,
+    name: 'Vesting',
+    sortable: true,
+    className: 'vesting',
+  },
+  {
+    id: 5,
     name: 'TBV',
     sortable: true,
     className: 'tbv',
   },
   {
-    id: 4,
+    id: 6,
     name: '',
     sortable: true,
     className: 'create-bond',
@@ -43,6 +55,8 @@ const availableBondTableData = [
     icon: ['/assets/icons/assets/ico.usdc.svg'],
     price: 8.6,
     marketPrice: 140,
+    discount: 12,
+    vesting: 7,
     roi: 0.25,
     tbv: 18228.58,
     vestingTime: 7,
@@ -53,7 +67,9 @@ const availableBondTableData = [
     icon: ['/assets/icons/assets/ico.moz.svg', '/assets/icons/assets/ico.avax.svg'],
     price: 16.1,
     marketPrice: 160,
+    discount: -12,
     roi: -18.4,
+    vesting: 21,
     tbv: 84668458.74,
     vestingTime: 7,
   },
@@ -72,76 +88,95 @@ export default function AvailableBonds() {
           visible: true,
           indicatorVisible: false,
         }}>
-        <table>
-          <colgroup>
-            {availableBondTableItems.map((item, index) => (
-              <col key={item.id} className={'col-' + index} />
-            ))}
-          </colgroup>
-          <thead className='table-header'>
-            <tr>
-              {availableBondTableItems.map((item) => (
-                <th key={item.id} className={item.className}>
-                  {item.name}
-                </th>
+        <div className='table-container'>
+          <table>
+            <colgroup>
+              {availableBondTableItems.map((item, index) => (
+                <col key={item.id} className={'col-' + index} />
               ))}
-            </tr>
-          </thead>
-          <tbody>
-            {availableBondTableData.map((item) => (
-              <tr key={item.id}>
-                <td className='bond-body-wrapper'>
-                  <div className='bond-wrapper'>
-                    <div className='icon-wrapper'>
-                      {item.icon.map((icon, index) => (
-                        <img className='icon' key={index} src={icon} alt='' />
-                      ))}
-                    </div>
-                    <h4>{item.name}</h4>
-                  </div>
-                </td>
-                <td className='price-body-wrapper'>
-                  <div className='price-wrapper'>
-                    <div className='asset-price-wrapper'>
-                      <img className='icon' src={item.icon[0]} alt='' />
-                      <p>{item.price}</p>
-                    </div>
-                    <div className='market-price-wrapper'>
-                      <p>${item.marketPrice} MARKET</p>
-                    </div>
-                  </div>
-                </td>
-                <td className='roi-body-wrapper'>
-                  <p className={item.roi < 0 ? 'negative' : ''}>{item.roi}%</p>
-                </td>
-                <td className='tbv-body-wrapper'>
-                  <p>${item.tbv.toLocaleString()}</p>
-                </td>
-                <td className='createbond-body-wrapper'>
-                  <BondBtn
-                    text='Bond'
-                    onClick={() => {
-                      setSelectedBond(item);
-                      setShowModal(true);
-                    }}
-                  />
-                </td>
+            </colgroup>
+            <thead className='table-header'>
+              <tr>
+                {availableBondTableItems.map((item) => (
+                  <th key={item.id} className={item.className}>
+                    {item.name}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {availableBondTableData.map((item) => (
+                <tr key={item.id}>
+                  <td className='bond-body-wrapper'>
+                    <div className='bond-wrapper'>
+                      <div className='icon-wrapper'>
+                        {item.icon.map((icon, index) => (
+                          <img className='icon' key={index} src={icon} alt='' />
+                        ))}
+                      </div>
+                      <h4>{item.name}</h4>
+                    </div>
+                  </td>
+                  <td className='price-body-wrapper'>
+                    <div className='price-wrapper'>
+                      <div className='asset-price-wrapper'>
+                        <img className='icon' src={item.icon[0]} alt='' />
+                        <p>${item.price}</p>
+                      </div>
+                      <div className='market-price-wrapper'>
+                        <p>${item.marketPrice} MARKET</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className='discount-body-wrapper'>
+                    <p className={item.discount < 0 ? 'negative' : ''}>{item.discount}%</p>
+                  </td>
+                  <td className='roi-body-wrapper'>
+                    <p className={item.roi < 0 ? 'negative' : ''}>{item.roi}%</p>
+                  </td>
+                  <td className='vesting-body-wrapper'>
+                    <p className={item.vesting < 0 ? 'negative' : ''}>{item.vesting} Days</p>
+                  </td>
+                  <td className='tbv-body-wrapper'>
+                    <p>${item.tbv.toLocaleString()}</p>
+                  </td>
+                  <td className='createbond-body-wrapper'>
+                    <BondBtn
+                      text='Bond'
+                      onClick={() => {
+                        setSelectedBond(item);
+                        setShowModal(true);
+                      }}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </PrimaryCard>
       <style jsx>{`
+        .table-container {
+          width: 100%;
+          overflow: auto;
+        }
         table {
           width: 100%;
           border-spacing: 0;
         }
+        .col-0,
         .col-1 {
-          width: 25%;
+          width: 22.5%;
         }
+
         .col-2,
         .col-3,
-        .col-4 {
+        .col-4,
+        .col-6 {
+          width: 10%;
+        }
+
+        .col-5 {
           width: 15%;
         }
         .table-header {

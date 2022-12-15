@@ -6,6 +6,7 @@ import { navItems } from '../../../data/static/nav';
 import ConnectWalletBtn from '../button/ConnectWalletBtn';
 import MenuBtn from '../button/MenuBtn';
 import ConnectWalletModal from '../modal/ConnectWalletModal';
+import FeedbackModal from '../modal/feedbackModal';
 
 export default function Nav() {
   const router: any = useRouter();
@@ -51,7 +52,6 @@ export default function Nav() {
         </div>
       </div>
       {showConnectWalletModal && <ConnectWalletModal setShowModal={setShowConnectWalletModal} />}
-
       <style jsx>{`
         .nav-container {
           display: flex;
@@ -97,6 +97,7 @@ export default function Nav() {
         }
 
         .nav-btn {
+          transition: all 0.2s ease;
         }
 
         .nav-btn::after {
@@ -111,6 +112,11 @@ export default function Nav() {
         .nav-btn.active {
           color: var(--primary);
           font-weight: bold;
+        }
+
+        .nav-btn:hover {
+          color: var(--primary);
+          text-shadow: 0 0 3px var(--primary);
         }
 
         .menu-wrapper {
