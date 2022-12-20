@@ -164,9 +164,11 @@ const options: any = {
 export default function Chart({
   timeline = '1d',
   series,
+  yLabel,
 }: {
   timeline: string;
   series: ChartDataType[];
+  yLabel?: string;
 }) {
   const [chartOptions, setChartOptions] = useState(options);
   const [dataStream, setDataStream] = useState(series);
@@ -232,18 +234,16 @@ export default function Chart({
   return (
     <>
       <div className='chart-container'>
+        {yLabel && (
+          <div className='y-axis-label-wrapper'>
+            <p className='y-label'>{yLabel}</p>
+          </div>
+        )}
         <ReactApexChart options={chartOptions} series={dataStream} type='area' height={350} />
-        {/* <div className='bar-bg-wrapper'>
-          <img src='/assets/icons/products/productInDepth/bg.bar.svg' alt='' />
-        </div> */}
       </div>
       <style jsx global>{`
         .apexcharts-svg {
           background: transparent !important;
-        }
-        .apexcharts-yaxis-title {
-          color: red;
-          background: red;
         }
       `}</style>
 
@@ -251,6 +251,25 @@ export default function Chart({
         .chart-container {
           width: 100%;
           position: relative;
+        }
+
+        .y-axis-label-wrapper {
+          height: 100%;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .y-label {
+          position: absolute;
+          transform: rotate(90deg);
+          font-size: 0.675rem;
+          width: max-content;
+          color: var(--textLabel);
+          white-space: nowrap;
+          text-align: center;
+          transform-origin: top center;
         }
       `}</style>
     </>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const matrixDetailsTableItem = [
+const metricsDetailsTableItem = [
   {
     id: 0,
     name: 'Asset Name',
@@ -15,10 +15,10 @@ const matrixDetailsTableItem = [
   },
 ];
 
-export default function MatrixDetails({ matrixData }: any) {
+export default function MetricsDetails({ metricsData }: any) {
   return (
     <>
-      <div className='matrix-details-container'>
+      <div className='metrics-details-container'>
         <table>
           <colgroup>
             <col className='col-1' />
@@ -26,7 +26,7 @@ export default function MatrixDetails({ matrixData }: any) {
           </colgroup>
           <thead className='table-header'>
             <tr>
-              {matrixDetailsTableItem.map((item) => (
+              {metricsDetailsTableItem.map((item) => (
                 <th key={item.id} className={item.className}>
                   {item.name}
                 </th>
@@ -34,7 +34,7 @@ export default function MatrixDetails({ matrixData }: any) {
             </tr>
           </thead>
           <tbody>
-            {matrixData.map((item: any) => (
+            {metricsData.map((item: any) => (
               <tr key={item.id}>
                 <td className={'asset-name-body'}>
                   <img src={item.icon} alt='' /> <p>{item.name}</p>
@@ -90,7 +90,7 @@ export default function MatrixDetails({ matrixData }: any) {
         .col-2 {
           width: 30%;
         }
-        .matrix-detail-container {
+        .metrics-detail-container {
           width: 100%;
         }
         table {

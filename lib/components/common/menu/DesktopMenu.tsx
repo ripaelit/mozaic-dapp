@@ -20,6 +20,7 @@ export default function DesktopMenu({ setShowMenu, setShowFeedbackModal, setSubj
               </Link>
             ) : (
               <div
+                key={item.id}
                 onClick={() => {
                   setSubject(item.name);
                   setShowFeedbackModal(true);

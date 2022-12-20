@@ -46,7 +46,7 @@ export const menuItems: MenuItemType[] = [
   },
   {
     id: 3,
-    name: 'Doc',
+    name: 'Docs',
     path: 'https://docs.mozaic.finance/',
     icon: '/assets/icons/menu/ico.menu.user.svg',
     newWindow: true,

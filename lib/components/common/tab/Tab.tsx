@@ -10,7 +10,7 @@ export default function Tab({
   itemStyle,
 }: {
   tabs: TabItem[];
-  currentTab: TabItem;
+  currentTab: TabItem | null;
   setCurrentTab: Dispatch<SetStateAction<TabItem>>;
   style?: string;
   itemStyle?: string;
@@ -21,7 +21,7 @@ export default function Tab({
         {tabs.map((tab) => (
           <div
             key={tab.id}
-            className={`tab-item ${activeChecker(tab.name, currentTab.name)}`}
+            className={`tab-item ${currentTab ? activeChecker(tab.name, currentTab.name) : ''}`}
             onClick={() => {
               setCurrentTab(tab);
             }}>
@@ -70,10 +70,10 @@ export default function Tab({
 
         @media screen and (max-width: 1000px) {
           .mobile {
-            ${currentTab.shortName ? 'display: inline-block;' : ''}
+            ${currentTab && currentTab.shortName ? 'display: inline-block;' : ''}
           }
           .desktop {
-            ${currentTab.shortName ? 'display: none;' : ''}
+            ${currentTab && currentTab.shortName ? 'display: none;' : ''}
           }
         }
 

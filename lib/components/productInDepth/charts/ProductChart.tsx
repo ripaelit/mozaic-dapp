@@ -28,7 +28,11 @@ export default function ProductChart({ style, chartData }: { style?: string; cha
                 setCurrentTab={setTimeline}
               />
             </div>
-            <Chart timeline={timeline.value} series={[selectedOption]} />
+            <Chart
+              yLabel={selectedOption.name}
+              timeline={timeline.value}
+              series={[selectedOption]}
+            />
           </div>
         </PrimaryCard>
       </div>
