@@ -776,60 +776,60 @@
             "strategy": 2
           }
         ],
-        "matrixDetails": [
+        "metricsDetails": [
           {
             "id": 0,
             "name": "Return Month-to-Date",
             "value": -5.5,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.returnmonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.returnmonth.svg"
           },
           {
             "id": 1,
             "name": "Return Quarter-To-Date",
             "value": 6.6,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.returnquarter.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.returnquarter.svg"
           },
           {
             "id": 2,
             "name": "Return Year-To-Date",
             "value": 8.4,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.returnyear.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.returnyear.svg"
           },
           {
             "id": 3,
             "name": "Return Inception-To-Date",
             "value": 15.5,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.returninception.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.returninception.svg"
           },
           {
             "id": 4,
             "name": "Average Month",
             "value": -8.9,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.avaragemonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.avaragemonth.svg"
           },
           {
             "id": 5,
             "name": "Best Month",
             "value": 14.6,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.bestmonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.bestmonth.svg"
           },
           {
             "id": 6,
             "name": "Worst Month",
             "value": -37.8,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.worstmonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.worstmonth.svg"
           },
           {
             "id": 7,
             "name": "Positive Months",
             "value": [5],
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.positivemonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.positivemonth.svg"
           },
           {
             "id": 8,
             "name": "Length of Track Record",
             "value": [1, 5],
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.lengthtrack.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.lengthtrack.svg"
           }
         ],
         "strategyDetails": [
@@ -2485,60 +2485,60 @@
             "strategy": 2
           }
         ],
-        "matrixDetails": [
+        "metricsDetails": [
           {
             "id": 0,
             "name": "Return Month-to-Date",
             "value": -5.5,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.returnmonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.returnmonth.svg"
           },
           {
             "id": 1,
             "name": "Return Quarter-To-Date",
             "value": 6.6,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.returnquarter.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.returnquarter.svg"
           },
           {
             "id": 2,
             "name": "Return Year-To-Date",
             "value": 8.4,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.returnyear.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.returnyear.svg"
           },
           {
             "id": 3,
             "name": "Return Inception-To-Date",
             "value": 15.5,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.returninception.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.returninception.svg"
           },
           {
             "id": 4,
             "name": "Average Month",
             "value": -8.9,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.avaragemonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.avaragemonth.svg"
           },
           {
             "id": 5,
             "name": "Best Month",
             "value": 14.6,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.bestmonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.bestmonth.svg"
           },
           {
             "id": 6,
             "name": "Worst Month",
             "value": -37.8,
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.worstmonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.worstmonth.svg"
           },
           {
             "id": 7,
             "name": "Positive Months",
             "value": [5],
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.positivemonth.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.positivemonth.svg"
           },
           {
             "id": 8,
             "name": "Length of Track Record",
             "value": [1, 5],
-            "icon": "/assets/icons/products/productInDepth/matrix/ico.lengthtrack.svg"
+            "icon": "/assets/icons/products/productInDepth/metrics/ico.lengthtrack.svg"
           }
         ],
         "strategyDetails": [
