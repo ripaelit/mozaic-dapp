@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PageTitle from '../../lib/components/common/PageTitle';
 import DetailsSection from '../../lib/components/stake/DetailsSection';
 import LockSection from '../../lib/components/stake/LockSection';
@@ -34,8 +34,8 @@ const overviewData = [
 const range: TabItem[] = [
   { id: 0, name: '1 week', shortName: '1W', value: 1 },
   { id: 1, name: '1 month', shortName: '1M', value: 4 },
-  { id: 2, name: '3 Months', shortName: '3M', value: 13 },
-  { id: 3, name: '6 Months', shortName: '6M', value: 26 },
+  { id: 2, name: '3 Months', shortName: '3M', value: 12 },
+  { id: 3, name: '6 Months', shortName: '6M', value: 24 },
   { id: 4, name: '1 Year', shortName: '1Y', value: 52 },
   { id: 5, name: '3 Years', shortName: '3Y', value: 156 },
 ];
@@ -60,8 +60,10 @@ const stakeAsset = {
 
 export default function Stake() {
   const [amount, setAmount] = useState(parseFloat(''));
-  const [time, setTime] = useState();
-  const [selectedRange, setSelectedRange] = useState<TabItem>(range[0]);
+  const [week, setWeek] = useState(4);
+  const [selectedRange, setSelectedRange] = useState<TabItem | null>(null);
+
+  // on create lock this function will get called
   const onLock = () => {};
 
   const setMaxBalance = (maxBalance: string) => {
@@ -72,11 +74,26 @@ export default function Stake() {
     setAmount(parseFloat(e.target.value));
   };
 
-  // Overview card section
+  useEffect(() => {
+    const matchedRange = range.filter((item) => {
+      if (item.value === week) {
+        return item;
+      }
+    });
 
-  // Details card section
+    if (matchedRange[0]) {
+      setSelectedRange(matchedRange[0]);
+      setWeek(matchedRange[0].value);
+    } else {
+      setSelectedRange(null);
+    }
+  }, [week]);
 
-  // stake page layout
+  useEffect(() => {
+    if (selectedRange) {
+      setWeek(selectedRange.value);
+    }
+  }, [selectedRange]);
 
   return (
     <>
@@ -107,8 +124,8 @@ export default function Stake() {
               setMaxBalance={setMaxBalance}
               stakeAsset={stakeAsset}
               onInput={onInput}
-              time={time}
-              setTime={setTime}
+              time={week}
+              setTime={setWeek}
               range={range}
               selectedRange={selectedRange}
               setSelectedRange={setSelectedRange}
