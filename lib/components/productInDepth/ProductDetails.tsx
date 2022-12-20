@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { TabItem } from '../../types/common';
 import PrimaryCard from '../common/card/PrimaryCard';
 import Tab from '../common/tab/Tab';
-import MatrixDetails from './MatrixDetails';
 import StrategyDetails from './StrategyDetails';
 import TokenDetails from './TokenDetails';
+import MetricsDetails from './MetrixDetails';
 
 export default function ProductDetails({ data }: any) {
   const tabs: TabItem[] = [
@@ -14,7 +14,7 @@ export default function ProductDetails({ data }: any) {
     },
     {
       id: 1,
-      name: 'Matrix',
+      name: 'Metrics',
     },
     {
       id: 2,
@@ -39,8 +39,8 @@ export default function ProductDetails({ data }: any) {
         tab={<Tab tabs={tabs} currentTab={currentTab} setCurrentTab={setCurrentTab} />}>
         {currentTab.name === 'Token' ? (
           <TokenDetails tokenData={data.details.tokenDetails} />
-        ) : currentTab.name === 'Matrix' ? (
-          <MatrixDetails matrixData={data.details.matrixDetails} />
+        ) : currentTab.name === 'Metrics' ? (
+          <MetricsDetails metricsData={data.details.metricsDetails} />
         ) : currentTab.name === 'Strategy' ? (
           <StrategyDetails strategyData={data.details.strategyDetails} />
         ) : (
