@@ -6,30 +6,35 @@ import PageErrorReloader from '../common/error/PageErrorReloader';
 import ProductCardLoader from '../loader/ProductCardLoader';
 import ProductCard from './ProductCard';
 
+import { productsDummyData } from '../../data/dummy/ProductStaticDummyData';
+
 export default function ProductList() {
   const [productList, setProductList] = useState<ProductType[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | LoadErrorType>(null);
 
   useEffect(() => {
-    setError(null);
+    // setError(null);
+    // setLoading(true);
+    // axios
+    //   .get('/products')
+    //   .then((res) => {
+    //     setTimeout(() => {
+    //       setProductList(res.data);
+    //       setLoading(false);
+    //     }, 500);
+    //   })
+    //   .catch((err) => {
+    //     setError({
+    //       message: err.message,
+    //       status: err.status,
+    //       code: err.code,
+    //     });
+    //     setLoading(false);
+    //   });
     setLoading(true);
-    axios
-      .get('/products')
-      .then((res) => {
-        setTimeout(() => {
-          setProductList(res.data);
-          setLoading(false);
-        }, 500);
-      })
-      .catch((err) => {
-        setError({
-          message: err.message,
-          status: err.status,
-          code: err.code,
-        });
-        setLoading(false);
-      });
+    setProductList(productsDummyData);
+    setLoading(false);
   }, []);
 
   return (
