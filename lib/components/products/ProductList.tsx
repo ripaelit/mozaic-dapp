@@ -13,9 +13,10 @@ export default function ProductList() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<null | LoadErrorType>(null);
 
+  // load data of the products on load
   useEffect(() => {
-    // setError(null);
-    // setLoading(true);
+    setError(null);
+    setLoading(true);
     // axios
     //   .get('/products')
     //   .then((res) => {
@@ -32,8 +33,7 @@ export default function ProductList() {
     //     });
     //     setLoading(false);
     //   });
-    setLoading(true);
-    setProductList(productsDummyData);
+    setProductList(productsDummyData.data);
     setLoading(false);
   }, []);
 
