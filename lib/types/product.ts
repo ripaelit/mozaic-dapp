@@ -1,4 +1,4 @@
-type token = {
+export type asset = {
   id: any;
   name: string;
   icon: string;
@@ -9,7 +9,7 @@ export interface ProductType {
   name: string;
   icon: string;
   color: string;
-  vault: token[];
+  vault: asset[];
   apy: number;
   tokenName: string;
   maxCap: number;
@@ -18,72 +18,65 @@ export interface ProductType {
   position: number | undefined;
 }
 
-export interface ProductDetailsType {}
+export interface ProductDetailDataType {
+  id: number;
+  name: string;
+  icon: string;
+  color: string;
+  balance: number;
+  chart: Chart[];
+  vault: AssetElement;
+  summary: Summary[];
+  details: Details;
+}
 
-let product = {
-  product: {
-    id: 1,
-    name: 'Stable Coin',
-    icon: '',
-    balance: 2000,
-  },
-  chart: [
-    {
-      id: 1,
-      name: 'Vault APY',
-      data: [
-        {
-          id: 1,
-          date: 151146516561,
-          value: 1,
-        },
-      ],
-    },
-  ],
-  summery: {
-    assetsUnderManagement: 1,
-    averageMonthlyReturn: 2,
-    lastMonthAverageAPY: 3,
-    predictedAPY: 4,
-  },
-  details: {
-    tokens: [
-      {
-        id: 1,
-        name: 'usdt',
-        icon: '',
-        allcoation: '',
-        apy: 1,
-        strategy: '',
-      },
-    ],
-    metrics: {
-      returnMonthToDate: 1,
-      returnQuerterToDate: 2,
-      returnYearToDate: 3,
-      returnInceptionToDate: 4,
-      averageMonth: 5,
-      bestMonth: 6,
-      worstMonth: 7,
-      positiveMonth: 8,
-      lenghtOfTrackRecord: 9,
-    },
-    strategy: [
-      {
-        id: 1,
-        tokenName: '',
-        icon: '',
-        data: [
-          {
-            id: 1,
-            date: new Date(),
-            value: 25,
-          },
-        ],
-      },
-    ],
-  },
-};
+export interface Chart {
+  id: number;
+  name: string;
+  data: Array<number[]>;
+}
+
+export interface Details {
+  tokenDetails: TokenDetail[];
+  metricsDetails: MetricsDetailElement[];
+  strategyDetails: Chart[];
+}
+
+export interface MetricsDetailElement {
+  id: number;
+  name: string;
+  value?: number[] | number;
+  icon: string;
+}
+
+export interface TokenDetail {
+  id: number;
+  name: string;
+  icon: string;
+  allocation: number;
+  apy: number;
+  strategy: number;
+}
+
+export interface Summary {
+  id: number;
+  name: string;
+  icon: string;
+  value: number;
+  prefix?: string;
+  suffix?: string;
+}
+
+export interface AssetElement {
+  id: number;
+  name: string;
+  address: string;
+  decimals: number;
+  conversionRateUSD: number;
+  conversionRate: number;
+  assets?: AssetElement[];
+  icon?: string;
+}
 
 export interface ChartDataType {
   id: any;

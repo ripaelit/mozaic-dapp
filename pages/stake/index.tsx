@@ -5,6 +5,7 @@ import DetailsSection from '../../lib/components/stake/DetailsSection';
 import LockSection from '../../lib/components/stake/LockSection';
 import OverviewSection from '../../lib/components/stake/OverviewSection';
 import { TabItem } from '../../lib/types/common';
+import { calcStakingDate } from '../../lib/utils/calcStakingDate';
 
 const title = { description: 'Automatic and intelligent multi-chain yield farming.', href: '#' };
 const overviewData = [
@@ -32,12 +33,12 @@ const overviewData = [
 ];
 
 const range: TabItem[] = [
-  { id: 0, name: '1 week', shortName: '1W', value: 1 },
-  { id: 1, name: '1 month', shortName: '1M', value: 4 },
-  { id: 2, name: '3 Months', shortName: '3M', value: 12 },
-  { id: 3, name: '6 Months', shortName: '6M', value: 24 },
-  { id: 4, name: '1 Year', shortName: '1Y', value: 52 },
-  { id: 5, name: '3 Years', shortName: '3Y', value: 156 },
+  { id: 0, name: '1 week', shortName: '1W', value: 1, range: '1w' },
+  { id: 1, name: '1 month', shortName: '1M', value: 4, range: '1m' },
+  { id: 2, name: '3 Months', shortName: '3M', value: 13, range: '3m' },
+  { id: 3, name: '6 Months', shortName: '6M', value: 26, range: '6m' },
+  { id: 4, name: '1 Year', shortName: '1Y', value: 52, range: '1y' },
+  { id: 5, name: '3 Years', shortName: '3Y', value: 156, range: '3y' },
 ];
 
 const detailsData = {
@@ -60,12 +61,14 @@ const stakeAsset = {
 
 export default function Stake() {
   const [amount, setAmount] = useState(parseFloat(''));
-  const [week, setWeek] = useState(4);
+  const [week, setWeek] = useState(1);
   const [selectedRange, setSelectedRange] = useState<TabItem | null>(null);
+  const [unlockTime, setUnlockTime] = useState<any>(null);
 
   // on create lock this function will get called
   const onLock = () => {};
 
+  // set maximum balance
   const setMaxBalance = (maxBalance: string) => {
     setAmount(parseFloat(maxBalance));
   };
@@ -74,6 +77,19 @@ export default function Stake() {
     setAmount(parseFloat(e.target.value));
   };
 
+  // on slider change
+  const onSliderChange = (value: number) => {
+    setWeek(value);
+    const { unlockDate } = calcStakingDate(week);
+    setUnlockTime(unlockDate);
+  };
+
+  // useEffect(() => {
+  //   const { weeks, days, unlockDate } = calcStakingDate(week);
+  //   setUnlockTime(unlockDate);
+  // }, []);
+
+  // on slider change calculate staking time
   useEffect(() => {
     const matchedRange = range.filter((item) => {
       if (item.value === week) {
@@ -89,9 +105,12 @@ export default function Stake() {
     }
   }, [week]);
 
+  // on range change calculate staking time
   useEffect(() => {
     if (selectedRange) {
-      setWeek(selectedRange.value);
+      const { weeks, days, unlockDate } = calcStakingDate(selectedRange.range);
+      setWeek(weeks);
+      setUnlockTime(unlockDate);
     }
   }, [selectedRange]);
 
@@ -125,11 +144,12 @@ export default function Stake() {
               stakeAsset={stakeAsset}
               onInput={onInput}
               time={week}
-              setTime={setWeek}
+              onSliderChange={onSliderChange}
               range={range}
               selectedRange={selectedRange}
               setSelectedRange={setSelectedRange}
               onLock={onLock}
+              unlockTime={unlockTime}
             />
           </section>
         </div>

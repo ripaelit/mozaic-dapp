@@ -179,31 +179,32 @@ export default function Chart({
   const filterBy = (timeline: string) => {
     switch (timeline) {
       case '1d':
-        filterData(8.64e7, series);
+        filterData(8.64e7, series, 25);
+
         break;
 
       case '1w':
-        filterData(6.048e8, series);
+        filterData(6.048e8, series, 25);
 
         break;
       case '1mo':
-        filterData(2.628e9, series);
+        filterData(2.628e9, series, 31);
 
         break;
       case '3mo':
-        filterData(7.884e9, series);
+        filterData(7.884e9, series, 31);
 
         break;
       case '6mo':
-        filterData(1.577e10, series);
+        filterData(1.577e10, series, 31);
 
         break;
       case '1y':
-        filterData(now.getTime() - now.setFullYear(now.getFullYear() - 1), series);
+        filterData(now.getTime() - now.setFullYear(now.getFullYear() - 1), series, 31);
 
         break;
       case 'ytd':
-        filterData(now.getTime() - new Date(now.getFullYear(), 0, 1).getTime(), series);
+        filterData(now.getTime() - new Date(now.getFullYear(), 0, 1).getTime(), series, 31);
 
         break;
       case 'all':
@@ -212,13 +213,40 @@ export default function Chart({
     }
   };
 
-  const filterData = (distance: number, dataStream: any) => {
+  function filterArray(arr: any, amount: any) {
+    if (arr.length < amount) {
+      console.log('arr', arr.length, amount);
+      return arr;
+    } else {
+    }
+    // Initialize a new array to store the filtered results
+    let filteredArr = [];
+
+    // Determine the step size to take when selecting elements
+    let step = Math.floor(arr.length / amount);
+
+    // Iterate over the input array with the specified step size
+    for (let i = 0; i < arr.length; i += step) {
+      // Add the current element to the filtered array
+      filteredArr.push(arr[i]);
+    }
+
+    // Return the filtered array
+    console.log('filter');
+
+    return filteredArr;
+  }
+
+  // Filter chart data
+  const filterData = (distance: number, dataStream: any, maxItems: number = 30) => {
     let data: any = [];
     const refTime = new Date().getTime() - distance;
-    for (let i = 0; i < series.length; i++) {
-      const filteredData = series[i].data.filter((time) => refTime < time[0]);
-      data.push({ ...series[i], data: filteredData });
+    for (let i = 0; i < dataStream.length; i++) {
+      const filteredData = dataStream[i].data.filter((time: any) => refTime < time[0]);
+      data.push({ ...dataStream[i], data: filterArray(filteredData, maxItems) });
+      console.log(filteredData.length);
     }
+
     setDataStream(data);
   };
 

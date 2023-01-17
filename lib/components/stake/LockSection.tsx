@@ -3,8 +3,11 @@ import InputCheckBtn from '../common/button/InputCheckBtn';
 import PrimaryBtn from '../common/button/PrimaryBtn';
 import PrimaryCard from '../common/card/PrimaryCard';
 import InputWithLabel from '../common/input/InputWithLabel';
-import Slider from '../common/Slider';
 import Tab from '../common/tab/Tab';
+import InputLabel from '../common/input/InputLabel';
+import { format } from 'date-fns';
+import { useEffect, useState } from 'react';
+import InputBox from '../common/input/InputBox';
 
 export default function LockSection({
   amount,
@@ -12,12 +15,21 @@ export default function LockSection({
   stakeAsset,
   onInput,
   time,
-  setTime,
+  onSliderChange,
   range,
   selectedRange,
   setSelectedRange,
   onLock,
+  unlockTime,
 }: any) {
+  const [unlockDate, setUnlockDate] = useState<any>(null);
+
+  useEffect(() => {
+    if (unlockTime) {
+      setUnlockDate(format(unlockTime, 'dd MMM, yyyy - hh:mma'));
+    }
+  }, [unlockTime]);
+
   return (
     <>
       <PrimaryCard
@@ -46,15 +58,9 @@ export default function LockSection({
               inputValue={amount}
               onChange={onInput}
             />
-            <InputWithLabel
-              datePicker={true}
-              inputType={'week'}
-              label='Choose lock time'
-              inputValue={time}
-              onChange={(e: any) => {
-                setTime(e.target.value);
-              }}
-            />
+            <InputLabel label={'Choose Lock Time'} />
+
+            {/* Time selection tab */}
             <Tab
               currentTab={selectedRange}
               tabs={range}
@@ -62,8 +68,6 @@ export default function LockSection({
               style={`height: 72px; width: 100%`}
               itemStyle={`width: auto;`}
             />
-          </div>
-          <div className='bottom'>
             <ReactSlider
               min={1}
               max={156}
@@ -71,17 +75,20 @@ export default function LockSection({
               thumbClassName='lock-slider-thumb'
               trackClassName='lock-slider-track'
               value={time}
-              onChange={setTime}
+              onChange={onSliderChange}
               renderThumb={(props, state) => (
                 <div {...props} className='handle'>
                   <div className='inner'>{state.valueNow}</div>
                 </div>
               )}
             />
+          </div>
+          <div className='bottom'>
             <p className='info'>
               Your starting voting power will be {!amount ? 0 : amount} veMOZ over {time}{' '}
               {time > 1 ? 'weeks' : 'week'}!
             </p>
+            <InputBox readOnly={true} inputType='text' inputValue={unlockDate} />
             <PrimaryBtn text='Create lock' onClick={onLock} />
           </div>
         </div>
