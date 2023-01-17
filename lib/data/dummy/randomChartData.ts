@@ -12,7 +12,7 @@ export const generateChart = (count: number, interval: number, startFrom?: numbe
   return arr;
 };
 
-const arr = generateChart(200, 6);
+const arr = generateChart(8000, 1);
 
 export const chartData1 = arr.map((data: any) => [
   data[0],
