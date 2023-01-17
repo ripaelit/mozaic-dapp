@@ -29,6 +29,7 @@ export const menuItems: MenuItemType[] = [
     name: 'Mozaic',
     path: '/',
     icon: '/assets/icons/menu/ico.menu.home.svg',
+    link: true,
   },
   {
     id: 1,
@@ -50,6 +51,7 @@ export const menuItems: MenuItemType[] = [
     path: 'https://docs.mozaic.finance/',
     icon: '/assets/icons/menu/ico.menu.user.svg',
     newWindow: true,
+    link: true,
   },
   // {
   //   id: 4,
