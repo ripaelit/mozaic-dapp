@@ -9,7 +9,7 @@ export default function SingleAsset({
   singleAssetWithdrawData,
   setSingleAssetWithdrawData,
 }: any) {
-  const [selectedAsset, setSelectedAsset] = useState(vault.assets[0]);
+  const [selectedAsset, setSelectedAsset] = useState(vault[0].assets[0]);
   const [assetWithdrawData, setAssetWithdrawData] = useState(singleAssetWithdrawData);
 
   // set maximum balance for withdraw data
@@ -97,7 +97,7 @@ export default function SingleAsset({
         rightElement={
           <>
             <DropdownWithIcon
-              options={vault.assets}
+              options={vault[0].assets}
               selectedOption={selectedAsset}
               setSelectedOption={setSelectedAsset}
             />

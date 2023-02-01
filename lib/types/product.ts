@@ -25,7 +25,7 @@ export interface ProductDetailDataType {
   color: string;
   balance: number;
   chart: Chart[];
-  vault: AssetElement;
+  vault: AssetElement[];
   summary: Summary[];
   details: Details;
 }

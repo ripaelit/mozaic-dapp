@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InputCheckBtn from '../../button/InputCheckBtn';
+import DropdownChainIcon from '../../input/dropdown/DropdownChainIcon';
 import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
@@ -9,7 +10,8 @@ export default function SingleAsset({
   singleAssetDepositData,
   setSingleAssetDepositData,
 }: any) {
-  const [selectedAsset, setSelectedAsset] = useState(vault.assets[0]);
+  const [selectedChainAsset, setSelectedChainAsset] = useState(vault[0]);
+  const [selectedAsset, setSelectedAsset] = useState(vault[0].assets[0]);
   const [assetDepositData, setAssetDepositData] = useState(singleAssetDepositData);
 
   // set maximum balance for deposit data
@@ -49,18 +51,38 @@ export default function SingleAsset({
 
   // on asset change generate the deposit data
   useEffect(() => {
-    setAssetDepositData({
-      ...assetDepositData,
-      asset: {
-        ...assetDepositData.asset,
-        id: selectedAsset.id,
-        name: selectedAsset.name,
-        address: selectedAsset.address,
-        decimals: selectedAsset.decimals,
-      },
-      totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
-    });
-  }, [selectedAsset]);
+    try {
+      setAssetDepositData({
+        ...assetDepositData,
+        asset: {
+          ...assetDepositData.asset,
+          id: selectedAsset.id,
+          name: selectedAsset.name,
+          address: selectedAsset.address,
+          decimals: selectedAsset.decimals,
+        },
+        totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
+      });
+    } catch(error){
+      console.log(selectedAsset);
+    }
+  }, [selectedAsset, selectedChainAsset]);
+
+  // // on asset change generate the deposit data
+  // useEffect(() => {
+  //   setAssetDepositData({
+  //     ...assetDepositData,
+  //     asset: {
+  //       ...assetDepositData.asset,
+  //       id: selectedAsset.id,
+  //       name: selectedAsset.name,
+  //       address: selectedAsset.address,
+  //       decimals: selectedAsset.decimals,
+  //     },
+  //     totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
+  //   });
+  //   console.log(assetDepositData);
+  // }, [selectedChainAsset]);
 
   // on input change generate the complete output data object
   useEffect(() => {
@@ -82,8 +104,13 @@ export default function SingleAsset({
               currentAsset={selectedAsset}
               currentAmount={assetDepositData.asset.amount}
             />
+            <DropdownChainIcon
+              options={vault}
+              selectedOption={selectedChainAsset}
+              setSelectedOption={setSelectedChainAsset}
+            />
             <DropdownWithIcon
-              options={vault.assets}
+              options={vault[selectedChainAsset.id].assets}
               selectedOption={selectedAsset}
               setSelectedOption={setSelectedAsset}
             />
@@ -96,7 +123,8 @@ export default function SingleAsset({
         labelRightElement={
           <SlippageEditor onChange={setSlippage} value={assetDepositData.slippage} />
         }
-        rightElement={<p>{vault.name}</p>}
+        rightElement={<p>{'INMOZ'}</p>}
+        // rightElement={<p>{vault[0].name}</p>}
         inputValue={assetDepositData.totalDepositAmount}
       />
     </>

@@ -37,7 +37,7 @@ export default function DepositModal({
   };
 
   const initialMultiAssetsDepositData = {
-    assets: vault.assets.map((asset: any) => ({
+    assets: vault[0].assets.map((asset: any) => ({
       id: asset.id,
       name: asset.name,
       address: asset.address,

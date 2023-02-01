@@ -1,0 +1,157 @@
+{
+  "initialSupply": "1000000000000",
+  "ZERO_ADDRESS": "0x0000000000000000000000000000000000000000",
+  "name":"InMoz",
+  "symbol":"InMoz",
+  "ethereum": {
+    "chainId": 101,
+    "endpoint": "0x66A71Dcef29A0fFBDBE3c6a460a3B5BC225Cd675",
+    "router": "0x8731d54E9D02c286767d56ac03e8037C07e01e98",
+    "lpstaking": "0xB0D502E938ed5f4df2E681fE6E419ff29631d62b",
+    "stgToken": "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6",
+    "poolInfos": [
+      {
+        "erc20Address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "Ipool": "0xdf0770dF86a8034b3EFEf0A1Bb3c889B8332FF56"
+      },
+      {
+        "erc20Address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "Ipool": "0x38ea452219524bb87e18de1c24d3bb59510bd783"
+      }
+    ]
+  },
+  "bsc": {
+    "chainId": 102,
+    "endpoint": "0x3c2269811836af69497E5F486A85D7316753cf62",
+    "router": "0x4a364f8c717cAAD9A442737Eb7b8A55cc6cf18D8",
+    "lpstaking": "0x3052A0F6ab15b4AE1df39962d5DdEFacA86DaB47",
+    "stgToken": "0xB0D502E938ed5f4df2E681fE6E419ff29631d62b",
+    "poolInfos": [
+      {
+        "erc20Address": "0x55d398326f99059ff775485246999027b3197955",
+        "Ipool": "0x9aA83081AA06AF7208Dcc7A4cB72C94d057D2cda"
+      },
+      {
+        "erc20Address": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "Ipool": "0x98a5737749490856b401DB5Dc27F522fC314A4e1"
+      }
+    ]
+  },
+  "avalanche": {
+    "chainId": 106,
+    "endpoint": "0x3c2269811836af69497E5F486A85D7316753cf62",
+    "router": "0x45A01E4e04F14f7A4a6702c74187c5F6222033cd",
+    "lpstaking": "0x8731d54E9D02c286767d56ac03e8037C07e01e98",
+    "stgToken": "0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590",
+    "poolInfos": [
+      {
+        "erc20Address": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+        "Ipool": "0x1205f31718499dBf1fCa446663B532Ef87481fe1"
+      },
+      {
+        "erc20Address": "0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7",
+        "Ipool": "0x29e38769f23701A2e4A8Ef0492e19dA4604Be62c"
+      }
+    ]
+  },
+  "polygon": {
+    "chainId": 109,
+    "endpoint": "0x3c2269811836af69497E5F486A85D7316753cf62",
+    "router": "0x45A01E4e04F14f7A4a6702c74187c5F6222033cd",
+    "lpstaking": "0x8731d54E9D02c286767d56ac03e8037C07e01e98",
+    "stgToken": "0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590",
+    "poolInfos": [
+      {
+        "erc20Address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+        "Ipool": "0x1205f31718499dBf1fCa446663B532Ef87481fe1"
+      },
+      {
+        "erc20Address": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+        "Ipool": "0x29e38769f23701A2e4A8Ef0492e19dA4604Be62c"
+      }
+    ]
+  },
+  "arbitrum": {
+    "chainId": 110,
+    "endpoint": "0x3c2269811836af69497E5F486A85D7316753cf62",
+    "router": "0x53Bf833A5d6c4ddA888F69c22C88C9f356a41614",
+    "lpstaking": "0xeA8DfEE1898a7e0a59f7527F076106d7e44c2176",
+    "stgToken": "0x6694340fc020c5E6B96567843da2df01b2CE1eb6",
+    "poolInfos": [
+      {
+        "erc20Address": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+        "Ipool": "0x892785f33CdeE22A30AEF750F285E18c18040c3e"
+      },
+      {
+        "erc20Address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+        "Ipool": "0xB6CfcF89a7B22988bfC96632aC2A9D6daB60d641"
+      }
+    ]
+  },
+  "optimism": {
+    "chainId": 111,
+    "endpoint": "0x3c2269811836af69497E5F486A85D7316753cf62",
+    "router": "0xB0D502E938ed5f4df2E681fE6E419ff29631d62b",
+    "lpstaking": "0x4DeA9e918c6289a52cd469cAC652727B7b412Cd2",
+    "stgToken": "0x296F55F8Fb28E498B858d0BcDA06D955B2Cb3f97",
+    "poolInfos": [
+      {
+        "erc20Address": "0x7f5c764cbc14f9669b88837ca1490cca17c31607",
+        "Ipool": "0xDecC0c09c3B5f6e92EF4184125D5648a66E35298"
+      }
+    ]
+  },
+  "fantom": {
+    "chainId": 112,
+    "endpoint": "0xb6319cC6c8c27A8F5dAF0dD3DF91EA35C4720dd7",
+    "router": "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6",
+    "lpstaking": "0x224D8Fd7aB6AD4c6eb4611Ce56EF35Dec2277F03",
+    "stgToken": "0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590",
+    "poolInfos": [
+      {
+        "erc20Address": "0x04068da6c83afcfa0e13ba15a6696662335d5b75",
+        "Ipool": "0x12edeA9cd262006cC3C4E77c90d2CD2DD4b1eb97"
+      }
+    ]
+  },
+  "goerli":{
+    "chainId": 10121,
+    "endpoint": "0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23",
+    "router": "0x7612aE2a34E5A363E137De748801FB4c86499152",
+    "lpstaking": "0x3eC94aDa1F6fC1af82E16cf27305CFae692E35B8",
+    "stgToken": "0xe0D6deF971250715Cb97794D4105CBf28f389BB8",
+    "dex":"0x66b7a2D427A0CAfAF485f5E52cE526Af4086eAFD",
+    "poolInfos": [
+      {
+        "erc20Address": "0xdf0360ad8c5ccf25095aa97ee5f2785c8d848620",
+        "Ipool": "0xa02e1f8c4546367763fa78fc077ba89291d4bc6c",
+        "symbol":"USDC"
+      },
+      {
+        "erc20Address": "0x5BCc22abEC37337630C0E0dd41D64fd86CaeE951",
+        "Ipool": "0x925d10060ab7D3150895C87a4138e7Fd379508bB",
+        "symbol":"USDT"
+      }
+    ]
+  },
+  "fuji":{
+    "chainId": 10106,
+    "endpoint": "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
+    "router": "0x13093E05Eb890dfA6DacecBdE51d24DabAb2Faa1",
+    "lpstaking": "0x65B26B3d6BF4Ad42C00c5871119b31439ae8c700",
+    "stgToken": "0x1Cb74544AaafBA3350C0E1149DDb304Bb0A0ff61",
+    "dex":"0xA7624c3E82721f10ed756A9b0210636d98075c95",
+    "poolInfos": [
+      {
+        "erc20Address": "0x4A0D1092E9df255cf95D72834Ea9255132782318",
+        "Ipool": "0xf14b09e2524855460d3a2cf7e682b8e8b1ba0f35",
+        "symbol":"USDC"
+      },
+      {
+        "erc20Address": "0x134Dc38AE8C853D1aa2103d5047591acDAA16682",
+        "Ipool": "0x024511D18C8932523dD91770ec015be365806D4E",
+        "symbol":"USDT"
+      }
+    ]
+  }
+}

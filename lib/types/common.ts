@@ -54,4 +54,17 @@ export type NetworkItemType = {
   icon: string;
 };
 
+export type NetworkChainDataType = {
+  id: any;
+  chainID: number | null;
+  rpcUrls: string;
+  name: string;
+  nativeCurrency: {
+    name: string;
+    decimals: number;
+    symbol: string;
+  };
+  icon: string;
+};
+
 export type TabItem = { id: any; name: string; shortName?: string; value?: any; range?: string };

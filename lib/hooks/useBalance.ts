@@ -13,7 +13,7 @@ export default function useBalance(tokenAddress: any, decimals: any) {
 
   useEffect(() => {
     let isCancelled = false;
-
+    console.log(tokenAddress);
     function getBalance() {
       return new Promise((resolve) => {
         if (!library || !tokenAddress) {
