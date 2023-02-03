@@ -51,7 +51,6 @@ export default function ConnectWalletBtn({
   // dispatch notification on wallet connect
   useEffect(() => {
     // console.log(web3reactContext);
-
     web3reactContext.account &&
       toast.success(`Wallet ${web3reactContext.account} connected!`, {
         position: 'bottom-right',
@@ -69,7 +68,6 @@ export default function ConnectWalletBtn({
 
   useEffect(() => {
     // console.log(web3reactContext.chainId);
-
     if (!web3reactContext.chainId) {
       setCurrentNetwork(networkIdleStates[0]);
       return;

@@ -5,6 +5,12 @@ import { wallets } from '../../../data/static/wallet';
 import { injected, resetWalletConnector, walletconnect } from '../../../helpers/connectors';
 import { DefaultBtnType, ModalBtnType } from '../../../types/common';
 import Modal from './Modal';
+import switchNetwork from '../../../hooks/useSwitchNetwork';
+declare global {
+  interface Window{
+    ethereum?:any
+  }
+}
 
 export default function ConnectWalletModal({
   setShowModal,
@@ -22,13 +28,29 @@ export default function ConnectWalletModal({
   };
 
   const [modalBtn, setModalBtn] = useState<DefaultBtnType>(initialBtn);
+  const [networkData, setNetworkData] = useState<any>();
 
   //web3react metamask
   const connectMetamask = async () => {
     try {
+      const data = {
+        id: 0,
+        chainID: '0x5',
+        rpcUrls: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+        name: 'Goerli',
+        nativeCurrency: {
+          name: 'ETH',
+          decimals: 18,
+          symbol: 'ETH',
+        },
+        icon: '/assets/icons/wallet/networks/ico.eth.svg',
+      }
+      switchNetwork(data)
       await web3reactContext.activate(injected).then(() => {
         setShowModal(false);
-      });
+      }).catch((e) => {
+        console.log('debug', e)
+      }) ;
     } catch (error) {
       console.log('err', error);
     }
