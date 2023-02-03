@@ -1,5 +1,3 @@
-import { useEffect, useCallback } from 'react';
-
  const switchNetwork = async (networkData: any) => {
   console.log('debug', networkData)
   try {
@@ -25,7 +23,7 @@ import { useEffect, useCallback } from 'react';
           ],
         });
       } catch (error) {
-         console.error(error)
+        //  console.log(error)
       }
     }
   }

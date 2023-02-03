@@ -1,6 +1,5 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { wallets } from '../../../data/static/wallet';
 import { injected, resetWalletConnector, walletconnect } from '../../../helpers/connectors';
 import { DefaultBtnType, ModalBtnType } from '../../../types/common';
@@ -33,7 +32,7 @@ export default function ConnectWalletModal({
   //web3react metamask
   const connectMetamask = async () => {
     try {
-      const data = {
+      const _defaultNetworkData = {
         id: 0,
         chainID: '0x5',
         rpcUrls: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
@@ -45,14 +44,14 @@ export default function ConnectWalletModal({
         },
         icon: '/assets/icons/wallet/networks/ico.eth.svg',
       }
-      switchNetwork(data)
+      switchNetwork(_defaultNetworkData)
       await web3reactContext.activate(injected).then(() => {
         setShowModal(false);
-      }).catch((e) => {
-        console.log('debug', e)
+      }).catch((error) => {
+        // console.log({error})
       }) ;
     } catch (error) {
-      console.log('err', error);
+      // console.log({error});
     }
   };
 
