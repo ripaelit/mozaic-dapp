@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
-import switchNetwork from '../../../../hooks/useSwitchNetwork';
-import { networks } from '../../../../data/static/wallet';
+// import switchNetwork from '../../../../hooks/useSwitchNetwork';
+// import { networks } from '../../../../data/static/wallet';
 
 type Option = {
   id: any;
@@ -53,7 +53,7 @@ export default function DropdownChainIcon({
                   onClick={() => {
                     setSelectedOption(option);
                     setOpenDropdown(!openDropdown);
-                    switchNetwork(networks[0]);
+                    // switchNetwork(networks[0]);
                   }}>
                   <img src={option.icon} alt='' />
                   <p>{option.name}</p>

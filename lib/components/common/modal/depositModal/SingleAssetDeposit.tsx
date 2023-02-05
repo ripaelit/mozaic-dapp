@@ -66,23 +66,24 @@ export default function SingleAsset({
     } catch(error){
       console.log(selectedAsset);
     }
-  }, [selectedAsset, selectedChainAsset]);
+  }, [selectedAsset]);
 
   // // on asset change generate the deposit data
-  // useEffect(() => {
-  //   setAssetDepositData({
-  //     ...assetDepositData,
-  //     asset: {
-  //       ...assetDepositData.asset,
-  //       id: selectedAsset.id,
-  //       name: selectedAsset.name,
-  //       address: selectedAsset.address,
-  //       decimals: selectedAsset.decimals,
-  //     },
-  //     totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
-  //   });
-  //   console.log(assetDepositData);
-  // }, [selectedChainAsset]);
+  useEffect(() => {
+    setAssetDepositData({
+      ...assetDepositData,
+      asset: {
+        ...assetDepositData.asset,
+        id: selectedAsset.id,
+        name: selectedAsset.name,
+        address: selectedAsset.address,
+        decimals: selectedAsset.decimals,
+      },
+      totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
+      name: selectedChainAsset.name
+    });
+    console.log(assetDepositData);
+  }, [selectedChainAsset]);
 
   // on input change generate the complete output data object
   useEffect(() => {

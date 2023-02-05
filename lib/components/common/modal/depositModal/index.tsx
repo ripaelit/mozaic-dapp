@@ -1,12 +1,13 @@
 import { useWeb3React } from '@web3-react/core';
-import React, { useEffect, useState } from 'react';
-import { ModalBtnType, TabItem } from '../../../../types/common';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ModalBtnType, NetworkChainDataType, TabItem } from '../../../../types/common';
 import Separator from '../../Separator';
 import Tab from '../../tab/Tab';
 import ConnectWalletModal from '../ConnectWalletModal';
 import Modal from '../Modal';
 import MultiAssets from './MultiAssetsDeposit';
 import SingleAsset from './SingleAssetDeposit';
+import { networks } from '../../../../data/static/wallet';
 
 const assetTypes: TabItem[] = [
   { id: 0, name: 'Single Asset', value: 'single' },
@@ -34,6 +35,7 @@ export default function DepositModal({
     address: '',
     decimals: 0,
     totalDepositAmount: '',
+    name: '',
   };
 
   const initialMultiAssetsDepositData = {
@@ -65,11 +67,16 @@ export default function DepositModal({
   );
 
   useEffect(() => {
-    // console.log('single asset', singleAssetDepositData);
+    console.log('single asset', singleAssetDepositData);
   }, [singleAssetDepositData]);
   useEffect(() => {
     // console.log('multi assets', multiAssetsDepositData);
   }, [multiAssetsDepositData]);
+
+  const chainData: NetworkChainDataType | undefined = useMemo(() => {
+    const targetChain = networks.find((network) => network.name.includes(singleAssetDepositData.name))
+    return targetChain
+  }, [singleAssetDepositData])
 
   return (
     <>
@@ -117,7 +124,7 @@ export default function DepositModal({
             )}
           </div>
           {showConnectWalletModal && (
-            <ConnectWalletModal setShowModal={setShowConnectWalletModal} />
+            <ConnectWalletModal setShowModal={setShowConnectWalletModal} chainData={chainData} />
           )}
         </div>
       </Modal>

@@ -88,7 +88,7 @@ export const networks: NetworkChainDataType[] = [
   {
     id: 1,
     chainID: 420,
-    rpcUrls: 'https://endpoints.omniatech.io/v1/op/goerli/public',
+    rpcUrls: 'https://opt-goerli.g.alchemy.com/v2/VvDMoNPGL63OALxGv9KaoQ1xf4_kr5br',
     name: 'Optimism Goerli Testnet',
     nativeCurrency: {
       name: 'ETH',
