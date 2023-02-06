@@ -55,7 +55,7 @@ export default function ConnectWalletBtn({
       toast.success(`Wallet ${web3reactContext.account} connected!`, {
         position: 'bottom-right',
         autoClose: 5000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -78,7 +78,7 @@ export default function ConnectWalletBtn({
           toast.info(`Connected to ${item.name} network`, {
             position: 'bottom-right',
             autoClose: 5000,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
