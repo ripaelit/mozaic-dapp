@@ -69,6 +69,7 @@ export default function DepositModal({
   useEffect(() => {
     console.log('single asset', singleAssetDepositData);
   }, [singleAssetDepositData]);
+
   useEffect(() => {
     // console.log('multi assets', multiAssetsDepositData);
   }, [multiAssetsDepositData]);
@@ -95,7 +96,10 @@ export default function DepositModal({
             : {
                 text: 'Deposit',
                 type: ModalBtnType.default,
-                onClick: () => {},
+                onClick: () => {
+                  // actions for deposit
+                  
+                },
               }
         }>
         <div className='deposit-modal-wrapper'>

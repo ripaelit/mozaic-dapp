@@ -72,7 +72,9 @@ export const networks: NetworkChainDataType[] = [
   //   name: 'Arbitrum One',
   //   icon: '/assets/icons/wallet/networks/ico.arb.svg',
   // },
+
   // testnet
+  // Goerli
   {
     id: 0,
     chainID: 5,
@@ -85,6 +87,7 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.eth.svg',
   },
+  // Optimism
   {
     id: 1,
     chainID: 420,
@@ -95,8 +98,9 @@ export const networks: NetworkChainDataType[] = [
       decimals: 18,
       symbol: 'ETH',
     },
-    icon: '/assets/icons/wallet/networks/ico.bsc.svg',
+    icon: '/assets/icons/wallet/networks/ico.op.svg',
   },
+  // BSC testnet
   {
     id: 2,
     chainID: 97,
@@ -107,20 +111,22 @@ export const networks: NetworkChainDataType[] = [
       decimals: 18,
       symbol: 'tBNB',
     },
-    icon: '/assets/icons/wallet/networks/ico.op.svg',
+    icon: '/assets/icons/wallet/networks/ico.bsc.svg',
   },
+  // Fuji
   {
     id: 3,
     chainID: 43113,
-    rpcUrls: 'https://test.doschain.com/jsonrpc',
+    rpcUrls: 'https://api.avax-test.network/ext/bc/C/rpc',
     name: 'Fuji',
     nativeCurrency: {
-      name: 'DOS',
+      name: 'AVAX',
       decimals: 18,
-      symbol: 'DOS',
+      symbol: 'AVAX',
     },
     icon: '/assets/icons/wallet/networks/ico.avax.svg',
   },
+  // Fantom
   {
     id: 4,
     chainID: 4002,
@@ -133,6 +139,7 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.ftm.svg',
   },
+  // Mumbai
   {
     id: 5,
     chainID: 80001,
@@ -145,6 +152,7 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.matic.svg',
   },
+  // Arbitrum
   {
     id: 6,
     chainID: 421613,

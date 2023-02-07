@@ -6,7 +6,7 @@ export default function PrimaryBtn({
   type = 'default',
   icon,
   onClick = () => {
-    console.log('button pressed');
+    // console.log('button pressed');
   },
 }: DefaultBtnType) {
   return (

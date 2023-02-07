@@ -1,6 +1,6 @@
 export default async function switchNetwork(networkData: any) {
   try {
-    console.log('debug switch network', networkData)
+    // console.log('debug switch network', networkData)
     await window.ethereum.request({
       method: "wallet_switchEthereumChain",
       params: [{ chainId: networkData.chainID }],

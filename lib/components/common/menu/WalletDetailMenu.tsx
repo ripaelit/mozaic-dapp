@@ -20,7 +20,7 @@ export default function WalletDetailMenu({ showMenu, setShowMenu, currentNetwork
     setShowMenu(false);
     toast.warning(`Wallet disconnected!`, {
       position: 'bottom-right',
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
@@ -34,7 +34,7 @@ export default function WalletDetailMenu({ showMenu, setShowMenu, currentNetwork
     setShowMenu(false);
     toast.info(`Wallet address copied to clipboard.`, {
       position: 'bottom-right',
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,

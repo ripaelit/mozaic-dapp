@@ -32,10 +32,10 @@ export default function ConnectWalletModal({
   const [networkData, setNetworkData] = useState<any>();
 
   //web3react metamask
-    console.log('debug chainData', chainData)
+    // console.log('debug chainData', chainData)
     const connectMetamask = async () => {
     try {
-      console.log('debug chainData', chainData)
+      // console.log('debug chainData', chainData)
       const _defaultNetworkData = chainData? {
         ...chainData,
         chainID: '0x' + (chainData.chainID || 0).toString(16)
@@ -51,7 +51,7 @@ export default function ConnectWalletModal({
         },
         icon: '/assets/icons/wallet/networks/ico.eth.svg',
       }
-      console.log('debug _defaultNetworkData', _defaultNetworkData)
+      // console.log('debug _defaultNetworkData', _defaultNetworkData)
       switchNetwork(_defaultNetworkData)
       await web3reactContext.activate(injected).then(() => {
         setShowModal(false);
