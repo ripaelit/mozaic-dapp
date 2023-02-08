@@ -73,7 +73,7 @@ export const networks: NetworkChainDataType[] = [
   //   icon: '/assets/icons/wallet/networks/ico.arb.svg',
   // },
 
-  // testnet
+  // test net
   // Goerli
   {
     id: 0,
@@ -87,9 +87,22 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.eth.svg',
   },
-  // Optimism
+  // Fuji
   {
     id: 1,
+    chainID: 43113,
+    rpcUrls: 'https://api.avax-test.network/ext/bc/C/rpc',
+    name: 'Fuji',
+    nativeCurrency: {
+      name: 'AVAX',
+      decimals: 18,
+      symbol: 'AVAX',
+    },
+    icon: '/assets/icons/wallet/networks/ico.avax.svg',
+  },
+  // Optimism
+  {
+    id: 2,
     chainID: 420,
     rpcUrls: 'https://opt-goerli.g.alchemy.com/v2/VvDMoNPGL63OALxGv9KaoQ1xf4_kr5br',
     name: 'Optimism Goerli Testnet',
@@ -100,31 +113,18 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.op.svg',
   },
-  // BSC testnet
-  {
-    id: 2,
-    chainID: 97,
-    rpcUrls: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
-    name: 'Binance Smart Chain Testnet',
-    nativeCurrency: {
-      name: 'tBNB',
-      decimals: 18,
-      symbol: 'tBNB',
-    },
-    icon: '/assets/icons/wallet/networks/ico.bsc.svg',
-  },
-  // Fuji
+  // Mumbai
   {
     id: 3,
-    chainID: 43113,
-    rpcUrls: 'https://api.avax-test.network/ext/bc/C/rpc',
-    name: 'Fuji',
+    chainID: 80001,
+    rpcUrls: 'https://polygon-mumbai.blockpi.network/v1/rpc/public',
+    name: 'Mumbai',
     nativeCurrency: {
-      name: 'AVAX',
+      name: 'MATIC',
       decimals: 18,
-      symbol: 'AVAX',
+      symbol: 'MATIC',
     },
-    icon: '/assets/icons/wallet/networks/ico.avax.svg',
+    icon: '/assets/icons/wallet/networks/ico.matic.svg',
   },
   // Fantom
   {
@@ -139,18 +139,18 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.ftm.svg',
   },
-  // Mumbai
+  // BSC testnet
   {
     id: 5,
-    chainID: 80001,
-    rpcUrls: 'https://polygon-mumbai.blockpi.network/v1/rpc/public',
-    name: 'Mumbai',
+    chainID: 97,
+    rpcUrls: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
+    name: 'Binance Smart Chain Testnet',
     nativeCurrency: {
-      name: 'MATIC',
+      name: 'tBNB',
       decimals: 18,
-      symbol: 'MATIC',
+      symbol: 'tBNB',
     },
-    icon: '/assets/icons/wallet/networks/ico.matic.svg',
+    icon: '/assets/icons/wallet/networks/ico.bsc.svg',
   },
   // Arbitrum
   {

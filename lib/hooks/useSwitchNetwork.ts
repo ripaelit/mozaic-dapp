@@ -23,7 +23,7 @@ export default async function switchNetwork(networkData: any) {
           ],
         });
       } catch (error) {
-         console.log('debug adding network error', error)
+         console.log('debug adding network error:', error)
       }
     }
   }

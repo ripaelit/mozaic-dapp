@@ -65,9 +65,7 @@ export default function ConnectWalletBtn({
   }, [web3reactContext.account]);
 
   // dispatch notification & change icon on mainNet change
-
   useEffect(() => {
-    // console.log(web3reactContext.chainId);
     if (!web3reactContext.chainId) {
       setCurrentNetwork(networkIdleStates[0]);
       return;

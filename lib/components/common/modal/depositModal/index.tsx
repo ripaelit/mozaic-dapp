@@ -98,7 +98,7 @@ export default function DepositModal({
                 text: 'Deposit',
                 type: ModalBtnType.default,
                 onClick: async () => {
-                  // Unless there is a network in my wallet, add and switch into it
+                  // Unless there is the selected network in my wallet, add and switch into it
                   const networkData = chainData? {
                     ...chainData,
                     chainID: '0x' + (chainData.chainID || 0).toString(16)

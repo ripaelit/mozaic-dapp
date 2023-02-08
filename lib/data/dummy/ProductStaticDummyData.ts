@@ -89,8 +89,9 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
         data: chartData2,
       },
     ],
-    // testnet
+    // test net vault
     vault: [
+      //Goerli
       {
         id: 0,
         name: 'Goerli',
@@ -120,6 +121,7 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
           },
         ],
       },
+      // Fuji
       {
         id: 1,
         name: 'Fuji',
@@ -149,6 +151,7 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
           },
         ],
       },
+      // Optimism
       {
         id: 2,
         name: 'Optimism',
@@ -162,22 +165,14 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
             id: 0,
             name: 'USDC',
             icon: '/assets/icons/assets/ico.usdc.svg',
-            address: '',
+            address: '0x0CEDBAF2D0bFF895C861c5422544090EEdC653Bf',
             decimals: 0,
             conversionRateUSD: 1,
             conversionRate: 1,
           },
-          {
-            id: 1,
-            name: 'USDT',
-            icon: '/assets/icons/assets/ico.usdt.svg',
-            address: '',
-            decimals: 0,
-            conversionRateUSD: 1,
-            conversionRate: 2,
-          },
         ],
       },
+      // Mumbai
       {
         id: 3,
         name: 'Mumbai',
@@ -204,6 +199,27 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
             decimals: 0,
             conversionRateUSD: 1,
             conversionRate: 2,
+          },
+        ],
+      },
+      // Fantom
+      {
+        id: 4,
+        name: 'Fantom',
+        icon: '/assets/icons/wallet/networks/ico.ftm.svg',
+        address: '',
+        decimals: 0,
+        conversionRateUSD: 1,
+        conversionRate: 1,
+        assets: [
+          {
+            id: 0,
+            name: 'USDC',
+            icon: '/assets/icons/assets/ico.usdc.svg',
+            address: '0x076488D244A73DA4Fa843f5A8Cd91F655CA81a1e',
+            decimals: 0,
+            conversionRateUSD: 1,
+            conversionRate: 1,
           },
         ],
       },
