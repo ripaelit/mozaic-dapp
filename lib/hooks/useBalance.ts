@@ -8,7 +8,6 @@ import BN from 'bn.js';
 export default function useBalance(tokenAddress: any, decimals: any) {
   // initial balance
   const [balance, setBalance] = useState('0');
-
   const { account, library } = useWeb3React();
 
   useEffect(() => {
@@ -65,7 +64,12 @@ export default function useBalance(tokenAddress: any, decimals: any) {
     return () => {
       isCancelled = true;
     };
-  }, [tokenAddress, library, decimals, account]);
+  }, [
+    tokenAddress,
+    library,
+    decimals,
+    account,
+  ]);
 
   return [balance];
 }

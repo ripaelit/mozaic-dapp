@@ -29,6 +29,7 @@ export default function InputCheckBtn({
   );
   return (
     <>
+      {/* `max` button */}
       <div
         className={`check-btn-container ${
           type === 'max' ? (maxBalance == currentAmount ? 'active' : '') : active ? 'active' : ''
