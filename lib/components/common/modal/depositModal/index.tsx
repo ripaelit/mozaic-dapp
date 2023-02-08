@@ -8,6 +8,7 @@ import Modal from '../Modal';
 import MultiAssets from './MultiAssetsDeposit';
 import SingleAsset from './SingleAssetDeposit';
 import { networks } from '../../../../data/static/wallet';
+import switchNetwork from '../../../../hooks/useSwitchNetwork';
 
 const assetTypes: TabItem[] = [
   { id: 0, name: 'Single Asset', value: 'single' },
@@ -96,9 +97,26 @@ export default function DepositModal({
             : {
                 text: 'Deposit',
                 type: ModalBtnType.default,
-                onClick: () => {
+                onClick: async () => {
+                  // Unless there is a network in my wallet, add and switch into it
+                  const networkData = chainData? {
+                    ...chainData,
+                    chainID: '0x' + (chainData.chainID || 0).toString(16)
+                  } :  {
+                    id: 0,
+                    chainID: '0x5',
+                    rpcUrls: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+                    name: 'Goerli',
+                    nativeCurrency: {
+                      name: 'ETH',
+                      decimals: 18,
+                      symbol: 'ETH',
+                    },
+                    icon: '/assets/icons/wallet/networks/ico.eth.svg',
+                  }
+                  await switchNetwork(networkData);
                   // actions for deposit
-                  
+
                 },
               }
         }>
