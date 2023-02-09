@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InputCheckBtn from '../../button/InputCheckBtn';
-import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
+import DropdownToken from '../../input/dropdown/DropdownToken';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
 
@@ -9,7 +9,7 @@ export default function SingleAsset({
   singleAssetWithdrawData,
   setSingleAssetWithdrawData,
 }: any) {
-  const [selectedAsset, setSelectedAsset] = useState(vault.assets[0]);
+  const [selectedAsset, setSelectedAsset] = useState(vault[0].assets[0]);
   const [assetWithdrawData, setAssetWithdrawData] = useState(singleAssetWithdrawData);
 
   // set maximum balance for withdraw data
@@ -45,7 +45,7 @@ export default function SingleAsset({
         amount: assetWithdrawData.totalWithdrawAmount / selectedAsset.conversionRate,
       },
     });
-    console.log(assetWithdrawData);
+    // console.log(assetWithdrawData);
   }, [assetWithdrawData.totalWithdrawAmount]);
 
   // on asset change generate the withdraw data
@@ -96,10 +96,10 @@ export default function SingleAsset({
         inputValue={assetWithdrawData.asset.amount}
         rightElement={
           <>
-            <DropdownWithIcon
-              options={vault.assets}
-              selectedOption={selectedAsset}
-              setSelectedOption={setSelectedAsset}
+            <DropdownToken
+              tokens={vault[0].assets}
+              selectedToken={selectedAsset}
+              setSelectedToken={setSelectedAsset}
             />
           </>
         }

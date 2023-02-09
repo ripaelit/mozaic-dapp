@@ -13,7 +13,7 @@ export default function Modal({
     text: 'Modal Button',
     type: ModalBtnType.default,
     onClick: () => {
-      console.log('modal button pressed');
+      // console.log('modal button pressed');
     },
   },
 }: {

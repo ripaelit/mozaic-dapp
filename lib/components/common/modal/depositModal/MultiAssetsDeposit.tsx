@@ -77,7 +77,7 @@ export default function MultiAssets({
   }, [assetDepositData]);
   return (
     <>
-      {vault.assets.map((asset: any, index: any) => {
+      {vault[0].assets.map((asset: any, index: any) => {
         return (
           <React.Fragment key={index}>
             <InputBox

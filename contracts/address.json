@@ -1,0 +1,16 @@
+{
+    "goerli":{
+        "vault":"0xFAfbBB15B85910dc05a86E0881FD19b8926787A9",
+        "token":{
+            "0":"0xdf0360ad8c5ccf25095aa97ee5f2785c8d848620",
+            "1":"0x5BCc22abEC37337630C0E0dd41D64fd86CaeE951"
+        }
+    },
+    "fuji":{
+        "vault":"0x5d6e82bd7a2dE437E4834FAD895A80bBf0AF59C8",
+        "token":{
+            "0":"0x4A0D1092E9df255cf95D72834Ea9255132782318",
+            "1":"134Dc38AE8C853D1aa2103d5047591acDAA16682"
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import useBalance from '../../../hooks/useBalance';
+import GetMaxBalance from '../../../hooks/useMaxBalance';
 
 // get max balance of the asset
 export default function InputCheckBtn({
@@ -23,12 +23,13 @@ export default function InputCheckBtn({
   index?: number;
   value?: number;
 }) {
-  const [maxBalance] = useBalance(
+  const [maxBalance] = GetMaxBalance(
     currentAsset && currentAsset.address,
     currentAsset && currentAsset.decimals
   );
   return (
     <>
+      {/* `max` button */}
       <div
         className={`check-btn-container ${
           type === 'max' ? (maxBalance == currentAmount ? 'active' : '') : active ? 'active' : ''

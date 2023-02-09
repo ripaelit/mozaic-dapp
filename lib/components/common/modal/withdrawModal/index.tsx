@@ -37,7 +37,7 @@ export default function WithdrawModal({
   };
 
   const initialMultiAssetsWithdrawData = {
-    assets: vault.assets.map((asset: any) => ({
+    assets: vault[0].assets.map((asset: any) => ({
       id: asset.id,
       name: asset.name,
       address: asset.address,
@@ -65,10 +65,10 @@ export default function WithdrawModal({
 
   const withdrawFunds = () => {
     if (withdrawType.value === 'single') {
-      console.log('single asset', singleAssetWithdrawData);
+      // console.log('single asset', singleAssetWithdrawData);
     }
     if (withdrawType.value === 'multi') {
-      console.log('multi assets', multiAssetsWithdrawData);
+      // console.log('multi assets', multiAssetsWithdrawData);
     }
   };
 

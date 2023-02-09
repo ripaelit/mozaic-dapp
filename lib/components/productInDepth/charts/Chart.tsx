@@ -215,7 +215,7 @@ export default function Chart({
 
   function filterArray(arr: any, amount: any) {
     if (arr.length < amount) {
-      console.log('arr', arr.length, amount);
+      // console.log('arr', arr.length, amount);
       return arr;
     } else {
     }
@@ -232,7 +232,7 @@ export default function Chart({
     }
 
     // Return the filtered array
-    console.log('filter');
+    // console.log('filter');
 
     return filteredArr;
   }
@@ -244,7 +244,7 @@ export default function Chart({
     for (let i = 0; i < dataStream.length; i++) {
       const filteredData = dataStream[i].data.filter((time: any) => refTime < time[0]);
       data.push({ ...dataStream[i], data: filterArray(filteredData, maxItems) });
-      console.log(filteredData.length);
+      // console.log(filteredData.length);
     }
 
     setDataStream(data);

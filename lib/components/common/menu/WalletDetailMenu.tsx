@@ -11,7 +11,7 @@ export default function WalletDetailMenu({ showMenu, setShowMenu, currentNetwork
     try {
       web3reactContext.deactivate();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -20,8 +20,8 @@ export default function WalletDetailMenu({ showMenu, setShowMenu, currentNetwork
     setShowMenu(false);
     toast.warning(`Wallet disconnected!`, {
       position: 'bottom-right',
-      autoClose: 5000,
-      hideProgressBar: false,
+      autoClose: 3000,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -34,8 +34,8 @@ export default function WalletDetailMenu({ showMenu, setShowMenu, currentNetwork
     setShowMenu(false);
     toast.info(`Wallet address copied to clipboard.`, {
       position: 'bottom-right',
-      autoClose: 5000,
-      hideProgressBar: false,
+      autoClose: 3000,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,

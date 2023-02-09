@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputCheckBtn from '../../button/InputCheckBtn';
-import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
+import DropdownChain from '../../input/dropdown/DropdownChain';
+import DropdownToken from '../../input/dropdown/DropdownToken';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
 
@@ -9,9 +10,11 @@ export default function SingleAsset({
   singleAssetDepositData,
   setSingleAssetDepositData,
 }: any) {
-  const [selectedAsset, setSelectedAsset] = useState(vault.assets[0]);
+  const [selectedChain, setSelectedChain] = useState(vault[0]);
+  const [selectedToken, setSelectedToken] = useState(vault[0].assets[0]);
   const [assetDepositData, setAssetDepositData] = useState(singleAssetDepositData);
 
+  // console.log("debug for vault:", vault);
   // set maximum balance for deposit data
   const setMaxBalance = (maxBalance: string) => {
     setAssetDepositData({
@@ -43,24 +46,46 @@ export default function SingleAsset({
   useEffect(() => {
     setAssetDepositData({
       ...assetDepositData,
-      totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
+      totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
     });
   }, [assetDepositData.asset.amount]);
 
   // on asset change generate the deposit data
   useEffect(() => {
+    try {
+      setAssetDepositData({
+        ...assetDepositData,
+        asset: {
+          ...assetDepositData.asset,
+          id: selectedToken.id,
+          name: selectedToken.name,
+          address: selectedToken.address,
+          decimals: selectedToken.decimals,
+        },
+        totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
+      });
+    } catch(error){
+      // console.log(selectedToken);
+    }
+  }, [selectedToken]);
+
+  // // on asset change generate the deposit data
+  useEffect(() => {
     setAssetDepositData({
       ...assetDepositData,
       asset: {
         ...assetDepositData.asset,
-        id: selectedAsset.id,
-        name: selectedAsset.name,
-        address: selectedAsset.address,
-        decimals: selectedAsset.decimals,
+        id: selectedToken.id,
+        name: selectedToken.name,
+        address: selectedToken.address,
+        decimals: selectedToken.decimals,
       },
-      totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
+      totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
+      name: selectedChain.name
     });
-  }, [selectedAsset]);
+    setSelectedToken(selectedChain.assets[0])
+    // console.log(assetDepositData);
+  }, [selectedChain]);
 
   // on input change generate the complete output data object
   useEffect(() => {
@@ -73,19 +98,24 @@ export default function SingleAsset({
         label='Enter Amount'
         inputValue={assetDepositData.asset.amount}
         onChange={onInput}
-        placeholder={`Enter ${selectedAsset.name} amount`}
+        placeholder={`Enter ${selectedToken.name} amount`}
         rightElement={
           <>
             <InputCheckBtn
               type='max'
               onMax={setMaxBalance}
-              currentAsset={selectedAsset}
+              currentAsset={selectedToken}
               currentAmount={assetDepositData.asset.amount}
             />
-            <DropdownWithIcon
-              options={vault.assets}
-              selectedOption={selectedAsset}
-              setSelectedOption={setSelectedAsset}
+            <DropdownChain
+              chains={vault}
+              selectedChain={selectedChain}
+              setSelectedChain={setSelectedChain}
+            />
+            <DropdownToken
+              tokens={vault[selectedChain.id].assets}
+              selectedToken={selectedToken}
+              setSelectedToken={setSelectedToken}
             />
           </>
         }
@@ -96,7 +126,8 @@ export default function SingleAsset({
         labelRightElement={
           <SlippageEditor onChange={setSlippage} value={assetDepositData.slippage} />
         }
-        rightElement={<p>{vault.name}</p>}
+        rightElement={<p>{'INMOZ'}</p>}
+        // rightElement={<p>{vault[0].name}</p>}
         inputValue={assetDepositData.totalDepositAmount}
       />
     </>

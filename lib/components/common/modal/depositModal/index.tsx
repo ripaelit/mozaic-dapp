@@ -1,12 +1,14 @@
 import { useWeb3React } from '@web3-react/core';
-import React, { useEffect, useState } from 'react';
-import { ModalBtnType, TabItem } from '../../../../types/common';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ModalBtnType, NetworkChainDataType, TabItem } from '../../../../types/common';
 import Separator from '../../Separator';
 import Tab from '../../tab/Tab';
 import ConnectWalletModal from '../ConnectWalletModal';
 import Modal from '../Modal';
 import MultiAssets from './MultiAssetsDeposit';
 import SingleAsset from './SingleAssetDeposit';
+import { networks } from '../../../../data/static/wallet';
+import switchNetwork from '../../../../hooks/useSwitchNetwork';
 
 const assetTypes: TabItem[] = [
   { id: 0, name: 'Single Asset', value: 'single' },
@@ -34,10 +36,11 @@ export default function DepositModal({
     address: '',
     decimals: 0,
     totalDepositAmount: '',
+    name: '',
   };
 
   const initialMultiAssetsDepositData = {
-    assets: vault.assets.map((asset: any) => ({
+    assets: vault[0].assets.map((asset: any) => ({
       id: asset.id,
       name: asset.name,
       address: asset.address,
@@ -57,19 +60,21 @@ export default function DepositModal({
   const [showConnectWalletModal, setShowConnectWalletModal] = useState<boolean>(false);
 
   const [depositType, setDepositType] = useState(assetTypes[0]);
-  const [singleAssetDepositData, setSingleAssetDepositData] = useState(
-    initialSingleAssetDepositData
-  );
-  const [multiAssetsDepositData, setMultiAssetsDepositData] = useState(
-    initialMultiAssetsDepositData
-  );
+  const [singleAssetDepositData, setSingleAssetDepositData] = useState(initialSingleAssetDepositData);
+  const [multiAssetsDepositData, setMultiAssetsDepositData] = useState(initialMultiAssetsDepositData);
 
   useEffect(() => {
-    // console.log('single asset', singleAssetDepositData);
+    // console.log('debug for single asset deposit data', singleAssetDepositData.address);
   }, [singleAssetDepositData]);
+
   useEffect(() => {
     // console.log('multi assets', multiAssetsDepositData);
   }, [multiAssetsDepositData]);
+
+  const chainData: NetworkChainDataType | undefined = useMemo(() => {
+    const targetChain = networks.find((network) => network.name.includes(singleAssetDepositData.name))
+    return targetChain
+  }, [singleAssetDepositData])
 
   return (
     <>
@@ -78,7 +83,7 @@ export default function DepositModal({
         title='Deposit'
         modalBtn={
           !web3reactContext.account
-            ? {
+            ? { // Unless your wallet is connected to Mozaic
                 text: 'Connect Wallet',
                 type: ModalBtnType.warning,
                 onClick: () => {
@@ -88,7 +93,28 @@ export default function DepositModal({
             : {
                 text: 'Deposit',
                 type: ModalBtnType.default,
-                onClick: () => {},
+                onClick: async () => {
+                  // Unless there is the selected network in my wallet, add and switch into it
+                  const networkData = chainData? {
+                    ...chainData,
+                    chainID: '0x' + (chainData.chainID || 0).toString(16)
+                  } :  {
+                    id: 0,
+                    chainID: '0x5',
+                    rpcUrls: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+                    name: 'Goerli',
+                    nativeCurrency: {
+                      name: 'ETH',
+                      decimals: 18,
+                      symbol: 'ETH',
+                    },
+                    icon: '/assets/icons/wallet/networks/ico.eth.svg',
+                  }
+                  await switchNetwork(networkData);
+
+                  // actions for deposit
+                  
+                },
               }
         }>
         <div className='deposit-modal-wrapper'>
@@ -117,7 +143,7 @@ export default function DepositModal({
             )}
           </div>
           {showConnectWalletModal && (
-            <ConnectWalletModal setShowModal={setShowConnectWalletModal} />
+            <ConnectWalletModal setShowModal={setShowConnectWalletModal} chainData={chainData} />
           )}
         </div>
       </Modal>

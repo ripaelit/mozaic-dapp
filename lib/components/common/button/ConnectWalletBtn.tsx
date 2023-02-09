@@ -51,12 +51,11 @@ export default function ConnectWalletBtn({
   // dispatch notification on wallet connect
   useEffect(() => {
     // console.log(web3reactContext);
-
     web3reactContext.account &&
       toast.success(`Wallet ${web3reactContext.account} connected!`, {
         position: 'bottom-right',
-        autoClose: 5000,
-        hideProgressBar: false,
+        autoClose: 3000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -66,10 +65,7 @@ export default function ConnectWalletBtn({
   }, [web3reactContext.account]);
 
   // dispatch notification & change icon on mainNet change
-
   useEffect(() => {
-    // console.log(web3reactContext.chainId);
-
     if (!web3reactContext.chainId) {
       setCurrentNetwork(networkIdleStates[0]);
       return;
@@ -79,8 +75,8 @@ export default function ConnectWalletBtn({
           setCurrentNetwork(item);
           toast.info(`Connected to ${item.name} network`, {
             position: 'bottom-right',
-            autoClose: 5000,
-            hideProgressBar: false,
+            autoClose: 3000,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,

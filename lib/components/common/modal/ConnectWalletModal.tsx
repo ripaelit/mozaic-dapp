@@ -1,15 +1,22 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { wallets } from '../../../data/static/wallet';
 import { injected, resetWalletConnector, walletconnect } from '../../../helpers/connectors';
-import { DefaultBtnType, ModalBtnType } from '../../../types/common';
+import { DefaultBtnType, ModalBtnType, NetworkChainDataType } from '../../../types/common';
 import Modal from './Modal';
+import switchNetwork from '../../../hooks/useSwitchNetwork';
+declare global {
+  interface Window{
+    ethereum?:any
+  }
+}
 
 export default function ConnectWalletModal({
   setShowModal,
+  chainData
 }: {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  chainData?: NetworkChainDataType
 }) {
   const web3reactContext = useWeb3React();
   const [selectedWallet, setSelectedWallet] = useState<any>(null);
@@ -22,15 +29,32 @@ export default function ConnectWalletModal({
   };
 
   const [modalBtn, setModalBtn] = useState<DefaultBtnType>(initialBtn);
+  const [networkData, setNetworkData] = useState<any>();
 
   //web3react metamask
-  const connectMetamask = async () => {
+    const connectMetamask = async () => {
     try {
+      const _defaultNetworkData = chainData? {
+        ...chainData,
+        chainID: '0x' + (chainData.chainID || 0).toString(16)
+      } :  {
+        id: 0,
+        chainID: '0x5',
+        rpcUrls: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+        name: 'Goerli',
+        nativeCurrency: {
+          name: 'ETH',
+          decimals: 18,
+          symbol: 'ETH',
+        },
+        icon: '/assets/icons/wallet/networks/ico.eth.svg',
+      }
+      switchNetwork(_defaultNetworkData)
       await web3reactContext.activate(injected).then(() => {
         setShowModal(false);
       });
     } catch (error) {
-      console.log('err', error);
+      // console.log({error});
     }
   };
 
@@ -42,7 +66,7 @@ export default function ConnectWalletModal({
         setShowModal(false);
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

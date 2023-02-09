@@ -1,7 +1,7 @@
 // hook to get current window width & height
 import { useState, useEffect } from 'react';
 
-export default function useWindowDimensions() {
+export default function GetWindowDimensions() {
   interface Dimensions {
     width: number | undefined;
     height: number | undefined;
