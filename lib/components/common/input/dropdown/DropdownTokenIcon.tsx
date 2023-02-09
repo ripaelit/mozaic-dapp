@@ -8,7 +8,7 @@ type Option = {
   icon?: string;
 };
 
-export default function DropdownWithIcon({
+export default function DropdownTokenIcon({
   options,
   setSelectedOption,
   selectedOption,

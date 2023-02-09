@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputCheckBtn from '../../button/InputCheckBtn';
 import DropdownChainIcon from '../../input/dropdown/DropdownChainIcon';
-import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
+import DropdownTokenIcon from '../../input/dropdown/DropdownTokenIcon';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
 
@@ -23,6 +23,7 @@ export default function SingleAsset({
         amount: parseFloat(maxBalance),
       },
     });
+    console.log("debug for max balance:", maxBalance)
   };
 
   // set slippage amount
@@ -110,7 +111,7 @@ export default function SingleAsset({
               selectedOption={selectedChainAsset}
               setSelectedOption={setSelectedChainAsset}
             />
-            <DropdownWithIcon
+            <DropdownTokenIcon
               options={vault[selectedChainAsset.id].assets}
               selectedOption={selectedAsset}
               setSelectedOption={setSelectedAsset}

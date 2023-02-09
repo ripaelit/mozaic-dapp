@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InputCheckBtn from '../../button/InputCheckBtn';
-import DropdownWithIcon from '../../input/dropdown/DropdownWithIcon';
+import DropdownTokenIcon from '../../input/dropdown/DropdownTokenIcon';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
 
@@ -96,7 +96,7 @@ export default function SingleAsset({
         inputValue={assetWithdrawData.asset.amount}
         rightElement={
           <>
-            <DropdownWithIcon
+            <DropdownTokenIcon
               options={vault[0].assets}
               selectedOption={selectedAsset}
               setSelectedOption={setSelectedAsset}
