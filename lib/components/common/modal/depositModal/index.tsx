@@ -60,12 +60,8 @@ export default function DepositModal({
   const [showConnectWalletModal, setShowConnectWalletModal] = useState<boolean>(false);
 
   const [depositType, setDepositType] = useState(assetTypes[0]);
-  const [singleAssetDepositData, setSingleAssetDepositData] = useState(
-    initialSingleAssetDepositData
-  );
-  const [multiAssetsDepositData, setMultiAssetsDepositData] = useState(
-    initialMultiAssetsDepositData
-  );
+  const [singleAssetDepositData, setSingleAssetDepositData] = useState(initialSingleAssetDepositData);
+  const [multiAssetsDepositData, setMultiAssetsDepositData] = useState(initialMultiAssetsDepositData);
 
   useEffect(() => {
     console.log('single asset', singleAssetDepositData);
@@ -87,7 +83,7 @@ export default function DepositModal({
         title='Deposit'
         modalBtn={
           !web3reactContext.account
-            ? {
+            ? { // Unless your wallet is connected to Mozaic
                 text: 'Connect Wallet',
                 type: ModalBtnType.warning,
                 onClick: () => {
@@ -115,8 +111,9 @@ export default function DepositModal({
                     icon: '/assets/icons/wallet/networks/ico.eth.svg',
                   }
                   await switchNetwork(networkData);
-                  // actions for deposit
 
+                  // actions for deposit
+                  
                 },
               }
         }>
