@@ -24,7 +24,7 @@ export default function FeedbackModal({
       subject: subject,
       message: message,
     };
-    console.log(feedback);
+    // console.log(feedback);
   };
 
   return (

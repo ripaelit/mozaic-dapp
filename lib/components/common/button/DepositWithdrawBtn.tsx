@@ -12,7 +12,7 @@ export default function DepositWithdrawBtn({ vault }: any) {
         <div
           className='btn deposit-btn'
           onClick={() => {
-            console.log('++++++deposit button clicked++++++');
+            // console.log('++++++deposit button clicked++++++');
             setOpenDepositModal(true);
           }}>
           Deposit
@@ -20,7 +20,7 @@ export default function DepositWithdrawBtn({ vault }: any) {
         <div
           className='btn withdraw-btn'
           onClick={() => {
-            console.log('++++++withdraw button clicked++++++');
+            // console.log('++++++withdraw button clicked++++++');
             setOpenWithdrawModal(true);
           }}>
           Withdraw

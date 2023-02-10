@@ -1,60 +1,59 @@
 import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-type Chain = {
+type Token = {
   id: any;
   name: string;
   value: string;
   icon?: string;
 };
 
-
-export default function DropdownChainIcon({
-  chains,
-  setSelectedChain,
-  selectedChain,
+export default function DropdownToken({
+  tokens,
+  setSelectedToken,
+  selectedToken,
 }: {
-  chains: Chain[];
-  setSelectedChain: React.Dispatch<React.SetStateAction<Chain>>;
-  selectedChain: Chain;
+  tokens: Token[];
+  setSelectedToken: React.Dispatch<React.SetStateAction<Token>>;
+  selectedToken: Token;
 }) {
-  const [isOpenDropdownChain, setIsOpenDropdownChain] = useState(false);
+  const [IsOpenDropdownToken, setIsOpenDropdownToken] = useState(false);
   return (
     <>
       <div className='dropdown-container'>
         <OutsideClickHandler
           onOutsideClick={() => {
-            setIsOpenDropdownChain(false);
+            setIsOpenDropdownToken(false);
           }}>
           <div
-            className={`dropdown-wrapper ${isOpenDropdownChain && 'opened'}`}
+            className={`dropdown-wrapper ${IsOpenDropdownToken && 'opened'}`}
             onClick={() => {
-              setIsOpenDropdownChain(!isOpenDropdownChain);
+              setIsOpenDropdownToken(!IsOpenDropdownToken);
             }}>
             <div className='dropdown-selected-item'>
-              <img src={selectedChain.icon} alt='' />
-              <p>{selectedChain.name}</p>
+              <img src={selectedToken.icon} alt='' />
+              <p>{selectedToken.name}</p>
             </div>
             <img
-              className={`dropdown-icon ${isOpenDropdownChain ? 'flipped' : ''}`}
+              className={`dropdown-icon ${IsOpenDropdownToken ? 'flipped' : ''}`}
               src='/assets/icons/ico.dropdown.svg'
               alt=''
             />
           </div>
           {/* on dropdown open */}
-          {isOpenDropdownChain && (
+          {IsOpenDropdownToken && (
             <div className='dropdown-options-wrapper'>
-              {chains.map((chain: Chain) => (
+              {tokens.map((token: Token) => (
                 <div
-                  key={chain.id}
+                  key={token.id}
                   className='dropdown-option'
                   onClick={() => {
-                    setSelectedChain(chain);
-                    setIsOpenDropdownChain(!isOpenDropdownChain);
-                    console.log("debug for chain selection:", chain);
+                    setSelectedToken(token);
+                    setIsOpenDropdownToken(!IsOpenDropdownToken);
+                    // console.log("debug for token selection:", token)
                   }}>
-                  <img src={chain.icon} alt='' />
-                  <p>{chain.name}</p>
+                  <img src={token.icon} alt='' />
+                  <p>{token.name}</p>
                 </div>
               ))}
             </div>

@@ -5,7 +5,7 @@ import { getERC20Contract } from '../store/contractStore';
 import BigNumber from 'bignumber.js';
 import BN from 'bn.js';
 
-export default function useBalance(tokenAddress: any, decimals: any) {
+export default function GetMaxBalance(tokenAddress: any, decimals: any) {
   // initial balance
   const [balance, setBalance] = useState('0');
   const { account, library } = useWeb3React();
@@ -32,9 +32,9 @@ export default function useBalance(tokenAddress: any, decimals: any) {
                 resolve(new BN('0'));
               });
           } else {
-            console.log("debug for getBalance...");
+            // console.log("debug for getBalance...");
             const contract = getERC20Contract(tokenAddress, library);
-            console.log("debug for tokenAddress:", tokenAddress);
+            // console.log("debug for tokenAddress:", tokenAddress);
             contract?.methods
               .balanceOf(account)
               .call()

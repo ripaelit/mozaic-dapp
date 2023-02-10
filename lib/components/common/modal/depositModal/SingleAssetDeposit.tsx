@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputCheckBtn from '../../button/InputCheckBtn';
-import DropdownChainIcon from '../../input/dropdown/DropdownChainIcon';
-import DropdownTokenIcon from '../../input/dropdown/DropdownTokenIcon';
+import DropdownChain from '../../input/dropdown/DropdownChain';
+import DropdownToken from '../../input/dropdown/DropdownToken';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
 
@@ -83,6 +83,7 @@ export default function SingleAsset({
       totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
       name: selectedChain.name
     });
+    setSelectedToken(selectedChain.assets[0])
     // console.log(assetDepositData);
   }, [selectedChain]);
 
@@ -106,12 +107,12 @@ export default function SingleAsset({
               currentAsset={selectedToken}
               currentAmount={assetDepositData.asset.amount}
             />
-            <DropdownChainIcon
+            <DropdownChain
               chains={vault}
               selectedChain={selectedChain}
               setSelectedChain={setSelectedChain}
             />
-            <DropdownTokenIcon
+            <DropdownToken
               tokens={vault[selectedChain.id].assets}
               selectedToken={selectedToken}
               setSelectedToken={setSelectedToken}
