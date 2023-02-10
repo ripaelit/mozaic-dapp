@@ -18,31 +18,31 @@ export default function DropdownChainIcon({
   setSelectedChain: React.Dispatch<React.SetStateAction<Chain>>;
   selectedChain: Chain;
 }) {
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const [isOpenDropdownChain, setIsOpenDropdownChain] = useState(false);
   return (
     <>
       <div className='dropdown-container'>
         <OutsideClickHandler
           onOutsideClick={() => {
-            setOpenDropdown(false);
+            setIsOpenDropdownChain(false);
           }}>
           <div
-            className={`dropdown-wrapper ${openDropdown && 'opened'}`}
+            className={`dropdown-wrapper ${isOpenDropdownChain && 'opened'}`}
             onClick={() => {
-              setOpenDropdown(!openDropdown);
+              setIsOpenDropdownChain(!isOpenDropdownChain);
             }}>
             <div className='dropdown-selected-item'>
               <img src={selectedChain.icon} alt='' />
               <p>{selectedChain.name}</p>
             </div>
             <img
-              className={`dropdown-icon ${openDropdown ? 'flipped' : ''}`}
+              className={`dropdown-icon ${isOpenDropdownChain ? 'flipped' : ''}`}
               src='/assets/icons/ico.dropdown.svg'
               alt=''
             />
           </div>
           {/* on dropdown open */}
-          {openDropdown && (
+          {isOpenDropdownChain && (
             <div className='dropdown-options-wrapper'>
               {chains.map((chain: Chain) => (
                 <div
@@ -50,7 +50,7 @@ export default function DropdownChainIcon({
                   className='dropdown-option'
                   onClick={() => {
                     setSelectedChain(chain);
-                    setOpenDropdown(!openDropdown);
+                    setIsOpenDropdownChain(!isOpenDropdownChain);
                     console.log("debug for chain selection:", chain);
                   }}>
                   <img src={chain.icon} alt='' />
