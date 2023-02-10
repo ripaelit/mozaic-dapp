@@ -10,10 +10,11 @@ export default function SingleAsset({
   singleAssetDepositData,
   setSingleAssetDepositData,
 }: any) {
-  const [selectedChainAsset, setSelectedChainAsset] = useState(vault[0]);
-  const [selectedAsset, setSelectedAsset] = useState(vault[0].assets[0]);
+  const [selectedChain, setSelectedChain] = useState(vault[0]);
+  const [selectedToken, setSelectedToken] = useState(vault[0].assets[0]);
   const [assetDepositData, setAssetDepositData] = useState(singleAssetDepositData);
 
+  console.log("debug for vault:", vault);
   // set maximum balance for deposit data
   const setMaxBalance = (maxBalance: string) => {
     setAssetDepositData({
@@ -23,7 +24,6 @@ export default function SingleAsset({
         amount: parseFloat(maxBalance),
       },
     });
-    console.log("debug for max balance:", maxBalance)
   };
 
   // set slippage amount
@@ -46,7 +46,7 @@ export default function SingleAsset({
   useEffect(() => {
     setAssetDepositData({
       ...assetDepositData,
-      totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
+      totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
     });
   }, [assetDepositData.asset.amount]);
 
@@ -57,17 +57,17 @@ export default function SingleAsset({
         ...assetDepositData,
         asset: {
           ...assetDepositData.asset,
-          id: selectedAsset.id,
-          name: selectedAsset.name,
-          address: selectedAsset.address,
-          decimals: selectedAsset.decimals,
+          id: selectedToken.id,
+          name: selectedToken.name,
+          address: selectedToken.address,
+          decimals: selectedToken.decimals,
         },
-        totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
+        totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
       });
     } catch(error){
-      console.log(selectedAsset);
+      console.log(selectedToken);
     }
-  }, [selectedAsset]);
+  }, [selectedToken]);
 
   // // on asset change generate the deposit data
   useEffect(() => {
@@ -75,16 +75,16 @@ export default function SingleAsset({
       ...assetDepositData,
       asset: {
         ...assetDepositData.asset,
-        id: selectedAsset.id,
-        name: selectedAsset.name,
-        address: selectedAsset.address,
-        decimals: selectedAsset.decimals,
+        id: selectedToken.id,
+        name: selectedToken.name,
+        address: selectedToken.address,
+        decimals: selectedToken.decimals,
       },
-      totalDepositAmount: assetDepositData.asset.amount * selectedAsset.conversionRate,
-      name: selectedChainAsset.name
+      totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
+      name: selectedChain.name
     });
     console.log(assetDepositData);
-  }, [selectedChainAsset]);
+  }, [selectedChain]);
 
   // on input change generate the complete output data object
   useEffect(() => {
@@ -97,24 +97,24 @@ export default function SingleAsset({
         label='Enter Amount'
         inputValue={assetDepositData.asset.amount}
         onChange={onInput}
-        placeholder={`Enter ${selectedAsset.name} amount`}
+        placeholder={`Enter ${selectedToken.name} amount`}
         rightElement={
           <>
             <InputCheckBtn
               type='max'
               onMax={setMaxBalance}
-              currentAsset={selectedAsset}
+              currentAsset={selectedToken}
               currentAmount={assetDepositData.asset.amount}
             />
             <DropdownChainIcon
               options={vault}
-              selectedOption={selectedChainAsset}
-              setSelectedOption={setSelectedChainAsset}
+              selectedOption={selectedChain}
+              setSelectedOption={setSelectedChain}
             />
             <DropdownTokenIcon
-              options={vault[selectedChainAsset.id].assets}
-              selectedOption={selectedAsset}
-              setSelectedOption={setSelectedAsset}
+              options={vault[selectedChain.id].assets}
+              selectedOption={selectedToken}
+              setSelectedOption={setSelectedToken}
             />
           </>
         }

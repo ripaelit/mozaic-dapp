@@ -51,6 +51,7 @@ export default function DropdownChainIcon({
                   onClick={() => {
                     setSelectedOption(option);
                     setOpenDropdown(!openDropdown);
+                    console.log("debug for chain selection:", option);
                   }}>
                   <img src={option.icon} alt='' />
                   <p>{option.name}</p>

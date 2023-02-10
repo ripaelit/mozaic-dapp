@@ -64,7 +64,7 @@ export default function DepositModal({
   const [multiAssetsDepositData, setMultiAssetsDepositData] = useState(initialMultiAssetsDepositData);
 
   useEffect(() => {
-    console.log('single asset', singleAssetDepositData);
+    console.log('debug for single asset deposit data', singleAssetDepositData);
   }, [singleAssetDepositData]);
 
   useEffect(() => {

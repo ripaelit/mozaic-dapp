@@ -32,7 +32,9 @@ export default function useBalance(tokenAddress: any, decimals: any) {
                 resolve(new BN('0'));
               });
           } else {
+            console.log("debug for getBalance...");
             const contract = getERC20Contract(tokenAddress, library);
+            console.log("debug for tokenAddress:", tokenAddress);
             contract?.methods
               .balanceOf(account)
               .call()
