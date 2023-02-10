@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-type Option = {
+type Token = {
   id: any;
   name: string;
   value: string;
@@ -9,13 +9,13 @@ type Option = {
 };
 
 export default function DropdownTokenIcon({
-  options,
-  setSelectedOption,
-  selectedOption,
+  tokens,
+  setSelectedToken,
+  selectedToken,
 }: {
-  options: Option[];
-  setSelectedOption: React.Dispatch<React.SetStateAction<Option>>;
-  selectedOption: Option;
+  tokens: Token[];
+  setSelectedToken: React.Dispatch<React.SetStateAction<Token>>;
+  selectedToken: Token;
 }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   return (
@@ -31,8 +31,8 @@ export default function DropdownTokenIcon({
               setOpenDropdown(!openDropdown);
             }}>
             <div className='dropdown-selected-item'>
-              <img src={selectedOption.icon} alt='' />
-              <p>{selectedOption.name}</p>
+              <img src={selectedToken.icon} alt='' />
+              <p>{selectedToken.name}</p>
             </div>
             <img
               className={`dropdown-icon ${openDropdown ? 'flipped' : ''}`}
@@ -43,16 +43,17 @@ export default function DropdownTokenIcon({
           {/* on dropdown open */}
           {openDropdown && (
             <div className='dropdown-options-wrapper'>
-              {options.map((option: Option) => (
+              {tokens.map((token: Token) => (
                 <div
-                  key={option.id}
+                  key={token.id}
                   className='dropdown-option'
                   onClick={() => {
-                    setSelectedOption(option);
+                    setSelectedToken(token);
                     setOpenDropdown(!openDropdown);
+                    console.log("debug for token selection:", token)
                   }}>
-                  <img src={option.icon} alt='' />
-                  <p>{option.name}</p>
+                  <img src={token.icon} alt='' />
+                  <p>{token.name}</p>
                 </div>
               ))}
             </div>

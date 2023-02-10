@@ -11,7 +11,7 @@ export default function WalletDetailMenu({ showMenu, setShowMenu, currentNetwork
     try {
       web3reactContext.deactivate();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

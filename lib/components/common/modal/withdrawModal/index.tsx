@@ -65,10 +65,10 @@ export default function WithdrawModal({
 
   const withdrawFunds = () => {
     if (withdrawType.value === 'single') {
-      console.log('single asset', singleAssetWithdrawData);
+      // console.log('single asset', singleAssetWithdrawData);
     }
     if (withdrawType.value === 'multi') {
-      console.log('multi assets', multiAssetsWithdrawData);
+      // console.log('multi assets', multiAssetsWithdrawData);
     }
   };
 

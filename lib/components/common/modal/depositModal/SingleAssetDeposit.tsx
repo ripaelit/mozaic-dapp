@@ -14,7 +14,7 @@ export default function SingleAsset({
   const [selectedToken, setSelectedToken] = useState(vault[0].assets[0]);
   const [assetDepositData, setAssetDepositData] = useState(singleAssetDepositData);
 
-  console.log("debug for vault:", vault);
+  // console.log("debug for vault:", vault);
   // set maximum balance for deposit data
   const setMaxBalance = (maxBalance: string) => {
     setAssetDepositData({
@@ -65,7 +65,7 @@ export default function SingleAsset({
         totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
       });
     } catch(error){
-      console.log(selectedToken);
+      // console.log(selectedToken);
     }
   }, [selectedToken]);
 
@@ -83,7 +83,7 @@ export default function SingleAsset({
       totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
       name: selectedChain.name
     });
-    console.log(assetDepositData);
+    // console.log(assetDepositData);
   }, [selectedChain]);
 
   // on input change generate the complete output data object
@@ -107,14 +107,14 @@ export default function SingleAsset({
               currentAmount={assetDepositData.asset.amount}
             />
             <DropdownChainIcon
-              options={vault}
-              selectedOption={selectedChain}
-              setSelectedOption={setSelectedChain}
+              chains={vault}
+              selectedChain={selectedChain}
+              setSelectedChain={setSelectedChain}
             />
             <DropdownTokenIcon
-              options={vault[selectedChain.id].assets}
-              selectedOption={selectedToken}
-              setSelectedOption={setSelectedToken}
+              tokens={vault[selectedChain.id].assets}
+              selectedToken={selectedToken}
+              setSelectedToken={setSelectedToken}
             />
           </>
         }

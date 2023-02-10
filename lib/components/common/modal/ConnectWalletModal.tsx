@@ -66,7 +66,7 @@ export default function ConnectWalletModal({
         setShowModal(false);
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

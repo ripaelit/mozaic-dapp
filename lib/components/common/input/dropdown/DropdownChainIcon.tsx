@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-type Option = {
+type Chain = {
   id: any;
   name: string;
   value: string;
@@ -10,13 +10,13 @@ type Option = {
 
 
 export default function DropdownChainIcon({
-  options,
-  setSelectedOption,
-  selectedOption,
+  chains,
+  setSelectedChain,
+  selectedChain,
 }: {
-  options: Option[];
-  setSelectedOption: React.Dispatch<React.SetStateAction<Option>>;
-  selectedOption: Option;
+  chains: Chain[];
+  setSelectedChain: React.Dispatch<React.SetStateAction<Chain>>;
+  selectedChain: Chain;
 }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   return (
@@ -32,8 +32,8 @@ export default function DropdownChainIcon({
               setOpenDropdown(!openDropdown);
             }}>
             <div className='dropdown-selected-item'>
-              <img src={selectedOption.icon} alt='' />
-              <p>{selectedOption.name}</p>
+              <img src={selectedChain.icon} alt='' />
+              <p>{selectedChain.name}</p>
             </div>
             <img
               className={`dropdown-icon ${openDropdown ? 'flipped' : ''}`}
@@ -44,17 +44,17 @@ export default function DropdownChainIcon({
           {/* on dropdown open */}
           {openDropdown && (
             <div className='dropdown-options-wrapper'>
-              {options.map((option: Option) => (
+              {chains.map((chain: Chain) => (
                 <div
-                  key={option.id}
+                  key={chain.id}
                   className='dropdown-option'
                   onClick={() => {
-                    setSelectedOption(option);
+                    setSelectedChain(chain);
                     setOpenDropdown(!openDropdown);
-                    console.log("debug for chain selection:", option);
+                    console.log("debug for chain selection:", chain);
                   }}>
-                  <img src={option.icon} alt='' />
-                  <p>{option.name}</p>
+                  <img src={chain.icon} alt='' />
+                  <p>{chain.name}</p>
                 </div>
               ))}
             </div>

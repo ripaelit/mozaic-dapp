@@ -45,7 +45,7 @@ export default function SingleAsset({
         amount: assetWithdrawData.totalWithdrawAmount / selectedAsset.conversionRate,
       },
     });
-    console.log(assetWithdrawData);
+    // console.log(assetWithdrawData);
   }, [assetWithdrawData.totalWithdrawAmount]);
 
   // on asset change generate the withdraw data
@@ -97,9 +97,9 @@ export default function SingleAsset({
         rightElement={
           <>
             <DropdownTokenIcon
-              options={vault[0].assets}
-              selectedOption={selectedAsset}
-              setSelectedOption={setSelectedAsset}
+              tokens={vault[0].assets}
+              selectedToken={selectedAsset}
+              setSelectedToken={setSelectedAsset}
             />
           </>
         }

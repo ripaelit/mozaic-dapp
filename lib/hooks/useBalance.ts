@@ -12,7 +12,7 @@ export default function useBalance(tokenAddress: any, decimals: any) {
 
   useEffect(() => {
     let isCancelled = false;
-    console.log(tokenAddress);
+    // console.log(tokenAddress);
     function getBalance() {
       return new Promise((resolve) => {
         if (!library || !tokenAddress) {
@@ -28,7 +28,7 @@ export default function useBalance(tokenAddress: any, decimals: any) {
                 resolve(new BN(value));
               })
               .catch((error: any) => {
-                console.log(error);
+                // console.log(error);
                 resolve(new BN('0'));
               });
           } else {
@@ -42,7 +42,7 @@ export default function useBalance(tokenAddress: any, decimals: any) {
                 resolve(new BN(value));
               })
               .catch((error: any) => {
-                console.log(error);
+                // console.log(error);
                 resolve(new BN('0'));
               });
           }
