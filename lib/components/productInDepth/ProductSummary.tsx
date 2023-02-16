@@ -1,5 +1,6 @@
 import React from 'react';
 import PrimaryCard from '../common/card/PrimaryCard';
+import ProductSummaryLoader from '../loader/productPageLoader/ProductSummaryLoader';
 
 const productSummaryData = [
   {
@@ -32,24 +33,28 @@ const productSummaryData = [
   },
 ];
 
-export default function ProductSummary() {
+export default function ProductSummary({ loading }: { loading: boolean }) {
   return (
     <>
       <PrimaryCard title={{ visible: false }}>
         <div className='product-summary-container'>
-          {productSummaryData.map((item) => (
-            <div key={item.id} className='product-summary-wrapper'>
-              <img src={item.icon} alt='' />
-              <div className='product-summary-text'>
-                <h3>
-                  {item.prefix ? item.prefix : ''}
-                  {item.value}
-                  {item.suffix ? item.suffix : ''}
-                </h3>
-                <p>{item.name}</p>
+          {!loading ? (
+            productSummaryData.map((item) => (
+              <div key={item.id} className='product-summary-wrapper'>
+                <img src={item.icon} alt='' />
+                <div className='product-summary-text'>
+                  <h3>
+                    {item.prefix ? item.prefix : ''}
+                    {item.value}
+                    {item.suffix ? item.suffix : ''}
+                  </h3>
+                  <p>{item.name}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <ProductSummaryLoader />
+          )}
         </div>
       </PrimaryCard>
       <style jsx>{`

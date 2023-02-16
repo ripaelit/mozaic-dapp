@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import DepositWithdrawBtn from '../common/button/DepositWithdrawBtn';
 import PrimaryCard from '../common/card/PrimaryCard';
+import useNumberCounter from '../../hooks/useNumberCounter';
+import TextLoader from '../loader/TextLoader';
+import IconLoader from '../loader/IconLoader';
 
-export default function ProductInfo({ product }: any) {
-  const [loading, setLoading] = useState(false);
+export default function ProductInfo({ product, loading }: any) {
+  const count = useNumberCounter;
 
   return (
     <>
@@ -13,19 +16,19 @@ export default function ProductInfo({ product }: any) {
           <div className='product-info-wrapper'>
             <div className='basic-info'>
               <div className='product'>
-                <img src={product.icon} alt='' />
-                <h2>{product.name}</h2>
+                {!loading ? <img src={product.icon} alt='' /> : <IconLoader d={'92px'} />}
+                {!loading ? <h2>{product.name}</h2> : <TextLoader type={'h2'} w={200} />}
               </div>
               <div className='balance b-d'>
                 <p>Balance</p>
-                <h1>${product.balance}</h1>
+                {!loading ? <h1>${count(product.balance)}</h1> : <TextLoader type={'h1'} w={200} />}
               </div>
             </div>
 
             <div className='deposit-withdraw-btn-wrapper'>
               <div className='balance b-t'>
                 <p>Balance</p>
-                <h1>${product.balance}</h1>
+                {!loading ? <h1>${count(product.balance)}</h1> : <TextLoader type={'h1'} w={200} />}
               </div>
               <DepositWithdrawBtn vault={product.vault} />
             </div>
@@ -46,8 +49,8 @@ export default function ProductInfo({ product }: any) {
           opacity: 0.3;
           background: linear-gradient(
             181.64deg,
-            ${product.color} 1.4%,
-            ${product.color + '00'} 98.6%
+            ${!loading ? product.color : '#ffffff70'} 1.4%,
+            ${(!loading ? product.color : '#ffffff') + '00'} 98.6%
           );
           border-radius: 10px 10px 0px 0px;
         }
