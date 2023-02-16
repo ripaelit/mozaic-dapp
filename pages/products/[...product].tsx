@@ -12,6 +12,7 @@ import { LoadErrorType } from '../../lib/types/common';
 import PageErrorReloader from '../../lib/components/common/error/PageErrorReloader';
 import TitleBtn from '../../lib/components/common/button/TitleBtn';
 import { productDetailsDummyData } from '../../lib/data/dummy/ProductStaticDummyData';
+import PagePreloader from '../../lib/components/loader/PagePreloader';
 
 export default function Product() {
   const router = useRouter();
@@ -19,6 +20,9 @@ export default function Product() {
 
   // loading state
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadingProductInfo, setLoadingProductInfo] = useState<boolean>(true);
+  const [loadingChart, setLoadingChart] = useState<boolean>(true);
+  const [loadingDetails, setLoadingDetails] = useState<boolean>(true);
 
   // error state
   const [error, setError] = useState<null | LoadErrorType>(null);
@@ -27,27 +31,20 @@ export default function Product() {
   const [productData, setProductData] = useState<any>();
 
   useEffect(() => {
-    setLoading(true);
     if (router.isReady) {
-      // axios
-      //   .get(`/productDetails/?id=${query.id}`)
-      //   .then((res) => {
-      //     setProductData(res.data[0]);
-      //     setLoading(false);
-      //   })
-      //   .catch((err) => {
-      //     setError({
-      //       message: err.message,
-      //       status: err.status,
-      //       code: err.code,
-      //     });
-      //     setLoading(false);
-      //   });
+      // TODO: load initial product data from contract
 
       setProductData(productDetailsDummyData[query.id]);
       setLoading(false);
+
+      setTimeout(() => {
+        setLoadingChart(false);
+        setLoadingProductInfo(false);
+        setLoadingDetails(false);
+      }, 2000);
     }
   }, [router.isReady]);
+
   return (
     <>
       <Head>
@@ -68,16 +65,17 @@ export default function Product() {
             // product list
             <>
               <div className='product-head-wrapper'>
-                <ProductInfo product={productData} />
+                <ProductInfo loading={loadingProductInfo} product={productData} />
                 <ProductChart
+                  loading={loadingChart}
                   chartData={productData.chart}
                   style={`
                     flex: 1;
                 `}
                 />
               </div>
-              <ProductSummary />
-              <ProductDetails data={productData} />
+              <ProductSummary loading={loadingProductInfo} />
+              <ProductDetails loading={loadingDetails} data={productData} />
               <KnowledgeBase />
             </>
           ) : (
@@ -87,7 +85,7 @@ export default function Product() {
         ) : (
           // on loading this loader component will be shown
           <>
-            <p>Loading...</p>
+            <PagePreloader />
           </>
         )}
       </main>
