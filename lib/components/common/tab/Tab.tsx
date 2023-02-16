@@ -68,7 +68,7 @@ export default function Tab({
           display: none;
         }
 
-        @media screen and (max-width: 1000px) {
+        @media screen and (max-width: 1050px) {
           .mobile {
             ${currentTab && currentTab.shortName ? 'display: inline-block;' : ''}
           }
