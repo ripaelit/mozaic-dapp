@@ -1,65 +1,54 @@
 import React from 'react';
-import { strategies, tokenDetailsTableItems } from '../../data/static/productInDepth';
-import ProgressBar from '../common/progressBar/ProgressBar';
-import TableLoader from '../loader/TableLoader';
+import TextLoader from './TextLoader';
+import IconLoader from './IconLoader';
 
-export default function TokenDetails({ tokenData, loading }: any) {
+export default function TableLoader() {
+  const loaderItems = [1, 2, 3, 4];
+
   return (
     <>
-      {!loading ? (
-        <div className='token-details-container'>
-          <table>
-            <colgroup>
-              <col className='col-1' />
-              <col className='col-2' />
-              <col className='col-3' />
-              <col className='col-4' />
-            </colgroup>
-            <thead className='table-header'>
-              <tr>
-                {tokenDetailsTableItems.map((item) => (
-                  <th key={item.id} className={item.className}>
-                    {item.name}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-
-            <tbody>
-              {tokenData.map((asset: any) => (
-                <tr key={asset.id}>
-                  <td className={'asset-name-body'}>
-                    <img src={asset.icon} alt='' /> <p>{asset.name}</p>
-                  </td>
-                  <td className={'allocation-body'}>
-                    <div className='allocation-body-wrapper'>
-                      <p>{asset.allocation}%</p>
-                      <ProgressBar value={asset.allocation} />
-                    </div>
-                  </td>
-                  <td className={'apy-body'}>{asset.apy}%</td>
-                  <td className={'strategy-body'}>
-                    {strategies.map((strategy) => (
-                      <React.Fragment key={strategy.id}>
-                        {strategy.id === asset.strategy && (
-                          <div className={`strategy-item-wrapper `}>
-                            <div className={`strategy-item ${strategy.className}`}>
-                              <img src={strategy.icon} alt='' />
-                              <p>{strategy.name}</p>
-                            </div>
-                          </div>
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </td>
-                </tr>
+      <div className='table-loader-container'>
+        <table>
+          <colgroup>
+            <col className='col-1' />
+            <col className='col-2' />
+            <col className='col-3' />
+            <col className='col-4' />
+          </colgroup>
+          <thead className='table-header'>
+            <tr>
+              {loaderItems.map((item, index) => (
+                <th key={index}>
+                  <TextLoader w={70} />
+                </th>
               ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <TableLoader />
-      )}
+            </tr>
+          </thead>
+
+          <tbody>
+            {loaderItems.map((item, index) => (
+              <tr key={index}>
+                <td className={'asset-name-body'}>
+                  <IconLoader />
+                  <TextLoader w={70} />
+                </td>
+                <td className={'allocation-body'}>
+                  <div className='allocation-body-wrapper'>
+                    <TextLoader w={50} />
+                  </div>
+                </td>
+                <td className={'apy-body'}>
+                  <TextLoader w={30} />
+                </td>
+                <td className={'strategy-body'}>
+                  <TextLoader w={70} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       <style jsx>{`
         .col-1 {
           width: 30%;

@@ -1396,7 +1396,7 @@
     },
     {
       "inputs": [],
-      "name": "totalInmoz",
+      "name": "totalmLP",
       "outputs": [
         {
           "internalType": "uint256",
@@ -1435,7 +1435,7 @@
     },
     {
       "inputs": [],
-      "name": "totalSyncInmoz",
+      "name": "totalSyncmLP",
       "outputs": [
         {
           "internalType": "uint256",
@@ -2936,7 +2936,7 @@
     },
     {
       "inputs": [],
-      "name": "totalInmoz",
+      "name": "totalmLP",
       "outputs": [
         {
           "internalType": "uint256",

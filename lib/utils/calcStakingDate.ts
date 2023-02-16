@@ -1,17 +1,9 @@
-export const calcStakingDate = (range: any): { weeks: number; days: number; unlockDate: any } => {
+export const calcStakingDate = (
+  range: any
+): { months: number; weeks: number; days: number; unlockDate: any } => {
   const currentDate: any = new Date();
   let targetDate: any;
   switch (range) {
-    case '1w':
-      targetDate = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-        currentDate.getDate() + 7,
-        currentDate.getHours(),
-        currentDate.getMinutes(),
-        currentDate.getSeconds()
-      );
-      break;
     case '1m':
       targetDate = new Date(
         currentDate.getFullYear(),
@@ -52,6 +44,16 @@ export const calcStakingDate = (range: any): { weeks: number; days: number; unlo
         currentDate.getSeconds()
       );
       break;
+    case '2y':
+      targetDate = new Date(
+        currentDate.getFullYear() + 2,
+        currentDate.getMonth(),
+        currentDate.getDate(),
+        currentDate.getHours(),
+        currentDate.getMinutes(),
+        currentDate.getSeconds()
+      );
+      break;
     case '3y':
       targetDate = new Date(
         currentDate.getFullYear() + 3,
@@ -66,25 +68,29 @@ export const calcStakingDate = (range: any): { weeks: number; days: number; unlo
       if (!isNaN(range)) {
         targetDate = new Date(
           currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate() + 7 * parseInt(range),
+          currentDate.getMonth() + 1 * parseInt(range),
+          currentDate.getDate(),
           currentDate.getHours(),
           currentDate.getMinutes(),
           currentDate.getSeconds()
         );
       } else {
         return {
+          months: 0,
           weeks: 0,
           days: 0,
           unlockDate: 'Invalid input',
         };
       }
   }
+
   const diffInMilliseconds = targetDate - currentDate;
+  const diffInMonths = Math.round(diffInMilliseconds / (1000 * 3600 * 24 * 30));
   const diffInWeeks = Math.round(diffInMilliseconds / (1000 * 3600 * 24 * 7));
   const diffInDays = Math.round(diffInMilliseconds / (1000 * 3600 * 24));
 
   return {
+    months: diffInMonths,
     weeks: diffInWeeks,
     days: diffInDays,
     unlockDate: targetDate.getTime(),

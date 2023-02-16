@@ -1,8 +1,8 @@
 {
   "initialSupply": "1000000000000",
   "ZERO_ADDRESS": "0x0000000000000000000000000000000000000000",
-  "name":"InMoz",
-  "symbol":"InMoz",
+  "name":"MozaicLP",
+  "symbol":"mLP",
   "ethereum": {
     "chainId": 101,
     "endpoint": "0x66A71Dcef29A0fFBDBE3c6a460a3B5BC225Cd675",

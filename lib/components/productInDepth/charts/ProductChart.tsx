@@ -6,8 +6,17 @@ import PrimaryCard from '../../common/card/PrimaryCard';
 import DropdownText from '../../common/input/dropdown/DropdownText';
 import FilterTab from '../../common/tab/FilterTab';
 import Chart from './Chart';
+import ChartLoader from '../../loader/productPageLoader/ChartLoader';
 
-export default function ProductChart({ style, chartData }: { style?: string; chartData: any }) {
+export default function ProductChart({
+  style,
+  chartData,
+  loading,
+}: {
+  style?: string;
+  chartData: any;
+  loading: boolean;
+}) {
   const [timeline, setTimeline] = useState(sortByTimelineTabItems[0]);
   const [selectedOption, setSelectedOption] = useState(chartData[0]);
 
@@ -28,11 +37,15 @@ export default function ProductChart({ style, chartData }: { style?: string; cha
                 setCurrentTab={setTimeline}
               />
             </div>
-            <Chart
-              yLabel={selectedOption.name}
-              timeline={timeline.value}
-              series={[selectedOption]}
-            />
+            {!loading ? (
+              <Chart
+                yLabel={selectedOption.name}
+                timeline={timeline.value}
+                series={[selectedOption]}
+              />
+            ) : (
+              <ChartLoader />
+            )}
           </div>
         </PrimaryCard>
       </div>

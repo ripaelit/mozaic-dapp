@@ -3,8 +3,9 @@ import { generateChart } from '../../data/dummy/randomChartData';
 import { sortByTimelineTabItems } from '../../data/static/productInDepth';
 import FilterTab from '../common/tab/FilterTab';
 import Chart from './charts/Chart';
+import ChartLoader from '../loader/productPageLoader/ChartLoader';
 
-export default function StrategyDetails({ style, strategyData }: any) {
+export default function StrategyDetails({ style, strategyData, loading }: any) {
   const [timeline, setTimeline] = useState(sortByTimelineTabItems[0]);
 
   return (
@@ -18,7 +19,7 @@ export default function StrategyDetails({ style, strategyData }: any) {
               setCurrentTab={setTimeline}
             />
           </div>
-          <Chart timeline={timeline.value} series={strategyData} />
+          {!loading ? <Chart timeline={timeline.value} series={strategyData} /> : <ChartLoader />}
         </div>
       </div>
       <style jsx>{`

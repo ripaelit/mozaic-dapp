@@ -14,14 +14,10 @@ const options: any = {
     toolbar: {
       show: false,
     },
+
     zoom: {
       autoScaleYaxis: true,
     },
-    // brush: {
-    //   enabled: true,
-    //   target: 0,
-    //   autoScaleYaxis: false
-    // },
     dropShadow: {
       enabled: true,
       opacity: 1,
