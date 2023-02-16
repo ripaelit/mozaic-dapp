@@ -8,6 +8,8 @@ import { TabItem } from '../../lib/types/common';
 import { calcStakingDate } from '../../lib/utils/calcStakingDate';
 
 const title = { description: 'Automatic and intelligent multi-chain yield farming.', href: '#' };
+
+// sample overview data
 const overviewData = [
   {
     id: 0,
@@ -33,12 +35,12 @@ const overviewData = [
 ];
 
 const range: TabItem[] = [
-  { id: 0, name: '1 week', shortName: '1W', value: 1, range: '1w' },
-  { id: 1, name: '1 month', shortName: '1M', value: 4, range: '1m' },
-  { id: 2, name: '3 Months', shortName: '3M', value: 13, range: '3m' },
-  { id: 3, name: '6 Months', shortName: '6M', value: 26, range: '6m' },
-  { id: 4, name: '1 Year', shortName: '1Y', value: 52, range: '1y' },
-  { id: 5, name: '3 Years', shortName: '3Y', value: 156, range: '3y' },
+  { id: 0, name: '1 Month', shortName: '1M', value: 1, range: '1m' },
+  { id: 1, name: '3 Months', shortName: '3M', value: 3, range: '3m' },
+  { id: 2, name: '6 Months', shortName: '6M', value: 6, range: '6m' },
+  { id: 3, name: '1 Year', shortName: '1Y', value: 12, range: '1y' },
+  { id: 4, name: '2 Years', shortName: '2Y', value: 24, range: '2y' },
+  { id: 5, name: '3 Years', shortName: '3Y', value: 36, range: '3y' },
 ];
 
 const detailsData = {
@@ -61,12 +63,14 @@ const stakeAsset = {
 
 export default function Stake() {
   const [amount, setAmount] = useState(parseFloat(''));
-  const [week, setWeek] = useState(1);
+  const [month, setMonth] = useState(1);
   const [selectedRange, setSelectedRange] = useState<TabItem | null>(null);
   const [unlockTime, setUnlockTime] = useState<any>(null);
 
   // on create lock this function will get called
-  const onLock = () => {};
+  const onLock = () => {
+    console.log('on lock', amount, unlockTime);
+  };
 
   // set maximum balance
   const setMaxBalance = (maxBalance: string) => {
@@ -79,37 +83,32 @@ export default function Stake() {
 
   // on slider change
   const onSliderChange = (value: number) => {
-    setWeek(value);
-    const { unlockDate } = calcStakingDate(week);
+    setMonth(value);
+    const { unlockDate } = calcStakingDate(month);
     setUnlockTime(unlockDate);
   };
-
-  // useEffect(() => {
-  //   const { weeks, days, unlockDate } = calcStakingDate(week);
-  //   setUnlockTime(unlockDate);
-  // }, []);
 
   // on slider change calculate staking time
   useEffect(() => {
     const matchedRange = range.filter((item) => {
-      if (item.value === week) {
+      if (item.value === month) {
         return item;
       }
     });
 
     if (matchedRange[0]) {
       setSelectedRange(matchedRange[0]);
-      setWeek(matchedRange[0].value);
+      setMonth(matchedRange[0].value);
     } else {
       setSelectedRange(null);
     }
-  }, [week]);
+  }, [month]);
 
   // on range change calculate staking time
   useEffect(() => {
     if (selectedRange) {
-      const { weeks, days, unlockDate } = calcStakingDate(selectedRange.range);
-      setWeek(weeks);
+      const { months, unlockDate } = calcStakingDate(selectedRange.range);
+      setMonth(months);
       setUnlockTime(unlockDate);
     }
   }, [selectedRange]);
@@ -143,7 +142,7 @@ export default function Stake() {
               setMaxBalance={setMaxBalance}
               stakeAsset={stakeAsset}
               onInput={onInput}
-              time={week}
+              time={month}
               onSliderChange={onSliderChange}
               range={range}
               selectedRange={selectedRange}
