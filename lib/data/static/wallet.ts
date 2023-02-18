@@ -73,10 +73,23 @@ export const networks: NetworkChainDataType[] = [
   //   icon: '/assets/icons/wallet/networks/ico.arb.svg',
   // },
 
-  // test net
+  // testnet
+  // BSC testnet
+    {
+      id: 0,
+      chainID: 97,
+      rpcUrls: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
+      name: 'Binance Smart Chain Testnet',
+      nativeCurrency: {
+        name: 'tBNB',
+        decimals: 18,
+        symbol: 'tBNB',
+      },
+      icon: '/assets/icons/wallet/networks/ico.bsc.svg',
+    },
   // Goerli
   {
-    id: 0,
+    id: 1,
     chainID: 5,
     rpcUrls: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
     name: 'Goerli',
@@ -89,7 +102,7 @@ export const networks: NetworkChainDataType[] = [
   },
   // Fuji
   {
-    id: 1,
+    id: 2,
     chainID: 43113,
     rpcUrls: 'https://api.avax-test.network/ext/bc/C/rpc',
     name: 'Fuji',
@@ -102,7 +115,7 @@ export const networks: NetworkChainDataType[] = [
   },
   // Optimism
   {
-    id: 2,
+    id: 3,
     chainID: 420,
     rpcUrls: 'https://opt-goerli.g.alchemy.com/v2/VvDMoNPGL63OALxGv9KaoQ1xf4_kr5br',
     name: 'Optimism Goerli Testnet',
@@ -115,7 +128,7 @@ export const networks: NetworkChainDataType[] = [
   },
   // Mumbai
   {
-    id: 3,
+    id: 4,
     chainID: 80001,
     rpcUrls: 'https://polygon-mumbai.blockpi.network/v1/rpc/public',
     name: 'Mumbai',
@@ -128,7 +141,7 @@ export const networks: NetworkChainDataType[] = [
   },
   // Fantom
   {
-    id: 4,
+    id: 5,
     chainID: 4002,
     rpcUrls: 'https://rpc.testnet.fantom.network',
     name: 'Fantom Testnet',
@@ -138,19 +151,6 @@ export const networks: NetworkChainDataType[] = [
       symbol: 'FTM',
     },
     icon: '/assets/icons/wallet/networks/ico.ftm.svg',
-  },
-  // BSC testnet
-  {
-    id: 5,
-    chainID: 97,
-    rpcUrls: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
-    name: 'Binance Smart Chain Testnet',
-    nativeCurrency: {
-      name: 'tBNB',
-      decimals: 18,
-      symbol: 'tBNB',
-    },
-    icon: '/assets/icons/wallet/networks/ico.bsc.svg',
   },
   // Arbitrum
   {
