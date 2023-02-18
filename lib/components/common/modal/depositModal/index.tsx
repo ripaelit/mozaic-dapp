@@ -1,14 +1,14 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ModalBtnType, NetworkChainDataType, TabItem } from '../../../../types/common';
+import { ModalBtnType, ChainDataType, TabItem } from '../../../../types/common';
 import Separator from '../../Separator';
 import Tab from '../../tab/Tab';
 import ConnectWalletModal from '../ConnectWalletModal';
 import Modal from '../Modal';
 import MultiAssets from './MultiAssetsDeposit';
 import SingleAsset from './SingleAssetDeposit';
-import { networks } from '../../../../data/static/wallet';
-import switchNetwork from '../../../../hooks/useSwitchNetwork';
+import { chains } from '../../../../data/static/wallet';
+import switchChain from '../../../../hooks/useSwitchChain';
 
 const assetTypes: TabItem[] = [
   { id: 0, name: 'Single Asset', value: 'single' },
@@ -71,8 +71,8 @@ export default function DepositModal({
     // console.log('multi assets', multiAssetsDepositData);
   }, [multiAssetsDepositData]);
 
-  const chainData: NetworkChainDataType | undefined = useMemo(() => {
-    const targetChain = networks.find((network) => network.name.includes(singleAssetDepositData.name))
+  const chainData: ChainDataType | undefined = useMemo(() => {
+    const targetChain = chains.find((chain) => chain.name.includes(singleAssetDepositData.name))
     return targetChain
   }, [singleAssetDepositData])
 
@@ -98,19 +98,8 @@ export default function DepositModal({
                   const networkData = chainData? {
                     ...chainData,
                     chainID: '0x' + (chainData.chainID || 0).toString(16)
-                  } :  {
-                    id: 0,
-                    chainID: '0x5',
-                    rpcUrls: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-                    name: 'Goerli',
-                    nativeCurrency: {
-                      name: 'ETH',
-                      decimals: 18,
-                      symbol: 'ETH',
-                    },
-                    icon: '/assets/icons/wallet/networks/ico.eth.svg',
-                  }
-                  await switchNetwork(networkData);
+                  } :  chains[0]
+                  await switchChain(networkData);
 
                   // actions for deposit
                   

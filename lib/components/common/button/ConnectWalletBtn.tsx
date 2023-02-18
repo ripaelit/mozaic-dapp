@@ -2,7 +2,7 @@ import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { toast } from 'react-toastify';
-import { networks, networkIdleStates } from '../../../data/static/wallet';
+import { chains, networkIdleStates } from '../../../data/static/wallet';
 import { NetworkItemType } from '../../../types/common';
 import WalletDetailMenu from '../menu/WalletDetailMenu';
 
@@ -16,7 +16,7 @@ export default function ConnectWalletBtn({
   const web3reactContext = useWeb3React();
 
   // initial network
-  const [currentNetwork, setCurrentNetwork] = useState<NetworkItemType>(networkIdleStates[0]);
+  const [currentChain, setCurrentChain] = useState<NetworkItemType>(networkIdleStates[0]);
   const [walletStateText, setWalletStateText] = useState('Connect Wallet');
   const [showWalletDetailMenu, setShowWalletDetailMenu] = useState(false);
 
@@ -25,11 +25,11 @@ export default function ConnectWalletBtn({
     if (!web3reactContext.account) {
       if (showConnectWalletModal) {
         setWalletStateText(networkIdleStates[1].name);
-        setCurrentNetwork(networkIdleStates[1]);
+        setCurrentChain(networkIdleStates[1]);
       }
       if (!showConnectWalletModal) {
         setWalletStateText(networkIdleStates[0].name);
-        setCurrentNetwork(networkIdleStates[0]);
+        setCurrentChain(networkIdleStates[0]);
       }
     } else {
       setWalletStateText(
@@ -67,12 +67,12 @@ export default function ConnectWalletBtn({
   // dispatch notification & change icon on mainNet change
   useEffect(() => {
     if (!web3reactContext.chainId) {
-      setCurrentNetwork(networkIdleStates[0]);
+      setCurrentChain(networkIdleStates[0]);
       return;
     } else {
-      networks.map((item) => {
+      chains.map((item) => {
         if (item.chainID === web3reactContext.chainId) {
-          setCurrentNetwork(item);
+          setCurrentChain(item);
           toast.info(`Connected to ${item.name} network`, {
             position: 'bottom-right',
             autoClose: 3000,
@@ -99,7 +99,7 @@ export default function ConnectWalletBtn({
           <div
             className={`wallet-btn-container ${!web3reactContext.account ? 'solid' : 'outlined'}`}
             onClick={onWalletBtnClick}>
-            <img className='network-icon' src={currentNetwork.icon} alt='' />
+            <img className='network-icon' src={currentChain.icon} alt='' />
             <p className='btn-text'>{walletStateText}</p>
           </div>
           <div className='wallet-detail-menu-wrapper'>
@@ -107,7 +107,7 @@ export default function ConnectWalletBtn({
               <WalletDetailMenu
                 showMenu={showWalletDetailMenu}
                 setShowMenu={setShowWalletDetailMenu}
-                currentNetwork={currentNetwork}
+                currentChain={currentChain}
               />
             )}
           </div>

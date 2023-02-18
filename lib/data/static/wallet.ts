@@ -1,4 +1,4 @@
-import { NetworkItemType, NetworkChainDataType, WalletItemType } from '../../types/common';
+import { NetworkItemType, ChainDataType, WalletItemType } from '../../types/common';
 
 export const wallets: WalletItemType[] = [
   {
@@ -28,7 +28,7 @@ export const networkIdleStates: NetworkItemType[] = [
   },
 ];
 
-export const networks: NetworkChainDataType[] = [
+export const chains: ChainDataType[] = [
   // mainnet
   // {
   //   id: 0,
@@ -75,22 +75,22 @@ export const networks: NetworkChainDataType[] = [
 
   // testnet
   // BSC testnet
-    {
-      id: 0,
-      chainID: 97,
-      rpcUrls: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
-      name: 'Binance Smart Chain Testnet',
-      nativeCurrency: {
-        name: 'tBNB',
-        decimals: 18,
-        symbol: 'tBNB',
-      },
-      icon: '/assets/icons/wallet/networks/ico.bsc.svg',
+  {
+    id: 0,
+    chainID: 97, // from chainlist
+    rpcUrls: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
+    name: 'BSC Testnet',
+    nativeCurrency: {
+      name: 'tBNB',
+      decimals: 18,
+      symbol: 'tBNB',
     },
+    icon: '/assets/icons/wallet/networks/ico.bsc.svg',
+  },
   // Goerli
   {
     id: 1,
-    chainID: 5,
+    chainID: 5, // from chainlist
     rpcUrls: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
     name: 'Goerli',
     nativeCurrency: {
@@ -100,10 +100,10 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.eth.svg',
   },
-  // Fuji
+  // Fuji (Avalanche testnet)
   {
     id: 2,
-    chainID: 43113,
+    chainID: 43113, // from chainlist
     rpcUrls: 'https://api.avax-test.network/ext/bc/C/rpc',
     name: 'Fuji',
     nativeCurrency: {
@@ -113,10 +113,10 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.avax.svg',
   },
-  // Optimism
+  // Optimism (Optimism Goerli Testnet)
   {
     id: 3,
-    chainID: 420,
+    chainID: 420, // from chainlist
     rpcUrls: 'https://opt-goerli.g.alchemy.com/v2/VvDMoNPGL63OALxGv9KaoQ1xf4_kr5br',
     name: 'Optimism Goerli Testnet',
     nativeCurrency: {
@@ -126,10 +126,10 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.op.svg',
   },
-  // Mumbai
+  // Mumbai (Polygon testnet)
   {
     id: 4,
-    chainID: 80001,
+    chainID: 80001, // from chainlist
     rpcUrls: 'https://polygon-mumbai.blockpi.network/v1/rpc/public',
     name: 'Mumbai',
     nativeCurrency: {
@@ -139,10 +139,10 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.matic.svg',
   },
-  // Fantom
+  // Fantom (Testnet)
   {
     id: 5,
-    chainID: 4002,
+    chainID: 4002, // from chainlist
     rpcUrls: 'https://rpc.testnet.fantom.network',
     name: 'Fantom Testnet',
     nativeCurrency: {
@@ -152,10 +152,10 @@ export const networks: NetworkChainDataType[] = [
     },
     icon: '/assets/icons/wallet/networks/ico.ftm.svg',
   },
-  // Arbitrum
+  // Arbitrum (Arbitrum Goerli)
   {
     id: 6,
-    chainID: 421613,
+    chainID: 421613, // from chainlist
     rpcUrls: 'https://endpoints.omniatech.io/v1/arbitrum/goerli/public',
     name: 'Arbitrum Goerli',
     nativeCurrency: {

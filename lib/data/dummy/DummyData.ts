@@ -89,7 +89,7 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
         data: chartData2,
       },
     ],
-    // test net vault
+    // testnet vault
     vault: [
       //BSC testnet
       {
