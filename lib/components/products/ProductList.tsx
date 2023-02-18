@@ -6,7 +6,7 @@ import PageErrorReloader from '../common/error/PageErrorReloader';
 import ProductCardLoader from '../loader/ProductCardLoader';
 import ProductCard from './ProductCard';
 
-import { productsDummyData } from '../../data/dummy/ProductStaticDummyData';
+import { productsDummyData } from '../../data/dummy/DummyData';
 
 export default function ProductList() {
   const [productList, setProductList] = useState<ProductType[] | null>(null);

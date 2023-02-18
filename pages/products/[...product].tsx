@@ -11,7 +11,7 @@ import axios from 'axios';
 import { LoadErrorType } from '../../lib/types/common';
 import PageErrorReloader from '../../lib/components/common/error/PageErrorReloader';
 import TitleBtn from '../../lib/components/common/button/TitleBtn';
-import { productDetailsDummyData } from '../../lib/data/dummy/ProductStaticDummyData';
+import { productDetailsDummyData } from '../../lib/data/dummy/DummyData';
 
 export default function Product() {
   const router = useRouter();
