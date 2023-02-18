@@ -1,0 +1,22 @@
+.loading-text {
+  animation: glitch 5s infinite;
+  font-size: 12px;
+}
+
+@keyframes glitch {
+  0% {
+    opacity: 0.5;
+  }
+  25% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.75;
+  }
+}

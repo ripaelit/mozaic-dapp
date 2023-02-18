@@ -70,7 +70,7 @@ export default function LockSection({
             />
             <ReactSlider
               min={1}
-              max={156}
+              max={36}
               className='horizontal-slider'
               thumbClassName='lock-slider-thumb'
               trackClassName='lock-slider-track'
@@ -86,7 +86,7 @@ export default function LockSection({
           <div className='bottom'>
             <p className='info'>
               Your starting voting power will be {!amount ? 0 : amount} veMOZ over {time}{' '}
-              {time > 1 ? 'weeks' : 'week'}!
+              {time > 1 ? 'months' : 'month'}!
             </p>
             <InputBox readOnly={true} inputType='text' inputValue={unlockDate} />
             <PrimaryBtn text='Create lock' onClick={onLock} />

@@ -17,22 +17,8 @@ export default function ProductList() {
   useEffect(() => {
     setError(null);
     setLoading(true);
-    // axios
-    //   .get('/products')
-    //   .then((res) => {
-    //     setTimeout(() => {
-    //       setProductList(res.data);
-    //       setLoading(false);
-    //     }, 500);
-    //   })
-    //   .catch((err) => {
-    //     setError({
-    //       message: err.message,
-    //       status: err.status,
-    //       code: err.code,
-    //     });
-    //     setLoading(false);
-    //   });
+
+    // load data from contract
     setProductList(productsDummyData.data);
     setLoading(false);
   }, []);

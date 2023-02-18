@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { ProductType } from '../../types/product';
 import Slider from '../common/Slider';
+import useNumberCounter from '../../hooks/useNumberCounter';
 
 // product card component
 export default function ProductCard({ product }: { product: ProductType }) {
@@ -165,10 +166,12 @@ const ProductTitle = ({ product }: any) => {
 
 // product card apy section
 const ProductAPY = ({ product }: { product: ProductType }) => {
+  const count = useNumberCounter;
+
   return (
     <>
       <div className='apy-container'>
-        <h2>{product.apy}%</h2>
+        <h2>{count(product.apy)}%</h2>
         <p className='label'>Current Projected Yield (APY)</p>
       </div>
       <style jsx>{`
@@ -185,6 +188,8 @@ const ProductAPY = ({ product }: { product: ProductType }) => {
 
 // product card deposit section
 const Deposit = ({ product }: { product: ProductType }) => {
+  const count = useNumberCounter;
+
   return (
     <>
       <div className='current-dep-container'>
@@ -192,7 +197,7 @@ const Deposit = ({ product }: { product: ProductType }) => {
         <div className='label-wrapper'>
           <p className='label'>Current Deposits:</p>
           <h4>
-            {product.currentDeposit} {product.tokenName}
+            {count(product.currentDeposit)} {product.tokenName}
           </h4>
         </div>
         <Slider max={product.maxCap} current={product.currentDeposit} />

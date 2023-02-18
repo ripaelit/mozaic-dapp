@@ -1,4 +1,5 @@
 import React from 'react';
+import TableLoader from '../loader/TableLoader';
 
 const metricsDetailsTableItem = [
   {
@@ -15,73 +16,77 @@ const metricsDetailsTableItem = [
   },
 ];
 
-export default function MetricsDetails({ metricsData }: any) {
+export default function MetricsDetails({ metricsData, loading }: any) {
   return (
     <>
       <div className='metrics-details-container'>
-        <table>
-          <colgroup>
-            <col className='col-1' />
-            <col className='col-2' />
-          </colgroup>
-          <thead className='table-header'>
-            <tr>
-              {metricsDetailsTableItem.map((item) => (
-                <th key={item.id} className={item.className}>
-                  {item.name}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {metricsData.map((item: any) => (
-              <tr key={item.id}>
-                <td className={'asset-name-body'}>
-                  <img src={item.icon} alt='' /> <p>{item.name}</p>
-                </td>
-                <td className={'performance-body'}>
-                  <div
-                    className='performance-wrapper'
-                    style={{
-                      color:
-                        typeof item.value === 'number' && item.value! > 0
-                          ? 'var(--alertPositive)'
-                          : item.value! < 0
-                          ? 'var(--alertNegative)'
-                          : 'var(--textPrimary)',
-                      textAlign: 'right',
-                    }}>
-                    {typeof item.value === 'number' && (
-                      <div className='performance-item'>
-                        <p className='counter'>{item.value}%</p>
-                        {item.value !== 0 && (
-                          <img
-                            src={
-                              item.value! > 0
-                                ? '/assets/icons/ico.up.svg'
-                                : '/assets/icons/ico.down.svg'
-                            }
-                            alt=''
-                          />
-                        )}
-                      </div>
-                    )}
-                    {typeof item.value === 'object' && (
-                      <>
-                        {item.value.length === 1 && <p>{item.value[0]} months</p>}
-                        {item.value.length === 2 && (
-                          <p>
-                            {item.value[0]} to {item.value[1]} months
-                          </p>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </td>
+        {!loading ? (
+          <table>
+            <colgroup>
+              <col className='col-1' />
+              <col className='col-2' />
+            </colgroup>
+            <thead className='table-header'>
+              <tr>
+                {metricsDetailsTableItem.map((item) => (
+                  <th key={item.id} className={item.className}>
+                    {item.name}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {metricsData.map((item: any) => (
+                <tr key={item.id}>
+                  <td className={'asset-name-body'}>
+                    <img src={item.icon} alt='' /> <p>{item.name}</p>
+                  </td>
+                  <td className={'performance-body'}>
+                    <div
+                      className='performance-wrapper'
+                      style={{
+                        color:
+                          typeof item.value === 'number' && item.value! > 0
+                            ? 'var(--alertPositive)'
+                            : item.value! < 0
+                            ? 'var(--alertNegative)'
+                            : 'var(--textPrimary)',
+                        textAlign: 'right',
+                      }}>
+                      {typeof item.value === 'number' && (
+                        <div className='performance-item'>
+                          <p className='counter'>{item.value}%</p>
+                          {item.value !== 0 && (
+                            <img
+                              src={
+                                item.value! > 0
+                                  ? '/assets/icons/ico.up.svg'
+                                  : '/assets/icons/ico.down.svg'
+                              }
+                              alt=''
+                            />
+                          )}
+                        </div>
+                      )}
+                      {typeof item.value === 'object' && (
+                        <>
+                          {item.value.length === 1 && <p>{item.value[0]} months</p>}
+                          {item.value.length === 2 && (
+                            <p>
+                              {item.value[0]} to {item.value[1]} months
+                            </p>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <TableLoader />
+        )}
       </div>
       <style jsx>{`
         .col-1 {
