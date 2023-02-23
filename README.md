@@ -21,7 +21,7 @@ DataTypes will be found at `lib/types/`
 PostMan collection will be found - [here](https://www.getpostman.com/collections/b22c76b21970a55c770e)
 Dummy db will be found at `lib/data/dummy/`
 
-## Learn More
+## Learn More.
 
 This project is developed using NextJS.
 
