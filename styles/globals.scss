@@ -8,11 +8,12 @@
 
 html,
 body {
+  position: relative;
   font-family: 'Poppins', sans-serif;
-  background-color: var(--bg);
+  background-color: var(--bgDark);
   color: var(--textPrimary);
   max-width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 #__next {
