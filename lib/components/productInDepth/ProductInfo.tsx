@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import DepositWithBtn from '../common/button/DepositBtn';
 import PrimaryCard from '../common/card/PrimaryCard';
 import useNumberCounter from '../../hooks/useNumberCounter';
 import TextLoader from '../loader/TextLoader';
