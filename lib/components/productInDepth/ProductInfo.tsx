@@ -185,7 +185,19 @@ export default function ProductInfo({ product, loading }: any) {
 }
 
 const TrxDetails = ({ data, loading }: any) => {
-  const TrxDetailsItem = ({ percent, profit, usd, value, label }: any) => {
+  const TrxDetailsItem = ({
+    percent,
+    profit,
+    usd,
+    value,
+    label,
+  }: {
+    percent?: boolean;
+    profit?: boolean;
+    usd?: boolean;
+    value: number;
+    label?: string;
+  }) => {
     return (
       <>
         <div className='trx-details-item'>
