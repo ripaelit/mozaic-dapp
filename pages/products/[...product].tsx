@@ -75,7 +75,7 @@ export default function Product() {
                 `}
                 />
               </div>
-              <DepositWithdrawSection />
+              <DepositWithdrawSection vault={productData.vault} loading={loading} />
               <ProductSummary loading={loadingProductInfo} />
               <ProductDetails loading={loadingDetails} data={productData} />
               <KnowledgeBase />
