@@ -27,8 +27,6 @@ function useColorTransition(color1: string, color2: string, duration: number) {
     };
   }, [color1, color2, duration]);
 
-  console.log('currentColor', currentColor);
-
   return currentColor;
 }
 
