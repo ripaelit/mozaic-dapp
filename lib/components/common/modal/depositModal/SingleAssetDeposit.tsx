@@ -64,7 +64,7 @@ export default function SingleAsset({
         },
         totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
       });
-    } catch(error){
+    } catch (error) {
       // console.log(selectedToken);
     }
   }, [selectedToken]);
@@ -81,9 +81,9 @@ export default function SingleAsset({
         decimals: selectedToken.decimals,
       },
       totalDepositAmount: assetDepositData.asset.amount * selectedToken.conversionRate,
-      name: selectedChain.name
+      name: selectedChain.name,
     });
-    setSelectedToken(selectedChain.assets[0])
+    setSelectedToken(selectedChain.assets[0]);
     // console.log(assetDepositData);
   }, [selectedChain]);
 
