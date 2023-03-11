@@ -47,7 +47,7 @@ export default function InfoTooltip({ text, tooltipFor }: { text: string; toolti
         .tooltip {
           background-color: black;
           max-width: 200px;
-          color: var(--text);
+          color: var(--text) !important;
           border-radius: 4px;
           padding: 8px 12px;
           font-size: 12px;
