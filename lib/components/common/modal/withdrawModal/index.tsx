@@ -18,9 +18,11 @@ const description = `Remove liquidity in one transaction. Your mCORE will automa
 export default function WithdrawModal({
   setOpenWithdrawModal,
   vault,
+  onWithdrawalSuccess,
 }: {
   setOpenWithdrawModal: React.Dispatch<React.SetStateAction<boolean>>;
   vault: any;
+  onWithdrawalSuccess: () => void;
 }) {
   const initialSingleAssetWithdrawData = {
     asset: {
@@ -70,6 +72,7 @@ export default function WithdrawModal({
     if (withdrawType.value === 'multi') {
       // console.log('multi assets', multiAssetsWithdrawData);
     }
+    onWithdrawalSuccess();
   };
 
   return (
