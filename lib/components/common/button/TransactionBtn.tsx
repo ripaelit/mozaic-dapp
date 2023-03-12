@@ -1,60 +1,109 @@
-import React, { useEffect, useState } from 'react';
-import DepositModal from '../modal/depositModal';
-import WithdrawModal from '../modal/withdrawModal';
+import React from 'react';
+
 import InfoTooltip from './InfoTooltip';
-import useBackgroundTransition from '../../../hooks/useBackgroundTransition';
 
 export default function TransactionBtn({ buttonType, onClick, tooltip, state, colors }: any) {
-  const [background, setBackground] = useState('black');
-  const backgroundColor = useBackgroundTransition({
-    state: state.state,
-    totalTime: state.estimatedTime,
-    remainingTime: state.remainingTime,
-    idleColor: 'var(--bg)',
-    startColor: colors.startColor,
-    endColor: colors.endColor,
-  });
-
-  console.log(state);
-
-  // Set the background to orange after 2 seconds
-  setTimeout(() => {
-    setBackground('orange');
-  }, 2000);
-
   return (
     <>
-      <div className='transaction-btn-container'>
-        <div className='btn transaction-btn' onClick={() => onClick(true)}>
-          {buttonType}
+      <div className={`transaction-btn-container gradient-animation`}>
+        <div className='overlay-wrapper'>
+          <div className={`bg-overlay ${state}`}></div>
         </div>
-        <div className='transaction-info'>
-          <p>
-            {state.state === 'idle'
-              ? 'Idle'
-              : state.state === 'pending'
-              ? buttonType + 'ing...'
-              : state.state === 'done'
-              ? buttonType + (buttonType == 'Deposit' ? 'ed!' : 'n!')
-              : 'an error occurred'}
-          </p>
-          <InfoTooltip text={tooltip} tooltipFor={buttonType} />
+        <div className='transition-btn-wrapper'>
+          <div className='btn transaction-btn' onClick={() => onClick(true)}>
+            {buttonType}
+          </div>
+          <div className='transaction-info'>
+            <p className={`btn-label ${state === 'idle' ? 'inactive' : 'active'}`}>
+              {buttonType}ing...
+            </p>
+            <InfoTooltip text={tooltip} tooltipFor={buttonType} />
+          </div>
         </div>
       </div>
 
       <style jsx>{`
         .transaction-btn-container {
+          position: relative;
           width: 100%;
           max-width: 300px;
           height: 56px;
-          padding: 8px;
           border-radius: 12px;
-          background: ${backgroundColor};
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: center;
+          background-color: var(--bg);
         }
+
+        .overlay-wrapper {
+          position: absolute;
+          background-color: var(--bg);
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
+          border-radius: 12px;
+        }
+
+        .bg-overlay {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          -webkit-mask-image: linear-gradient(
+            to left,
+            transparent 0%,
+            black 40%,
+            black 60%,
+            transparent 100%
+          );
+          mask-image: linear-gradient(
+            to left,
+            transparent 0%,
+            black 40%,
+            black 60%,
+            transparent 100%
+          );
+        }
+
+        .idle {
+          background-color: var(--bg);
+          left: -100%;
+          opacity: 1;
+        }
+
+        .pending {
+          animation: transition-animation 5s ease-in-out;
+        }
+
+        @keyframes transition-animation {
+          0% {
+            left: -100%;
+            opacity: 1;
+            background-color: ${colors.startColor};
+          }
+
+          75% {
+            left: 50%;
+            opacity: 1;
+            background-color: ${colors.endColor};
+          }
+          100% {
+            left: 50%;
+            opacity: 0;
+            background-color: var(--bg);
+          }
+        }
+
+        .transition-btn-wrapper {
+          position: absolute;
+          padding: 8px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+        }
+
         .transaction-btn {
           height: 100%;
           border-radius: 6px;
@@ -78,6 +127,19 @@ export default function TransactionBtn({ buttonType, onClick, tooltip, state, co
           justify-content: space-between;
           font-size: 0.875rem;
           color: ${state.state === 'idle' ? 'var(--textSecondary)' : 'var(--text)'};
+        }
+
+        .btn-label {
+          transition: all 0.3s ease-in-out;
+        }
+
+        .inactive {
+          opacity: 0.5;
+        }
+
+        .active {
+          opacity: 1;
+          font-weight: 600;
         }
 
         @media screen and (max-width: 600px) {
