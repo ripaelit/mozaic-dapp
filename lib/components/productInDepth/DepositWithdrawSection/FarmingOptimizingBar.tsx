@@ -13,22 +13,22 @@ const FarmingOptimizingBar = ({
   tooltipOptimizing: string;
   colors: any;
 }) => {
-  const [barClass, setBarClass] = useState<string>('idle');
+  // const [barClass, setBarClass] = useState<string>('idle');
 
-  useEffect(() => {
-    setBarClass('idle');
-    setTimeout(() => {
-      setBarClass(state);
-    }, 500);
+  // useEffect(() => {
+  //   setBarClass('idle');
+  //   setTimeout(() => {
+  //     setBarClass(state);
+  //   }, 500);
 
-    console.log('state', state);
-  }, [state]);
+  //   console.log('state', state);
+  // }, [state]);
 
   return (
     <>
       <div className='farming-optimizing-bar'>
         <div className='overlay-wrapper'>
-          <div className={`bg-overlay ${barClass}`}></div>
+          <div className={`bg-overlay ${state}`}></div>
         </div>
         <div className='indicator-wrapper'>
           <div className='farming-wrapper'>
@@ -69,21 +69,9 @@ const FarmingOptimizingBar = ({
         .bg-overlay {
           position: absolute;
           height: 100%;
-          width: 50%;
-          -webkit-mask-image: linear-gradient(
-            to left,
-            transparent 0%,
-            black 40%,
-            black 60%,
-            transparent 100%
-          );
-          mask-image: linear-gradient(
-            to left,
-            transparent 0%,
-            black 40%,
-            black 60%,
-            transparent 100%
-          );
+          width: 75%;
+          -webkit-mask-image: linear-gradient(to left, transparent 0%, black 50%, transparent 100%);
+          mask-image: linear-gradient(to left, transparent 0%, black 50%, transparent 100%);
         }
 
         .idle {
@@ -93,49 +81,17 @@ const FarmingOptimizingBar = ({
         }
 
         .farming {
-          left: 25%;
+          left: -30%;
           opacity: 1;
-          animation: farming-animation 3s ease-in-out infinite;
           transition: all 1s ease;
+          background-color: ${colors.startColor};
         }
 
         .optimizing {
-          left: 25%;
+          left: 55%;
           opacity: 1;
-          animation: optimizing-animation 3s ease-in-out infinite;
           transition: all 1s ease;
-        }
-
-        @keyframes farming-animation {
-          0% {
-            left: -20%;
-            background-color: ${colors.startColor};
-          }
-
-          75% {
-            left: 0%;
-            background-color: ${colors.startColor};
-          }
-          100% {
-            left: -20%;
-            background-color: ${colors.startColor};
-          }
-        }
-
-        @keyframes optimizing-animation {
-          0% {
-            left: 70%;
-            background-color: ${colors.endColor};
-          }
-
-          75% {
-            left: 50%;
-            background-color: ${colors.endColor};
-          }
-          100% {
-            left: 70%;
-            background-color: ${colors.endColor};
-          }
+          background-color: ${colors.endColor};
         }
 
         .indicator-wrapper {
@@ -180,3 +136,35 @@ const FarmingOptimizingBar = ({
 };
 
 export default FarmingOptimizingBar;
+
+// @keyframes farming-animation {
+//   0% {
+//     left: -20%;
+//     background-color: ${colors.startColor};
+//   }
+
+//   75% {
+//     left: 0%;
+//     background-color: ${colors.startColor};
+//   }
+//   100% {
+//     left: -20%;
+//     background-color: ${colors.startColor};
+//   }
+// }
+
+// @keyframes optimizing-animation {
+//   0% {
+//     left: 70%;
+//     background-color: ${colors.endColor};
+//   }
+
+//   75% {
+//     left: 50%;
+//     background-color: ${colors.endColor};
+//   }
+//   100% {
+//     left: 70%;
+//     background-color: ${colors.endColor};
+//   }
+// }

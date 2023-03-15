@@ -66,32 +66,17 @@ export default function TransactionBtn({ buttonType, onClick, tooltip, state, co
         }
 
         .idle {
-          background-color: var(--bg);
+          background-color: ${colors.startColor};
+          opacity: 0;
           left: -100%;
-          opacity: 1;
+          transition: opacity 1s ease, left 1s ease 1s;
         }
 
         .pending {
-          animation: transition-animation 5s ease-in-out;
-        }
-
-        @keyframes transition-animation {
-          0% {
-            left: -100%;
-            opacity: 1;
-            background-color: ${colors.startColor};
-          }
-
-          75% {
-            left: 50%;
-            opacity: 1;
-            background-color: ${colors.endColor};
-          }
-          100% {
-            left: 50%;
-            opacity: 0;
-            background-color: var(--bg);
-          }
+          background-color: ${colors.endColor};
+          opacity: 1;
+          left: 50%;
+          transition: all 5s ease;
         }
 
         .transition-btn-wrapper {
@@ -151,3 +136,22 @@ export default function TransactionBtn({ buttonType, onClick, tooltip, state, co
     </>
   );
 }
+
+// @keyframes transition-animation {
+//   0% {
+//     left: -100%;
+//     opacity: 1;
+//     background-color: ${colors.startColor};
+//   }
+
+//   75% {
+//     left: 50%;
+//     opacity: 1;
+//     background-color: ${colors.endColor};
+//   }
+//   100% {
+//     left: 50%;
+//     opacity: 0;
+//     background-color: var(--bg);
+//   }
+// }

@@ -9,11 +9,13 @@ import useBackgroundTransition from '../../../hooks/useBackgroundTransition';
 import FarmingOptimizingBar from './FarmingOptimizingBar';
 
 const tooltipData = {
-  deposit: 'Deposit your assets into the vault to earn yield',
-  farming: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  deposit:
+    'Your funds are currently being deposited into the vault. We batch deposits every hour to save on gas fees. Your money will begin farming within the hour, please check back soon!',
+  farming: 'Archimedes (AI) is actively farming for you!',
   optimizing:
-    'Archimedes (AI) is currently optimizing your funds. It is searching and rebalancing to find you the best yield! Your funds will begin farming again when optimization is complete. This process may take up to 15 minutes.',
-  withdraw: 'Withdraw your assets from the vault to get your principal back',
+    'Archimedes (AI) is currently optimizing your funds. It is searching and rebalancing to find you the best yield! \n\nYour funds will begin farming again when optimization is complete. This process may take up to 15 minutes.',
+  withdraw:
+    'Your funds are currently being withdrawn into your wallet. We batch withdrawals every hour to save on gas fees. Your money will be returned to you within the hour, please check back soon!',
 };
 
 export default function DepositWithdrawSection({
@@ -35,7 +37,7 @@ export default function DepositWithdrawSection({
     setDepositState('pending');
     setTimeout(() => {
       setDepositState('idle');
-    }, 5000);
+    }, 10000);
   };
 
   const onWithdrawalSuccess = () => {
@@ -43,7 +45,7 @@ export default function DepositWithdrawSection({
     setWithdrawState('pending');
     setTimeout(() => {
       setWithdrawState('idle');
-    }, 5000);
+    }, 10000);
   };
 
   // dummy optimization/farming state
@@ -52,7 +54,7 @@ export default function DepositWithdrawSection({
     if (balancingState === 'optimizing') {
       setTimeout(() => {
         setBalancingState('farming');
-      }, 15000);
+      }, 3000);
     }
 
     if (balancingState === 'farming') {
