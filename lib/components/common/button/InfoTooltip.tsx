@@ -10,7 +10,6 @@ export default function InfoTooltip({ text, tooltipFor }: { text: string; toolti
         data-tooltip-content={text}
         data-tooltip-place='top'
         data-tooltip-variant='dark'>
-        <Tooltip />
         <svg
           width='20'
           height='20'
@@ -34,8 +33,8 @@ export default function InfoTooltip({ text, tooltipFor }: { text: string; toolti
       </div>
       <style jsx>{`
         .tooltip-wrapper {
-          width: 26px;
-          height: 26px;
+          width: 20px;
+          height: 20px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -53,6 +52,7 @@ export default function InfoTooltip({ text, tooltipFor }: { text: string; toolti
           font-size: 12px;
           line-height: 16px;
           font-weight: 400;
+          white-space: pre-wrap;
         }
       `}</style>
     </>
