@@ -5,6 +5,7 @@ import TextLoader from '../loader/TextLoader';
 import IconLoader from '../loader/IconLoader';
 import { getWeb3ReactContext, useWeb3React } from '@web3-react/core';
 import { userTrxDetailsDummyData } from '../../data/dummy/ProductStaticDummyData';
+import { Tooltip } from 'react-tooltip';
 
 const getDecimalVal = (val: number | string) => {
   let value;
@@ -185,12 +186,17 @@ export default function ProductInfo({ product, loading }: any) {
 
 const TrxDetails = ({ data, loading }: any) => {
   const TrxDetailsItem = ({
+    tooltip,
     percent,
     profit,
     usd,
     value,
     label,
   }: {
+    tooltip?: {
+      id: any;
+      text: string;
+    };
     percent?: boolean;
     profit?: boolean;
     usd?: boolean;
@@ -199,7 +205,13 @@ const TrxDetails = ({ data, loading }: any) => {
   }) => {
     return (
       <>
-        <div className='trx-details-item'>
+        <div
+          className='trx-details-item'
+          data-tooltip-id={tooltip && tooltip.id}
+          data-tooltip-content={tooltip && tooltip.text}
+          data-tooltip-place='top'
+          data-tooltip-variant='dark'>
+          <Tooltip id={tooltip && tooltip.id} className='tooltip' />
           <p className='label'>{profit ? (!percent ? 'Profit' : 'Profit %') : label}</p>
           {!loading ? (
             !data?.initialDeposit ? (
@@ -264,9 +276,14 @@ const TrxDetails = ({ data, loading }: any) => {
         </div>
         <div className='trx-details'>
           <TrxDetailsItem
+            tooltip={{
+              id: 'mlp',
+              text: 'Number of vault shares.',
+            }}
             label='mLP Balance'
             value={data?.initialDeposit ? data?.initialDeposit : null}
           />
+
           <TrxDetailsItem
             profit
             percent
