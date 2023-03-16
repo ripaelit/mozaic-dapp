@@ -66,6 +66,7 @@ export default function InputCheckBtn({
           font-weight: bold;
           background-color: var(--primaryT1);
         }
+
         @media screen and (max-width: 500px) {
           .check-btn-container {
             padding: 0 5px;

@@ -3,6 +3,7 @@ import '../styles/layout.scss';
 import '../styles/colors.scss';
 import '../styles/notification.scss';
 import '../styles/animation.scss';
+import 'react-tooltip/dist/react-tooltip.css';
 import { Web3ReactProvider } from '@web3-react/core';
 import Web3 from 'web3';
 import type { AppProps } from 'next/app';
@@ -50,6 +51,7 @@ const AppContainer = ({ children }: { children: JSX.Element }) => {
           --inputBtnBgPrimary: #23262f;
           --sliderGrad: linear-gradient(90deg, #f7931a 0%, #eec083 100%);
           --bg: #141518;
+          --bgDark: #131417;
           --graphPrimary: #f7931a;
           --graphGrid: #252d55;
           --shadowPrimary: 0px 40px 64px -12px rgba(0, 0, 0, 0.08),

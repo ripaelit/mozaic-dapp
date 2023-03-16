@@ -13,6 +13,7 @@ import PageErrorReloader from '../../lib/components/common/error/PageErrorReload
 import TitleBtn from '../../lib/components/common/button/TitleBtn';
 import { productDetailsDummyData } from '../../lib/data/dummy/DummyData';
 import PagePreloader from '../../lib/components/loader/PagePreloader';
+import DepositWithdrawSection from '../../lib/components/productInDepth/DepositWithdrawSection';
 
 export default function Product() {
   const router = useRouter();
@@ -75,6 +76,7 @@ export default function Product() {
                 `}
                 />
               </div>
+              <DepositWithdrawSection vault={productData.vault} loading={loading} />
               <ProductSummary loading={loadingProductInfo} />
               <ProductDetails loading={loadingDetails} data={productData} />
               <KnowledgeBase />

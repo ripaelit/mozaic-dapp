@@ -46,7 +46,7 @@ export default function PrimaryCard({
           gap: 32px;
           background-color: var(--cardBgPrimary);
           border-radius: 10px;
-          padding: 32px;
+          padding: 24px;
           width: ${width};
           ${style ? style : ''}
         }
