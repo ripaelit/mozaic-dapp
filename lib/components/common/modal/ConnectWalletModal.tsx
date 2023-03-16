@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { wallets } from '../../../data/static/wallet';
 import { injected, resetWalletConnector, walletconnect } from '../../../helpers/connectors';
 import { DefaultBtnType, ModalBtnType, NetworkChainDataType } from '../../../types/common';
+import { networks } from '../../../data/static/wallet';
 import Modal from './Modal';
 import switchNetwork from '../../../hooks/useSwitchNetwork';
 declare global {
@@ -37,18 +38,7 @@ export default function ConnectWalletModal({
       const _defaultNetworkData = chainData? {
         ...chainData,
         chainID: '0x' + (chainData.chainID || 0).toString(16)
-      } :  {
-        id: 0,
-        chainID: '0x5',
-        rpcUrls: 'https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-        name: 'Goerli',
-        nativeCurrency: {
-          name: 'ETH',
-          decimals: 18,
-          symbol: 'ETH',
-        },
-        icon: '/assets/icons/wallet/networks/ico.eth.svg',
-      }
+      } :  networks[0]
       switchNetwork(_defaultNetworkData)
       await web3reactContext.activate(injected).then(() => {
         setShowModal(false);
