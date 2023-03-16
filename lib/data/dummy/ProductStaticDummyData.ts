@@ -7,7 +7,7 @@ export const productsDummyData: ProductType[] | any = {
   data: [
     {
       id: 0,
-      name: 'Stable Coin',
+      name: 'StableCoin',
       icon: '/assets/icons/products/ico.stablecoin.svg',
       color: '#2EBAC6',
       vault: [
@@ -73,7 +73,7 @@ export const productsDummyData: ProductType[] | any = {
 export const productDetailsDummyData: ProductDetailDataType[] = [
   {
     id: 0,
-    name: 'Stable Coin',
+    name: 'StableCoin',
     icon: '/assets/icons/products/ico.stablecoin.svg',
     color: '#2EBAC6',
     balance: 2558,
@@ -89,71 +89,41 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
         data: chartData2,
       },
     ],
-    // testnet vault
+    // test net vault
     vault: [
-      //BSC testnet
-      {
-        id: 0,
-        name: 'BSC',
-        icon: '/assets/icons/wallet/networks/ico.bsc.svg',
-        address: '',
-        decimals: 0,
-        conversionRateUSD: 1,
-        conversionRate: 1,
-        assets: [
-          {
-            id: 0,
-            name: 'BUSD',
-            icon: '/assets/icons/assets/ico.busd.svg',
-            address: '0xl010Bblb9Dff29e6233E7947e045e0ba58f6E92e',
-            decimals: 6,
-            conversionRateUSD: 1,
-            conversionRate: 1,
-          },
-          {
-            id: 1,
-            name: 'USDT',
-            icon: '/assets/icons/assets/ico.usdt.svg',
-            address: '0xF49E250aEB5abDf660d643583AdFd0be41464EfD',
-            decimals: 6,
-            conversionRateUSD: 1,
-            conversionRate: 1,
-          },
-        ],
-      },
       //Goerli
-      {
-        id: 1,
-        name: 'Goerli',
-        icon: '/assets/icons/wallet/networks/ico.eth.svg',
-        address: '0xFAfbBB15B85910dc05a86E0881FD19b8926787A9',
-        decimals: 0,
-        conversionRateUSD: 1,
-        conversionRate: 1,
-        assets: [
-          {
-            id: 0,
-            name: 'USDC',
-            icon: '/assets/icons/assets/ico.usdc.svg',
-            address: '0xdf0360ad8c5ccf25095aa97ee5f2785c8d848620',
-            decimals: 6,
-            conversionRateUSD: 1,
-            conversionRate: 1,
-          },
-          {
-            id: 1,
-            name: 'USDT',
-            icon: '/assets/icons/assets/ico.usdt.svg',
-            address: '0x5BCc22abEC37337630C0E0dd41D64fd86CaeE951',
-            decimals: 6,
-            conversionRateUSD: 1,
-            conversionRate: 1,
-          },
-        ],
-      },
+      // {
+      //   id: 0,
+      //   name: 'Goerli',
+      //   icon: '/assets/icons/wallet/networks/ico.eth.svg',
+      //   address: '0xFAfbBB15B85910dc05a86E0881FD19b8926787A9',
+      //   decimals: 0,
+      //   conversionRateUSD: 1,
+      //   conversionRate: 1,
+      //   assets: [
+      //     {
+      //       id: 0,
+      //       name: 'USDC',
+      //       icon: '/assets/icons/assets/ico.usdc.svg',
+      //       address: '0xdf0360ad8c5ccf25095aa97ee5f2785c8d848620',
+      //       decimals: 6,
+      //       conversionRateUSD: 1,
+      //       conversionRate: 1,
+      //     },
+      //     {
+      //       id: 1,
+      //       name: 'USDT',
+      //       icon: '/assets/icons/assets/ico.usdt.svg',
+      //       address: '0x5BCc22abEC37337630C0E0dd41D64fd86CaeE951',
+      //       decimals: 6,
+      //       conversionRateUSD: 1,
+      //       conversionRate: 2,
+      //     },
+      //   ],
+      // },
       // Fuji
       // {
-      //   id: 2,
+      //   id: 1,
       //   name: 'Fuji',
       //   icon: '/assets/icons/wallet/networks/ico.avax.svg',
       //   address: '0x5d6e82bd7a2dE437E4834FAD895A80bBf0AF59C8',
@@ -177,13 +147,13 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
       //       address: '0x134Dc38AE8C853D1aa2103d5047591acDAA16682',
       //       decimals: 0,
       //       conversionRateUSD: 1,
-      //       conversionRate: 1,
+      //       conversionRate: 2,
       //     },
       //   ],
       // },
       // Optimism
       // {
-      //   id: 3,
+      //   id: 2,
       //   name: 'Optimism',
       //   icon: '/assets/icons/wallet/networks/ico.op.svg',
       //   address: '',
@@ -204,7 +174,7 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
       // },
       // Mumbai
       // {
-      //   id: 4,
+      //   id: 3,
       //   name: 'Mumbai',
       //   icon: '/assets/icons/wallet/networks/ico.matic.svg',
       //   address: '',
@@ -233,26 +203,55 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
       //   ],
       // },
       // Fantom
-      // {
-      //   id: 5,
-      //   name: 'Fantom',
-      //   icon: '/assets/icons/wallet/networks/ico.ftm.svg',
-      //   address: '',
-      //   decimals: 0,
-      //   conversionRateUSD: 1,
-      //   conversionRate: 1,
-      //   assets: [
-      //     {
-      //       id: 0,
-      //       name: 'USDC',
-      //       icon: '/assets/icons/assets/ico.usdc.svg',
-      //       address: '0x076488D244A73DA4Fa843f5A8Cd91F655CA81a1e',
-      //       decimals: 0,
-      //       conversionRateUSD: 1,
-      //       conversionRate: 1,
-      //     },
-      //   ],
-      // },
+      {
+        id: 0,
+        name: 'BSC',
+        icon: '/assets/icons/wallet/networks/ico.bsc.svg',
+        address: '',
+        decimals: 0,
+        conversionRateUSD: 1,
+        conversionRate: 1,
+        assets: [
+          {
+            id: 0,
+            name: 'BUSD',
+            icon: '/assets/icons/assets/ico.busd.svg',
+            address: '',
+            decimals: 0,
+            conversionRateUSD: 1,
+            conversionRate: 1,
+          },
+          {
+            id: 1,
+            name: 'USDT',
+            icon: '/assets/icons/assets/ico.usdt.svg',
+            address: '',
+            decimals: 0,
+            conversionRateUSD: 1,
+            conversionRate: 1,
+          },
+        ],
+      },
+      {
+        id: 1,
+        name: 'Fantom',
+        icon: '/assets/icons/wallet/networks/ico.ftm.svg',
+        address: '',
+        decimals: 0,
+        conversionRateUSD: 1,
+        conversionRate: 1,
+        assets: [
+          {
+            id: 0,
+            name: 'USDC',
+            icon: '/assets/icons/assets/ico.usdc.svg',
+            address: '',
+            decimals: 0,
+            conversionRateUSD: 1,
+            conversionRate: 1,
+          },
+        ],
+      },
     ],
     // mainnet
     // vault: [
@@ -820,52 +819,54 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
         // ],
       },
     ],
-    vault: [{
-      id: 0,
-      name: 'mCORE',
-      address: '',
-      decimals: 0,
-      conversionRateUSD: 1,
-      conversionRate: 1,
-      assets: [
-        {
-          id: 0,
-          name: 'ETH',
-          icon: '/assets/icons/assets/ico.eth.svg',
-          address: '',
-          decimals: 0,
-          conversionRateUSD: 1,
-          conversionRate: 1,
-        },
-        {
-          id: 1,
-          name: 'BNB',
-          icon: '/assets/icons/assets/ico.bnb.svg',
-          address: '',
-          decimals: 0,
-          conversionRateUSD: 1,
-          conversionRate: 2,
-        },
-        {
-          id: 2,
-          name: 'OP',
-          icon: '/assets/icons/assets/ico.op.svg',
-          address: '',
-          decimals: 0,
-          conversionRateUSD: 1,
-          conversionRate: 3,
-        },
-        {
-          id: 3,
-          name: 'AVAX',
-          icon: '/assets/icons/assets/ico.avax.svg',
-          address: '',
-          decimals: 0,
-          conversionRateUSD: 1,
-          conversionRate: 3,
-        },
-      ],
-    }],
+    vault: [
+      {
+        id: 0,
+        name: 'mCORE',
+        address: '',
+        decimals: 0,
+        conversionRateUSD: 1,
+        conversionRate: 1,
+        assets: [
+          {
+            id: 0,
+            name: 'ETH',
+            icon: '/assets/icons/assets/ico.eth.svg',
+            address: '',
+            decimals: 0,
+            conversionRateUSD: 1,
+            conversionRate: 1,
+          },
+          {
+            id: 1,
+            name: 'BNB',
+            icon: '/assets/icons/assets/ico.bnb.svg',
+            address: '',
+            decimals: 0,
+            conversionRateUSD: 1,
+            conversionRate: 2,
+          },
+          {
+            id: 2,
+            name: 'OP',
+            icon: '/assets/icons/assets/ico.op.svg',
+            address: '',
+            decimals: 0,
+            conversionRateUSD: 1,
+            conversionRate: 3,
+          },
+          {
+            id: 3,
+            name: 'AVAX',
+            icon: '/assets/icons/assets/ico.avax.svg',
+            address: '',
+            decimals: 0,
+            conversionRateUSD: 1,
+            conversionRate: 3,
+          },
+        ],
+      },
+    ],
     summary: [
       {
         id: 0,
@@ -2218,5 +2219,24 @@ export const productDetailsDummyData: ProductDetailDataType[] = [
         },
       ],
     },
+  },
+];
+
+export const userTrxDetailsDummyData = [
+  {
+    id: 0,
+    value: 10230.3,
+    initialDeposit: 2311.51,
+    mLPbalance: 123,
+    profitUSD: 34.2,
+    profitPercentage: 42.3,
+  },
+  {
+    id: 1,
+    value: 100,
+    initialDeposit: 100,
+    mLPbalance: 0,
+    profitUSD: 0,
+    profitPercentage: 0,
   },
 ];
