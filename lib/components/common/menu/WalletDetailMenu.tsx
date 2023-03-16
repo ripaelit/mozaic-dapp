@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import Separator from '../Separator';
 import MenuBox from './MenuBox';
 
-export default function WalletDetailMenu({ showMenu, setShowMenu, currentNetwork }: any) {
+export default function WalletDetailMenu({ showMenu, setShowMenu, currentChain }: any) {
   const web3reactContext = useWeb3React();
   const removeWallet = (): void => {
     try {
@@ -49,7 +49,7 @@ export default function WalletDetailMenu({ showMenu, setShowMenu, currentNetwork
       <MenuBox>
         <div className='wallet-detail-menu-container'>
           <p className='label'>Connected network:</p>
-          <p>{currentNetwork.name}</p>
+          <p>{currentChain.name}</p>
           <p className='label'>Connected Wallet:</p>
           <div className='wallet-details' onClick={copy}>
             <p className='wallet-address'>

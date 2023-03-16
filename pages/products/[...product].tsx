@@ -11,7 +11,7 @@ import axios from 'axios';
 import { LoadErrorType } from '../../lib/types/common';
 import PageErrorReloader from '../../lib/components/common/error/PageErrorReloader';
 import TitleBtn from '../../lib/components/common/button/TitleBtn';
-import { productDetailsDummyData } from '../../lib/data/dummy/ProductStaticDummyData';
+import { productDetailsDummyData } from '../../lib/data/dummy/DummyData';
 import PagePreloader from '../../lib/components/loader/PagePreloader';
 import DepositWithdrawSection from '../../lib/components/productInDepth/DepositWithdrawSection';
 
@@ -32,6 +32,7 @@ export default function Product() {
   const [productData, setProductData] = useState<any>();
 
   useEffect(() => {
+    setLoading(true);
     if (router.isReady) {
       // TODO: load initial product data from contract
 

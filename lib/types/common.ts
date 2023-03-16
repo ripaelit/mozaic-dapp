@@ -54,7 +54,7 @@ export type NetworkItemType = {
   icon: string;
 };
 
-export type NetworkChainDataType = {
+export type ChainDataType = {
   id: any;
   chainID: number | null;
   rpcUrls: string;
