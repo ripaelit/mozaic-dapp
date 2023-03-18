@@ -7,7 +7,7 @@ export const productsDummyData: ProductType[] | any = {
   data: [
     {
       id: 0,
-      name: 'Stable Coin',
+      name: 'StableCoin',
       icon: '/assets/icons/products/ico.stablecoin.svg',
       color: '#2EBAC6',
       vault: [
@@ -73,7 +73,7 @@ export const productsDummyData: ProductType[] | any = {
 export const productDetailsDummyData: ProductDetailDataType[] = [
   {
     id: 0,
-    name: 'Stable Coin',
+    name: 'StableCoin',
     icon: '/assets/icons/products/ico.stablecoin.svg',
     color: '#2EBAC6',
     balance: 2558,

@@ -4,6 +4,7 @@ import Nav from './components/common/nav/index';
 export default function AppLayout({ children }: { children: JSX.Element }) {
   return (
     <>
+      <img className='overlay-body' src='/assets/images/bg.grain.png' alt='' />
       <img className='overlay-top' src='/assets/images/bg.overlay.png' alt='' />
       <img className='overlay-bottom' src='/assets/images/bg.overlay.png' alt='' />
       <main className='container'>
@@ -37,11 +38,21 @@ export default function AppLayout({ children }: { children: JSX.Element }) {
         }
 
         .overlay-bottom {
-          position: absolute;
+          position: fixed;
           bottom: 0;
           left: 0;
           max-width: 100vw;
           transform: rotate(-90deg);
+        }
+
+        .overlay-body {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0.5;
+          object-fit: cover;
         }
 
         @media screen and (max-width: 425px) {
