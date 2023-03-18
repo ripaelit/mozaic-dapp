@@ -35,10 +35,7 @@ export default function ConnectWalletModal({
   //web3react metamask
     const connectMetamask = async () => {
     try {
-      const _defaultNetworkData = chainData? {
-        ...chainData,
-        chainID: '0x' + (chainData.chainID || 0).toString(16)
-      } : chains[0]
+      const _defaultNetworkData = chainData || chains[0]
       switchChain(_defaultNetworkData)
       await web3reactContext.activate(injected).then(() => {
         setShowModal(false);

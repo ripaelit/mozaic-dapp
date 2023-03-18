@@ -1,9 +1,10 @@
+import { safehexstr } from "../utils/stringutils";
 export default async function switchChain(chainData: any) {
   try {
     // console.log('debug switch Chain', chainData)
     await window.ethereum.request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: chainData.chainID }],
+      params: [{ chainId: safehexstr(chainData.chainID) }],
     });
   } catch (switchError: any) {
     // 4902 code indicates the chain is missing on the wallet
@@ -13,7 +14,7 @@ export default async function switchChain(chainData: any) {
           method: "wallet_addEthereumChain",
           params: [
             {
-              chainId: chainData.chainID,
+              chainId: safehexstr(chainData.chainID),
               rpcUrls: [chainData.rpcUrls],
               chainName: chainData.name,
               nativeCurrency: { name: chainData.nativeCurrency.name, decimals: chainData.nativeCurrency.decimals, symbol: chainData.nativeCurrency.symbol },
