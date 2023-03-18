@@ -33,7 +33,7 @@ export default function ConnectWalletModal({
   const [networkData, setNetworkData] = useState<any>();
 
   //web3react metamask
-    const connectMetamask = async () => {
+  const connectMetamask = async () => {
     try {
       const _defaultNetworkData = chainData || chains[0]
       switchChain(_defaultNetworkData)
