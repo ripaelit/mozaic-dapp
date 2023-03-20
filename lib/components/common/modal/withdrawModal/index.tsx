@@ -15,6 +15,7 @@ const assetTypes: TabItem[] = [
 
 const description = `Remove liquidity in one transaction. Your mCORE will automatically swap to one of the underlying pool tokens.`;
 
+// TODO: on withdraw success, dispatch onWithdrawalSuccess to animate the withdraw button
 export default function WithdrawModal({
   setOpenWithdrawModal,
   vault,

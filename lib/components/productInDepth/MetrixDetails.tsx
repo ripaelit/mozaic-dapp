@@ -103,7 +103,7 @@ export default function MetricsDetails({ metricsData, loading }: any) {
           border-spacing: 0;
         }
         .table-header {
-          font-size: 0.875rem;
+          font-size: 1rem;
           height: 80px;
         }
 
