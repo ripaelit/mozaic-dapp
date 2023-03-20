@@ -119,7 +119,7 @@ export default function DepositModal({
         <div className='deposit-modal-wrapper'>
           <Tab
             currentTab={depositType}
-            setCurrentTab={setDepositType}
+            setCurrentTab={()=>{}}
             tabs={assetTypes}
             style={'height:64px;'}
           />

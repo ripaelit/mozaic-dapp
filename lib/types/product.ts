@@ -26,6 +26,8 @@ export interface ProductDetailDataType {
   balance: number;
   chart: Chart[];
   vault: AssetElement[];
+  mozaicLp: AssetElement[];
+  mainnet: string;
   summary: Summary[];
   details: Details;
 }

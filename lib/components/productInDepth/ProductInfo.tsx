@@ -6,6 +6,7 @@ import IconLoader from '../loader/IconLoader';
 import { getWeb3ReactContext, useWeb3React } from '@web3-react/core';
 import { userTrxDetailsDummyData } from '../../data/dummy/ProductStaticDummyData';
 import { Tooltip } from 'react-tooltip';
+import {ProductDetailDataType} from '../../types/product';
 
 const getDecimalVal = (val: number | string) => {
   let value;
@@ -23,18 +24,33 @@ const getDecimalVal = (val: number | string) => {
 
 export default function ProductInfo({ product, loading }: any) {
   const web3reactContext = useWeb3React();
+  const productData = product as ProductDetailDataType;
 
   const [userTrxData, setUserTrxData] = useState<any>();
+  const dummyUserTrxData = userTrxDetailsDummyData[productData.id];
+  dummyUserTrxData.mLPbalance = 0;
 
   useEffect(() => {
     // TODO: load user transaction details from contract when the wallet is connected
 
     if (web3reactContext.account) {
-      setUserTrxData(userTrxDetailsDummyData[product.id]);
+      setUserTrxData(dummyUserTrxData);
     } else {
       setUserTrxData(null);
     }
   }, [web3reactContext.account]);
+
+  const updateMlpBalance = async () => {
+    
+  }
+
+  useEffect(() => {
+    // Update mLP Balance
+    const timer = setInterval(() => {
+      updateMlpBalance()
+    }, 60000);
+    return () => {clearInterval(timer)};
+  })
 
   return (
     <>
@@ -281,7 +297,7 @@ const TrxDetails = ({ data, loading }: any) => {
               text: 'Number of vault shares.',
             }}
             label='mLP Balance'
-            value={data?.initialDeposit ? data?.initialDeposit : null}
+            value={((data?.mLPbalance !== null) && (data?.mLPbalance !== undefined)) ? data?.mLPbalance : '--'}
           />
 
           <TrxDetailsItem

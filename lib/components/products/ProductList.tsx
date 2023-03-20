@@ -6,7 +6,7 @@ import PageErrorReloader from '../common/error/PageErrorReloader';
 import ProductCardLoader from '../loader/ProductCardLoader';
 import ProductCard from './ProductCard';
 
-import { productsDummyData } from '../../data/dummy/ProductStaticDummyData';
+import { products } from '../../data/productsStaging';
 
 export default function ProductList() {
   const [productList, setProductList] = useState<ProductType[] | null>(null);
@@ -19,7 +19,7 @@ export default function ProductList() {
     setLoading(true);
 
     // load data from contract
-    setProductList(productsDummyData.data);
+    setProductList(products.data);
     setLoading(false);
   }, []);
 
