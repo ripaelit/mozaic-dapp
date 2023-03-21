@@ -57,6 +57,7 @@ export type NetworkItemType = {
 export type ChainDataType = {
   id: any;
   chainID: number | null;
+  lzChainID: number | null;
   rpcUrls: string;
   name: string;
   nativeCurrency: {

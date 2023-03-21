@@ -78,6 +78,7 @@ export const chains: ChainDataType[] = [
   {
     id: 0,
     chainID: 97, // from chainlist
+    lzChainID: 10102, // LayerZero
     rpcUrls: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
     name: 'BSC Testnet',
     nativeCurrency: {
@@ -90,6 +91,7 @@ export const chains: ChainDataType[] = [
   {
     id: 1,
     chainID: 4002, // from chainlist
+    lzChainID: 10112, // LayerZero
     rpcUrls: 'https://rpc.testnet.fantom.network',
     name: 'Fantom Testnet',
     nativeCurrency: {
