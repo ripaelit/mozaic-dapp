@@ -7,6 +7,7 @@ import { getWeb3ReactContext, useWeb3React } from '@web3-react/core';
 import { userTrxDetailsDummyData } from '../../data/dummy/ProductStaticDummyData';
 import { Tooltip } from 'react-tooltip';
 import {ProductDetailDataType} from '../../types/product';
+import { getERC20Contract } from '../../store/contractStore';
 
 const getDecimalVal = (val: number | string) => {
   let value;
@@ -30,19 +31,30 @@ export default function ProductInfo({ product, loading }: any) {
   const dummyUserTrxData = userTrxDetailsDummyData[productData.id];
   dummyUserTrxData.mLPbalance = 0;
 
+  
+  const updateMlpBalance = async () => {
+    let totalMlpBalance = 0
+    for (const mlpData of productData.mozaicLp) {
+      // TODO: STG1:
+      // go to network mlpData.name ("BSC Testnet") without showing popup
+      // const mlp = getERC20Contract(mlpData.address, web3reactContext.library)
+      // if (!mlp) {
+      //   console.log("Could not instantiate MLP")
+      // }
+      // totalMlpBalance += mlp.methods.balanceOf(web3reactContext.account)
+    }
+    // setUserTrxData({...userTrxData, mLPBalance: totalMlpBalance})
+  }
+
   useEffect(() => {
     // TODO: load user transaction details from contract when the wallet is connected
-
+    updateMlpBalance()
     if (web3reactContext.account) {
       setUserTrxData(dummyUserTrxData);
     } else {
       setUserTrxData(null);
     }
   }, [web3reactContext.account]);
-
-  const updateMlpBalance = async () => {
-    
-  }
 
   useEffect(() => {
     // Update mLP Balance
