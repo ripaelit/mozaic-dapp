@@ -1,6 +1,7 @@
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ModalBtnType, ChainDataType, TabItem } from '../../../../types/common';
+import { AssetElement } from '../../../../types/product';
 import Separator from '../../Separator';
 import Tab from '../../tab/Tab';
 import ConnectWalletModal from '../ConnectWalletModal';
@@ -9,6 +10,8 @@ import MultiAssets from './MultiAssetsDeposit';
 import SingleAsset from './SingleAssetDeposit';
 import { chains } from '../../../../data/static/wallet';
 import switchChain from '../../../../hooks/useSwitchChain';
+import { getERC20Contract, getSecondaryVaultContract } from '../../../../store/contractStore';
+import BN from 'bn.js';
 
 const assetTypes: TabItem[] = [
   { id: 0, name: 'Single Asset', value: 'single' },
@@ -83,6 +86,8 @@ export default function DepositModal({
     return targetChain;
   }, [singleAssetDepositData]);
 
+  // chains[singleAssetDepositData.name] --> chainData
+
   return (
     <>
       <Modal
@@ -110,9 +115,38 @@ export default function DepositModal({
                       }
                     : chains[0];
                   await switchChain(networkData);
-
-                  // actions for deposit
-                  onDepositSuccess();
+                  const chainName = networkData.name;
+                  const depositVault = vault.find((theVault:any) => (theVault.name == chainName)) as AssetElement;
+                  const vaultContract = getSecondaryVaultContract(depositVault.address, web3reactContext.library);
+                  const tokenContract = getERC20Contract(singleAssetDepositData.asset.address, web3reactContext.library);
+                  const depositAmount = new BN(singleAssetDepositData.totalDepositAmount+'0'.repeat(singleAssetDepositData.asset.decimals));
+                  try {
+                    // allowance
+                    // TODO-abdullah: call approve only when allowedAmount < depositAmount
+                    await tokenContract!.methods
+                      .approve(
+                        depositVault.address,
+                        depositAmount
+                      )
+                      .send({from: web3reactContext.account});
+                    // TODO-abdullah: check if result is True. Otherwise show error message saying "You did not approve your asset to be utilized by Mozaic."
+                    // deposit
+                    await vaultContract!.methods
+                      .addDepositRequest(
+                        depositAmount,
+                        singleAssetDepositData.asset.address,
+                        new BN(''+networkData.lzChainID)
+                      )
+                      .send({from: web3reactContext.account});
+                    // 
+                    onDepositSuccess();
+                  }
+                  catch (err) {
+                    // TODO-abdullah: error flow.
+                    console.log(err);
+                    // onDepositFailure();
+                  }
+                  console.log("Finished blockchain call");
                 },
               }
         }>
