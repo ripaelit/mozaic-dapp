@@ -3,13 +3,15 @@ import InputCheckBtn from '../../button/InputCheckBtn';
 import DropdownToken from '../../input/dropdown/DropdownToken';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
+import DropdownChain from '../../input/dropdown/DropdownChain';
 
 export default function SingleAsset({
   vault,
   singleAssetWithdrawData,
   setSingleAssetWithdrawData,
 }: any) {
-  const [selectedAsset, setSelectedAsset] = useState(vault[0].assets[0]);
+  const [selectedChain, setSelectedChain] = useState(vault[0]);
+  const [selectedToken, setSelectedToken] = useState(vault[0].assets[0]);
   const [assetWithdrawData, setAssetWithdrawData] = useState(singleAssetWithdrawData);
 
   // set maximum balance for withdraw data
@@ -42,7 +44,7 @@ export default function SingleAsset({
       ...assetWithdrawData,
       asset: {
         ...assetWithdrawData.asset,
-        amount: assetWithdrawData.totalWithdrawAmount / selectedAsset.conversionRate,
+        amount: assetWithdrawData.totalWithdrawAmount / selectedToken.conversionRate,
       },
     });
     // console.log(assetWithdrawData);
@@ -54,14 +56,31 @@ export default function SingleAsset({
       ...assetWithdrawData,
       asset: {
         ...assetWithdrawData.asset,
-        id: selectedAsset.id,
-        name: selectedAsset.name,
-        address: selectedAsset.address,
-        decimals: selectedAsset.decimals,
-        amount: assetWithdrawData.totalWithdrawAmount / selectedAsset.conversionRate,
+        id: selectedToken.id,
+        name: selectedToken.name,
+        address: selectedToken.address,
+        decimals: selectedToken.decimals,
+        amount: assetWithdrawData.totalWithdrawAmount / selectedToken.conversionRate,
       },
     });
-  }, [selectedAsset]);
+  }, [selectedToken]);
+
+  useEffect(() => {
+    setAssetWithdrawData({
+      ...assetWithdrawData,
+      asset: {
+        ...assetWithdrawData.asset,
+        id: selectedToken.id,
+        name: selectedToken.name,
+        address: selectedToken.address,
+        decimals: selectedToken.decimals,
+      },
+      totalDepositAmount: assetWithdrawData.asset.amount * selectedToken.conversionRate,
+      name: selectedChain.name,
+    });
+    setSelectedToken(selectedChain.assets[0]);
+    // console.log(assetDepositData);
+  }, [selectedChain]);
 
   // on input change generate the complete output data object
   useEffect(() => {
@@ -71,8 +90,8 @@ export default function SingleAsset({
   return (
     <>
       <InputWithLabel
-        placeholder={`Enter ${vault.name} amount`}
-        label={`Enter ${vault.name} amount`}
+        placeholder={`Enter ${selectedChain.tokenName} amount`}
+        label={`Enter ${selectedChain.tokenName} amount`}
         labelRightElement={
           <SlippageEditor onChange={setSlippage} value={assetWithdrawData.slippage} />
         }
@@ -84,7 +103,12 @@ export default function SingleAsset({
               currentAsset={vault}
               currentAmount={assetWithdrawData.totalWithdrawAmount}
             />
-            <p>{vault.name}</p>
+            <DropdownChain
+              chains={vault}
+              selectedChain={selectedChain}
+              setSelectedChain={setSelectedChain}
+            />
+            <p>{selectedChain.tokenName}</p>
           </>
         }
         inputValue={assetWithdrawData.totalWithdrawAmount}
@@ -92,14 +116,14 @@ export default function SingleAsset({
       />
       <InputWithLabel
         readOnly={true}
-        label={`${selectedAsset.name} withdrawal amount`}
+        label={`${selectedToken.name} withdrawal amount`}
         inputValue={assetWithdrawData.asset.amount}
         rightElement={
           <>
             <DropdownToken
               tokens={vault[0].assets}
-              selectedToken={selectedAsset}
-              setSelectedToken={setSelectedAsset}
+              selectedToken={selectedToken}
+              setSelectedToken={setSelectedToken}
             />
           </>
         }
