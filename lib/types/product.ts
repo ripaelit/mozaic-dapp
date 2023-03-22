@@ -72,6 +72,7 @@ export interface Summary {
 export interface AssetElement {
   id: number;
   name: string;
+  tokenName?: string;
   address: string;
   decimals: number;
   conversionRateUSD: number;

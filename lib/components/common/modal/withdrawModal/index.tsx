@@ -1,12 +1,14 @@
 import { useWeb3React } from '@web3-react/core';
-import React, { useEffect, useState } from 'react';
-import { ModalBtnType, TabItem } from '../../../../types/common';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ChainDataType, ModalBtnType, TabItem } from '../../../../types/common';
 import Separator from '../../Separator';
 import Tab from '../../tab/Tab';
 import ConnectWalletModal from '../ConnectWalletModal';
 import Modal from '../Modal';
 import MultiAssets from './MultiAssetsWithdraw';
 import SingleAsset from './SingleAssetWithdraw';
+import switchChain from '../../../../hooks/useSwitchChain';
+import { chains } from '../../../../data/static/wallet';
 
 const assetTypes: TabItem[] = [
   { id: 0, name: 'Single Asset', value: 'single' },
@@ -37,6 +39,7 @@ export default function WithdrawModal({
     address: '',
     decimals: 0,
     totalWithdrawAmount: '',
+    name: '',
   };
 
   const initialMultiAssetsWithdrawData = {
@@ -66,7 +69,15 @@ export default function WithdrawModal({
     initialMultiAssetsWithdrawData
   );
 
-  const withdrawFunds = () => {
+  const withdrawFunds = async () => {
+    const networkData = chainData
+      ? {
+          ...chainData,
+          chainID: '0x' + (chainData.chainID || 0).toString(16),
+        }
+      : chains[0];
+    await switchChain(networkData);
+
     if (withdrawType.value === 'single') {
       // console.log('single asset', singleAssetWithdrawData);
     }
@@ -75,6 +86,11 @@ export default function WithdrawModal({
     }
     onWithdrawalSuccess();
   };
+
+  const chainData: ChainDataType | undefined = useMemo(() => {
+    const targetChain = chains.find((chain) => chain.name.includes(singleAssetWithdrawData.name));
+    return targetChain;
+  }, [singleAssetWithdrawData]);
 
   return (
     <>

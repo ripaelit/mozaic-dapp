@@ -8,7 +8,6 @@ type Chain = {
   icon?: string;
 };
 
-
 export default function DropdownChain({
   chains,
   setSelectedChain,
@@ -101,6 +100,11 @@ export default function DropdownChain({
         .dropdown-selected-item > img {
           width: 28px;
           height: 28px;
+        }
+
+        .dropdown-selected-item > p {
+          font-size: 0.75rem;
+          line-height: 0.8rem;
         }
 
         .dropdown-icon {
