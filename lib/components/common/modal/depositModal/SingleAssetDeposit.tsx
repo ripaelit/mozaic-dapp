@@ -126,7 +126,7 @@ export default function SingleAsset({
         labelRightElement={
           <SlippageEditor onChange={setSlippage} value={assetDepositData.slippage} />
         }
-        rightElement={<p>{'mLP'}</p>}
+        rightElement={<p>{selectedChain.tokenName}</p>}
         // rightElement={<p>{vault[0].name}</p>}
         inputValue={assetDepositData.totalDepositAmount}
       />
