@@ -4,8 +4,6 @@ import ProductSummaryLoader from '../../loader/productPageLoader/ProductSummaryL
 import WithdrawModal from '../../common/modal/withdrawModal';
 import DepositModal from '../../common/modal/depositModal';
 import TransactionBtn from '../../common/button/TransactionBtn';
-import InfoTooltip from '../../common/button/InfoTooltip';
-import useBackgroundTransition from '../../../hooks/useBackgroundTransition';
 import FarmingOptimizingBar from './FarmingOptimizingBar';
 
 const tooltipData = {
