@@ -14,25 +14,34 @@ export function getWeb3(chainName: string) {
   return web3;
 }
 
-export function getERC20Contract(tokenAddress: any, web3: any) {
+export function getERC20Contract(contractAddress: any, web3: any) {
+  if (!contractAddress) {
+    return;
+  }
   return web3
-    ? new web3.eth.Contract(ERC20ABI, tokenAddress, {
+    ? new web3.eth.Contract(ERC20ABI, contractAddress, {
         from: web3.eth.defaultAccount,
       })
     : null;
 }
 
-export function getSecondaryVaultContract(tokenAddress: any, web3: any) {
+export function getSecondaryVaultContract(contractAddress: any, web3: any) {
+  if (!contractAddress) {
+    return;
+  }
   return web3
-    ? new web3.eth.Contract(SecondaryVaultABI, tokenAddress, {
+    ? new web3.eth.Contract(SecondaryVaultABI, contractAddress, {
         from: web3.eth.defaultAccount,
       })
     : null;
 }
 
-export function getPrimaryVaultContract(tokenAddress: any, web3: any) {
+export function getPrimaryVaultContract(contractAddress: any, web3: any) {
+  if (!contractAddress) {
+    return;
+  }
   return web3
-    ? new web3.eth.Contract(PrimaryVaultABI, tokenAddress, {
+    ? new web3.eth.Contract(PrimaryVaultABI, contractAddress, {
         from: web3.eth.defaultAccount,
       })
     : null;
