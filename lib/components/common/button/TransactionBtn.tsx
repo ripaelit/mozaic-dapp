@@ -2,7 +2,7 @@ import React from 'react';
 
 import InfoTooltip from './InfoTooltip';
 
-export default function TransactionBtn({ buttonType, onClick, tooltip, state, colors }: any) {
+export default function TransactionBtn({ buttonType, onClick, tooltip, state, colors, amount, prefix, suffix }: any) {
   return (
     <>
       <div className={`transaction-btn-container gradient-animation`}>
@@ -15,7 +15,7 @@ export default function TransactionBtn({ buttonType, onClick, tooltip, state, co
           </div>
           <div className='transaction-info'>
             <p className={`btn-label ${state === 'idle' ? 'inactive' : 'active'}`}>
-              {buttonType}ing...
+              {buttonType}ing {prefix || ''}{amount || '0'}{suffix || ''} ...
             </p>
             <InfoTooltip text={tooltip} tooltipFor={buttonType} />
           </div>

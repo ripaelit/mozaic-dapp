@@ -5,8 +5,11 @@ import WithdrawModal from '../../common/modal/withdrawModal';
 import DepositModal from '../../common/modal/depositModal';
 import TransactionBtn from '../../common/button/TransactionBtn';
 import FarmingOptimizingBar from './FarmingOptimizingBar';
-import { getPrimaryVaultContract, getWeb3 } from '../../../store/contractStore';
+import { getPrimaryVaultContract, getSecondaryVaultContract, getWeb3 } from '../../../store/contractStore';
 import { AssetElement } from '../../../types/product';
+import BN from 'bn.js';
+import { useWeb3React } from '@web3-react/core';
+import { chains } from '../../../data/static/wallet';
 
 const tooltipData = {
   deposit:
@@ -29,8 +32,11 @@ export default function DepositWithdrawSection({
   const [openWithdrawModal, setOpenWithdrawModal] = useState(false);
 
   const [depositState, setDepositState] = useState('idle');
+  const [depositAmount, setDepositAmount] = useState(0);
   const [withdrawState, setWithdrawState] = useState('idle');
   const [balancingState, setBalancingState] = useState('farming');
+
+  const web3reactContext = useWeb3React();
 
   const onDepositSuccess = () => {
     setOpenDepositModal(false);
@@ -71,9 +77,29 @@ export default function DepositWithdrawSection({
     setBalancingState(newBalancingState);
   }
 
+  const updateDepositAmount = async () => {
+    if (!web3reactContext.account) {
+      setDepositAmount(0);
+      return;
+    }
+    let depositAmountSum = new BN('0');
+    for (const vaultData of vault) {
+      const vaultContract = getSecondaryVaultContract(vaultData.address, getWeb3(vaultData.name));
+      const chainData = chains.find(obj => obj.name == vaultData.name);
+      for (const assetData of vaultData.assets || []) {
+        depositAmountSum = depositAmountSum.add(new BN(await vaultContract!.methods.getDepositAmount(false, web3reactContext.account, assetData.address, chainData?.lzChainID).call()));
+        depositAmountSum = depositAmountSum.add(new BN(await vaultContract!.methods.getDepositAmount(true, web3reactContext.account, assetData.address, chainData?.lzChainID).call()));
+      }
+    }
+    // TODO: move Mozaic Decimal 6 to static data source.
+    let floatDepositAmountSum = depositAmountSum.div(new BN('10').pow(new BN('6'))).toNumber();
+    setDepositAmount(floatDepositAmountSum);
+  }
+
   useEffect(() => {
     updateBalancingState();
     console.log("DepositWithdrawSection.useEffect called");
+    updateDepositAmount();
   });
 
   // dummy optimization/farming state
@@ -89,6 +115,8 @@ export default function DepositWithdrawSection({
                 onClick={setOpenDepositModal}
                 buttonType='Deposit'
                 tooltip={tooltipData.deposit}
+                amount={depositAmount}
+                prefix='$'
                 colors={{
                   startColor: '#988B48',
                   endColor: '#FFB800',
