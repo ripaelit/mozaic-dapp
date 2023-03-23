@@ -40,6 +40,7 @@ export default function ProductInfo({ product, loading }: any) {
   const updateMlpBalance = async (account:any) => {
     console.log("updateMlpBalance");
     if (!account) {
+      setUserTrxData({...userTrxData, mLPBalance: new BN("0")});
       return;
     }
     let totalMlpBalance = new BN("0");
@@ -80,7 +81,7 @@ export default function ProductInfo({ product, loading }: any) {
   //   const timer = setInterval(() => {
   //     updateMlpBalance()
   //   }, 1000);
-    // return () => {clearInterval(timer)};
+  //   return () => {clearInterval(timer)};
   // },[])
 
   return (
