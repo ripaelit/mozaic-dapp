@@ -11,6 +11,7 @@ import switchChain from '../../../../hooks/useSwitchChain';
 import { chains } from '../../../../data/static/wallet';
 import { getSecondaryVaultContract } from '../../../../store/contractStore';
 import BN from 'bn.js';
+import { AssetElement } from '../../../../types/product';
 
 const assetTypes: TabItem[] = [
   { id: 0, name: 'Single Asset', value: 'single' },
@@ -93,30 +94,35 @@ export default function WithdrawModal({
       : chains[0];
     await switchChain(networkData);
     const chainName = networkData.name;
-    const withdrawVault = vault.find((theVault:any) => (theVault.name == chainName)) as AssetElement;
-    const vaultContract = getSecondaryVaultContract(withdrawVault.address, web3reactContext.library);
-    const withdrawAmount = new BN(singleAssetWithdrawData.totalWithdrawAmount+'0'.repeat(singleAssetWithdrawData.asset.decimals));
+    const withdrawVault = vault.find((theVault: any) => theVault.name == chainName) as AssetElement;
+    const vaultContract = getSecondaryVaultContract(
+      withdrawVault.address,
+      web3reactContext.library
+    );
+    const withdrawAmount = new BN(
+      singleAssetWithdrawData.totalWithdrawAmount +
+        '0'.repeat(singleAssetWithdrawData.asset.decimals)
+    );
     try {
       await vaultContract!.methods
         .addWithdrawRequest(
           withdrawAmount,
           singleAssetWithdrawData.asset.address,
-          new BN(''+networkData.lzChainID)
+          new BN('' + networkData.lzChainID)
         )
-        .send({from: web3reactContext.account});
-      // 
-      onWithdrawSuccess();
-    }
-    catch (err) {
+        .send({ from: web3reactContext.account });
+      //
+      onWithdrawalSuccess();
+    } catch (err) {
       // TODO-abdullah: error flow.
       console.log(err);
       // onWithdrawFailure();
     }
-    console.log("Finished blockchain call");
+    console.log('Finished blockchain call');
 
     // if (withdrawType.value === 'single') {
     //   // console.log('single asset', singleAssetWithdrawData);
-      
+
     // }
     // if (withdrawType.value === 'multi') {
     //   // console.log('multi assets', multiAssetsWithdrawData);
