@@ -99,9 +99,10 @@ export default function WithdrawModal({
       withdrawVault.address,
       web3reactContext.library
     );
+    // TODO: to use mozaicLP decimals, not constant 6
     const withdrawAmount = new BN(
       singleAssetWithdrawData.totalWithdrawAmount +
-        '0'.repeat(singleAssetWithdrawData.asset.decimals)
+        '0'.repeat(6)
     );
     try {
       await vaultContract!.methods
