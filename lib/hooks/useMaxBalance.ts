@@ -2,10 +2,12 @@ import { useWeb3React } from '@web3-react/core';
 import { useState, useEffect } from 'react';
 import { ZERO_ADDRESS, web3BNToFloatString } from '../utils/web3BNToFloatString';
 import { getERC20Contract } from '../store/contractStore';
+import { chains } from '../data/static/wallet';
 import BigNumber from 'bignumber.js';
 import BN from 'bn.js';
 
 export default function GetMaxBalance(tokenAddress: any, decimals: any) {
+  // TODO: remove this.
   // initial balance
   const [balance, setBalance] = useState('0');
   const { account, library } = useWeb3React();

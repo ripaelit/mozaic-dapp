@@ -4,6 +4,11 @@ import DropdownToken from '../../input/dropdown/DropdownToken';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
 import DropdownChain from '../../input/dropdown/DropdownChain';
+import { AssetElement } from '../../../../types/product';
+import { productDetails } from '../../../../data/productsStaging';
+import BN from 'bn.js';
+import { getERC20Contract, getWeb3 } from '../../../../store/contractStore';
+import { useWeb3React } from '@web3-react/core';
 
 export default function SingleAsset({
   vault,
@@ -13,12 +18,29 @@ export default function SingleAsset({
   const [selectedChain, setSelectedChain] = useState(vault[0]);
   const [selectedToken, setSelectedToken] = useState(vault[0].assets[0]);
   const [assetWithdrawData, setAssetWithdrawData] = useState(singleAssetWithdrawData);
+  const web3reactContext = useWeb3React();
 
   // set maximum balance for withdraw data
-  const setMaxBalance = (maxBalance: string) => {
+  const setMaxBalance = async (maxBalance: string) => {
+    // not use maxBalance from lower hierarchy
+    if (!web3reactContext.account) {
+      setAssetWithdrawData({
+        ...assetWithdrawData,
+        totalWithdrawAmount: 0,
+      });
+      return;
+    }
+    // TODO: use context to get current product
+    const mozLpData = productDetails[0].mozaicLp.find(obj => obj.name == selectedChain.name);
+    if (!mozLpData) {
+      console.log(`Could not find MozaicLP contract on chain - ${selectedChain.name}`);
+      return;
+    }
+    const mozLpContract = getERC20Contract(mozLpData!.address, getWeb3(selectedChain.name));
+    let _maxBalance = new BN(await mozLpContract!.methods.balanceOf(web3reactContext.account).call());
     setAssetWithdrawData({
       ...assetWithdrawData,
-      totalWithdrawAmount: parseFloat(maxBalance),
+      totalWithdrawAmount: _maxBalance.toNumber()/new BN('10').pow(new BN(mozLpData!.decimals)).toNumber(),
     });
   };
 
@@ -121,7 +143,7 @@ export default function SingleAsset({
         rightElement={
           <>
             <DropdownToken
-              tokens={vault[0].assets}
+              tokens={((vault as AssetElement[]).find(obj=> obj.name == selectedChain.name)?.assets || []) as any} // redo typing
               selectedToken={selectedToken}
               setSelectedToken={setSelectedToken}
             />

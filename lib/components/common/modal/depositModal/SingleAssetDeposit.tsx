@@ -4,6 +4,9 @@ import DropdownChain from '../../input/dropdown/DropdownChain';
 import DropdownToken from '../../input/dropdown/DropdownToken';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
+import BN from 'bn.js';
+import { getERC20Contract, getWeb3 } from '../../../../store/contractStore';
+import { useWeb3React } from '@web3-react/core';
 
 export default function SingleAsset({
   vault,
@@ -13,15 +16,29 @@ export default function SingleAsset({
   const [selectedChain, setSelectedChain] = useState(vault[0]);
   const [selectedToken, setSelectedToken] = useState(vault[0].assets[0]);
   const [assetDepositData, setAssetDepositData] = useState(singleAssetDepositData);
+  const web3reactContext = useWeb3React();
 
   // console.log("debug for vault:", vault);
   // set maximum balance for deposit data
-  const setMaxBalance = (maxBalance: string) => {
+  const setMaxBalance = async (maxBalance: string) => {
+    // not use maxBalance from lower hierarchy
+    if (!web3reactContext.account) {
+      setAssetDepositData({
+        ...assetDepositData,
+        asset: {
+          ...assetDepositData.asset,
+          amount: 0,
+        },
+      });
+      return;
+    }
+    const tokenContract = getERC20Contract(selectedToken!.address, getWeb3(selectedChain.name));
+    let _maxBalance = new BN(await tokenContract!.methods.balanceOf(web3reactContext.account).call()).div(new BN('10').pow(new BN(selectedToken!.decimals)));
     setAssetDepositData({
       ...assetDepositData,
       asset: {
         ...assetDepositData.asset,
-        amount: parseFloat(maxBalance),
+        amount: _maxBalance.toNumber(),
       },
     });
   };
