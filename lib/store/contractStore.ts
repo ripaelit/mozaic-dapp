@@ -1,5 +1,5 @@
 import ERC20ABI from './assets/abi-erc20.json';
-import PrimaryVaultABI from './assets/abi-SecondaryVault.json';
+import PrimaryVaultABI from './assets/abi-PrimaryVault.json';
 import SecondaryVaultABI from './assets/abi-SecondaryVault.json';
 import Web3 from 'web3';
 import { chains } from '../data/static/wallet';
