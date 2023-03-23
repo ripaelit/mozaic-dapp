@@ -4,6 +4,7 @@ import DropdownToken from '../../input/dropdown/DropdownToken';
 import InputWithLabel from '../../input/InputWithLabel';
 import SlippageEditor from '../../input/SlippageEditor';
 import DropdownChain from '../../input/dropdown/DropdownChain';
+import { AssetElement } from '../../../../types/product';
 
 export default function SingleAsset({
   vault,
@@ -121,7 +122,7 @@ export default function SingleAsset({
         rightElement={
           <>
             <DropdownToken
-              tokens={vault[0].assets}
+              tokens={((vault as AssetElement[]).find(obj=> obj.name == selectedChain.name)?.assets || []) as any} // redo typing
               selectedToken={selectedToken}
               setSelectedToken={setSelectedToken}
             />
