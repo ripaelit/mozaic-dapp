@@ -9,6 +9,8 @@ import MultiAssets from './MultiAssetsWithdraw';
 import SingleAsset from './SingleAssetWithdraw';
 import switchChain from '../../../../hooks/useSwitchChain';
 import { chains } from '../../../../data/static/wallet';
+import { getSecondaryVaultContract } from '../../../../store/contractStore';
+import BN from 'bn.js';
 
 const assetTypes: TabItem[] = [
   { id: 0, name: 'Single Asset', value: 'single' },
@@ -69,6 +71,19 @@ export default function WithdrawModal({
     initialMultiAssetsWithdrawData
   );
 
+  useEffect(() => {
+    // console.log('debug for single asset withdraw data', singleAssetWithdrawData.address);
+  }, [singleAssetWithdrawData]);
+
+  useEffect(() => {
+    // console.log('multi assets', multiAssetsWithdrawData);
+  }, [multiAssetsWithdrawData]);
+
+  const chainData: ChainDataType | undefined = useMemo(() => {
+    const targetChain = chains.find((chain) => chain.name.includes(singleAssetWithdrawData.name));
+    return targetChain;
+  }, [singleAssetWithdrawData]);
+
   const withdrawFunds = async () => {
     const networkData = chainData
       ? {
@@ -77,20 +92,37 @@ export default function WithdrawModal({
         }
       : chains[0];
     await switchChain(networkData);
+    const chainName = networkData.name;
+    const withdrawVault = vault.find((theVault:any) => (theVault.name == chainName)) as AssetElement;
+    const vaultContract = getSecondaryVaultContract(withdrawVault.address, web3reactContext.library);
+    const withdrawAmount = new BN(singleAssetWithdrawData.totalWithdrawAmount+'0'.repeat(singleAssetWithdrawData.asset.decimals));
+    try {
+      await vaultContract!.methods
+        .addWithdrawRequest(
+          withdrawAmount,
+          singleAssetWithdrawData.asset.address,
+          new BN(''+networkData.lzChainID)
+        )
+        .send({from: web3reactContext.account});
+      // 
+      onWithdrawSuccess();
+    }
+    catch (err) {
+      // TODO-abdullah: error flow.
+      console.log(err);
+      // onWithdrawFailure();
+    }
+    console.log("Finished blockchain call");
 
-    if (withdrawType.value === 'single') {
-      // console.log('single asset', singleAssetWithdrawData);
-    }
-    if (withdrawType.value === 'multi') {
-      // console.log('multi assets', multiAssetsWithdrawData);
-    }
-    onWithdrawalSuccess();
+    // if (withdrawType.value === 'single') {
+    //   // console.log('single asset', singleAssetWithdrawData);
+      
+    // }
+    // if (withdrawType.value === 'multi') {
+    //   // console.log('multi assets', multiAssetsWithdrawData);
+    // }
+    // onWithdrawalSuccess();
   };
-
-  const chainData: ChainDataType | undefined = useMemo(() => {
-    const targetChain = chains.find((chain) => chain.name.includes(singleAssetWithdrawData.name));
-    return targetChain;
-  }, [singleAssetWithdrawData]);
 
   return (
     <>
