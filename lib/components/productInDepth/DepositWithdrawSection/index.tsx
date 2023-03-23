@@ -34,6 +34,7 @@ export default function DepositWithdrawSection({
   const [depositState, setDepositState] = useState('idle');
   const [depositAmount, setDepositAmount] = useState(0);
   const [withdrawState, setWithdrawState] = useState('idle');
+  const [withdrawAmount, setWithdrawAmount] = useState(0);
   const [balancingState, setBalancingState] = useState('farming');
 
   const web3reactContext = useWeb3React();
@@ -96,10 +97,30 @@ export default function DepositWithdrawSection({
     setDepositAmount(floatDepositAmountSum);
   }
 
+  const updateWithdrawAmount = async () => {
+    if (!web3reactContext.account) {
+      setWithdrawAmount(0);
+      return;
+    }
+    let withdrawAmountSum = new BN('0');
+    for (const vaultData of vault) {
+      const vaultContract = getSecondaryVaultContract(vaultData.address, getWeb3(vaultData.name));
+      const chainData = chains.find(obj => obj.name == vaultData.name);
+      for (const assetData of vaultData.assets || []) {
+        withdrawAmountSum = withdrawAmountSum.add(new BN(await vaultContract!.methods.getWithdrawAmount(false, web3reactContext.account, chainData?.lzChainID, assetData.address).call()));
+        withdrawAmountSum = withdrawAmountSum.add(new BN(await vaultContract!.methods.getWithdrawAmount(true, web3reactContext.account, chainData?.lzChainID, assetData.address).call()));
+      }
+    }
+    // TODO: move mLP Decimal 6 to static data source.
+    let floatWithdrawAmountSum = withdrawAmountSum.div(new BN('10').pow(new BN('6'))).toNumber();
+    setWithdrawAmount(floatWithdrawAmountSum);
+  }
+
   useEffect(() => {
     updateBalancingState();
     console.log("DepositWithdrawSection.useEffect called");
     updateDepositAmount();
+    updateWithdrawAmount();
   });
 
   // dummy optimization/farming state
@@ -140,6 +161,8 @@ export default function DepositWithdrawSection({
                   startColor: '#66543E',
                   endColor: '#F7931A',
                 }}
+                amount={withdrawAmount}
+                postfix=' mLP'
               />
             </>
           ) : (
