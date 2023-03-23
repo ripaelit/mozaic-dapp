@@ -5,6 +5,10 @@ import WithdrawModal from '../../common/modal/withdrawModal';
 import DepositModal from '../../common/modal/depositModal';
 import TransactionBtn from '../../common/button/TransactionBtn';
 import FarmingOptimizingBar from './FarmingOptimizingBar';
+import { chains } from '../../../data/static/wallet';
+import Web3 from 'web3';
+import { getPrimaryVaultContract, getSecondaryVaultContract } from '../../../store/contractStore';
+import { AssetElement } from '../../../types/product';
 
 const tooltipData = {
   deposit:
@@ -21,7 +25,7 @@ export default function DepositWithdrawSection({
   vault,
 }: {
   loading: boolean;
-  vault: any;
+  vault: AssetElement[];
 }) {
   const [openDepositModal, setOpenDepositModal] = useState(false);
   const [openWithdrawModal, setOpenWithdrawModal] = useState(false);
@@ -46,21 +50,43 @@ export default function DepositWithdrawSection({
     }, 10000);
   };
 
-  // dummy optimization/farming state
+  const updateBalancingState = async () => {
+    console.log("updateMozaicStatus");
+
+    
+    const primaryVault = vault.find(obj => obj.id == 0) as AssetElement;
+    if (!primaryVault) {
+      console.log(`updateBalancingState: Could not find primary vault`);
+      return;
+    }
+    
+    const chain = chains.find((obj => obj.name == primaryVault.name));
+    if (!chain) {
+        console.log(`Could not find chain for name ${primaryVault.name}`);
+        return;
+    }
+    const web3Provider = new Web3.providers.HttpProvider(chain.rpcUrls);
+    const web3 = new Web3(web3Provider);
+    const vaultContract = getPrimaryVaultContract(primaryVault.address, web3);
+    if (!vaultContract) {
+        console.log("Could not instantiate Vault");
+    }
+    const protocolStatus = await vaultContract.methods.protocolStatus().call();
+    console.log(`ProtocolStatus: ${protocolStatus}`);
+
+    let newBalancingState = 'optimizing';
+    if (protocolStatus == 0) {
+      newBalancingState = 'farming';
+    }
+    setBalancingState(newBalancingState);
+  }
 
   useEffect(() => {
-    if (balancingState === 'optimizing') {
-      setTimeout(() => {
-        setBalancingState('farming');
-      }, 3000);
-    }
+    updateBalancingState();
+    console.log("DepositWithdrawSection.useEffect called");
+  });
 
-    if (balancingState === 'farming') {
-      setTimeout(() => {
-        setBalancingState('optimizing');
-      }, 15000);
-    }
-  }, [balancingState]);
+  // dummy optimization/farming state
 
   return (
     <>
