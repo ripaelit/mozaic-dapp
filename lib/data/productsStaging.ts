@@ -60,7 +60,7 @@ export const productDetails: ProductDetailDataType[] = [
       {
         id: 0,
         name: 'BSC Testnet',
-        tokenName: 'VaultIsNotToken',
+        tokenName: 'mLP',
         icon: '/assets/icons/wallet/networks/ico.bsc.svg',
         address: '0x67c6bdCdfd06766fcc06261Fb9ffc282ea82a6e8',
         decimals: 0,
@@ -90,7 +90,7 @@ export const productDetails: ProductDetailDataType[] = [
       {
         id: 1,
         name: 'Fantom Testnet',
-        tokenName: 'VaultIsNotToken',
+        tokenName: 'mLP',
         icon: '/assets/icons/wallet/networks/ico.ftm.svg',
         address: '0x73252e4b345f8521dbd11D2F15AcAedBd87b049E',
         decimals: 0,
