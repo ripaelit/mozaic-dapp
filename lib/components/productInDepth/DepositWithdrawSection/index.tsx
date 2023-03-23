@@ -5,9 +5,7 @@ import WithdrawModal from '../../common/modal/withdrawModal';
 import DepositModal from '../../common/modal/depositModal';
 import TransactionBtn from '../../common/button/TransactionBtn';
 import FarmingOptimizingBar from './FarmingOptimizingBar';
-import { chains } from '../../../data/static/wallet';
-import Web3 from 'web3';
-import { getPrimaryVaultContract, getSecondaryVaultContract } from '../../../store/contractStore';
+import { getPrimaryVaultContract, getWeb3 } from '../../../store/contractStore';
 import { AssetElement } from '../../../types/product';
 
 const tooltipData = {
@@ -53,21 +51,13 @@ export default function DepositWithdrawSection({
   const updateBalancingState = async () => {
     console.log("updateMozaicStatus");
 
-    
     const primaryVault = vault.find(obj => obj.id == 0) as AssetElement;
     if (!primaryVault) {
       console.log(`updateBalancingState: Could not find primary vault`);
       return;
     }
     
-    const chain = chains.find((obj => obj.name == primaryVault.name));
-    if (!chain) {
-        console.log(`Could not find chain for name ${primaryVault.name}`);
-        return;
-    }
-    const web3Provider = new Web3.providers.HttpProvider(chain.rpcUrls);
-    const web3 = new Web3(web3Provider);
-    const vaultContract = getPrimaryVaultContract(primaryVault.address, web3);
+    const vaultContract = getPrimaryVaultContract(primaryVault.address, getWeb3(primaryVault.name));
     if (!vaultContract) {
         console.log("Could not instantiate Vault");
     }
