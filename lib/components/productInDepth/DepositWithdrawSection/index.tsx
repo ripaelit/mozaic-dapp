@@ -122,7 +122,7 @@ export default function DepositWithdrawSection({
           {!loading ? (
             <>
               <TransactionBtn
-                state={depositAmount > 0 ? 'idle': 'idle'}
+                state={depositAmount > 0 ? 'pending': 'idle'}
                 onClick={setOpenDepositModal}
                 buttonType='Deposit'
                 tooltip={tooltipData.deposit}
