@@ -49,6 +49,7 @@ export default function TransactionBtn({ buttonType, onClick, tooltip, state, co
           position: absolute;
           height: 100%;
           width: 100%;
+          animation: pending-animation 5s infinite;
           -webkit-mask-image: linear-gradient(
             to left,
             transparent 0%,
@@ -63,21 +64,23 @@ export default function TransactionBtn({ buttonType, onClick, tooltip, state, co
             black 60%,
             transparent 100%
           );
-          transition: opacity 3s ease, left 1s ease 1s;
         }
 
         .idle {
           background-color: ${colors.startColor};
           opacity: 0;
-          left: -100%;
+          animation-play-state: paused;
+          transition: opacity .5s linear;
         }
 
         .pending {
           background-color: ${colors.endColor};
           opacity: 1;
-          animation-name: pending-animation;
-          animation-duration: 5s;
-          animation-iteration-count: infinite;
+        }
+
+        @keyframes pending-animation {
+          0% {left: -100%}
+          100% {left: 100%}
         }
 
         @keyframes pending-animation {
