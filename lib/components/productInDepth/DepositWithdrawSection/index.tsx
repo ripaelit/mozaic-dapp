@@ -34,6 +34,7 @@ export default function DepositWithdrawSection({
   const [depositAmount, setDepositAmount] = useState(0);
   const [withdrawAmount, setWithdrawAmount] = useState(0);
   const [balancingState, setBalancingState] = useState('farming');
+  const [tickTock, setTickTock] = useState<boolean>(false);
 
   const web3reactContext = useWeb3React();
 
@@ -46,8 +47,6 @@ export default function DepositWithdrawSection({
   };
 
   const updateBalancingState = async () => {
-    console.log("updateMozaicStatus");
-
     const primaryVault = vault.find(obj => obj.id == 0) as AssetElement;
     if (!primaryVault) {
       console.log(`updateBalancingState: Could not find primary vault`);
@@ -66,11 +65,13 @@ export default function DepositWithdrawSection({
       newBalancingState = 'farming';
     }
     setBalancingState(newBalancingState);
+    console.log("updateBalancingState:", newBalancingState);
   }
 
   const updateDepositAmount = async () => {
     if (!web3reactContext.account) {
       setDepositAmount(0);
+      console.log("updateDepositAmount: web3reactContext.account is null");
       return;
     }
     let depositAmountSum = new BN('0');
@@ -85,10 +86,12 @@ export default function DepositWithdrawSection({
     // TODO: move Mozaic Decimal 6 to static data source.
     let floatDepositAmountSum = depositAmountSum.div(new BN('10').pow(new BN('6'))).toNumber();
     setDepositAmount(floatDepositAmountSum);
+    console.log("setDepositAmount:", floatDepositAmountSum);
   }
 
   const updateWithdrawAmount = async () => {
     if (!web3reactContext.account) {
+      console.log("updateWithdrawAmount: web3reactContext.account is null");
       setWithdrawAmount(0);
       return;
     }
@@ -104,14 +107,13 @@ export default function DepositWithdrawSection({
     // TODO: move mLP Decimal 6 to static data source.
     let floatWithdrawAmountSum = withdrawAmountSum.div(new BN('10').pow(new BN('6'))).toNumber();
     setWithdrawAmount(floatWithdrawAmountSum);
+    console.log("setWithdrawAmount:", floatWithdrawAmountSum);
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      updateBalancingState();
-      updateDepositAmount();
-      updateWithdrawAmount();
-    }, 5000);
+      setTickTock(oldVal => !oldVal);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
@@ -119,10 +121,7 @@ export default function DepositWithdrawSection({
     updateBalancingState();
     updateDepositAmount();
     updateWithdrawAmount();
-  }, [web3reactContext.account]);
-
-
-  // dummy optimization/farming state
+  }, [web3reactContext.account, tickTock]);
 
   return (
     <>
