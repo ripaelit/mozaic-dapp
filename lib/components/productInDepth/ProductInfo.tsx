@@ -38,9 +38,8 @@ export default function ProductInfo({ product, loading }: any) {
 
   
   const updateMlpBalance = async () => {
-    const account = web3reactContext.account;
     console.log("updateMlpBalance");
-    if (!account) {
+    if (!web3reactContext.account) {
       setUserTrxData({...userTrxData, mLPbalance: 0});
       return;
     }
@@ -50,7 +49,7 @@ export default function ProductInfo({ product, loading }: any) {
       if (!mlp) {
         console.log("Could not instantiate MLP");
       }
-      const balanceOnChain = new BN(await mlp.methods.balanceOf(account).call());
+      const balanceOnChain = new BN(await mlp.methods.balanceOf(web3reactContext.account).call());
       console.log(`Balance on ${mlpData.name} : ${balanceOnChain}`);
       totalMlpBalance = totalMlpBalance.add(balanceOnChain);
     }
