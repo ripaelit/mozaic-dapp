@@ -15,7 +15,7 @@ export default function TransactionBtn({ buttonType, onClick, tooltip, state, co
           </div>
           <div className='transaction-info'>
             <p className={`btn-label ${state === 'idle' ? 'inactive' : 'active'}`}>
-              {buttonType}ing {prefix || ''}{amount || '0'}{postfix || ''} ...
+              {amount > 0 ? `${buttonType}ing ${prefix || ''}${amount}${postfix || ''} ...` : '--'}
             </p>
             <InfoTooltip text={tooltip} tooltipFor={buttonType} />
           </div>

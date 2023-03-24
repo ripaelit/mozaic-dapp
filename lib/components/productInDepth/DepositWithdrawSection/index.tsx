@@ -31,9 +31,7 @@ export default function DepositWithdrawSection({
   const [openDepositModal, setOpenDepositModal] = useState(false);
   const [openWithdrawModal, setOpenWithdrawModal] = useState(false);
 
-  const [depositState, setDepositState] = useState('idle');
   const [depositAmount, setDepositAmount] = useState(0);
-  const [withdrawState, setWithdrawState] = useState('idle');
   const [withdrawAmount, setWithdrawAmount] = useState(0);
   const [balancingState, setBalancingState] = useState('farming');
 
@@ -132,7 +130,7 @@ export default function DepositWithdrawSection({
           {!loading ? (
             <>
               <TransactionBtn
-                state={depositState}
+                state={depositAmount > 0 ? 'pending': 'idle'}
                 onClick={setOpenDepositModal}
                 buttonType='Deposit'
                 tooltip={tooltipData.deposit}
@@ -153,7 +151,7 @@ export default function DepositWithdrawSection({
                 }}
               />
               <TransactionBtn
-                state={withdrawState}
+                state={withdrawAmount > 0 ? 'pending': 'idle'}
                 onClick={setOpenWithdrawModal}
                 buttonType='Withdraw'
                 tooltip={tooltipData.withdraw}
