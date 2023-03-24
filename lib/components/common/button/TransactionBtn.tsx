@@ -63,20 +63,26 @@ export default function TransactionBtn({ buttonType, onClick, tooltip, state, co
             black 60%,
             transparent 100%
           );
+          transition: opacity 3s ease, left 1s ease 1s;
         }
 
         .idle {
           background-color: ${colors.startColor};
           opacity: 0;
           left: -100%;
-          transition: opacity 1s ease, left 1s ease 1s;
         }
 
         .pending {
           background-color: ${colors.endColor};
           opacity: 1;
-          left: 50%;
-          transition: all 5s ease;
+          animation-name: pending-animation;
+          animation-duration: 5s;
+          animation-iteration-count: infinite;
+        }
+
+        @keyframes pending-animation {
+          0%   {left:-100%}
+          100% {left:100%}
         }
 
         .transition-btn-wrapper {
