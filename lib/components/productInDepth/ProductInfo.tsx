@@ -35,11 +35,13 @@ export default function ProductInfo({ product, loading }: any) {
   const dummyUserTrxData = userTrxDetailsDummyData[productData.id];
   dummyUserTrxData.mLPbalance = 0;
   const [userTrxData, setUserTrxData] = useState<any>(dummyUserTrxData);
+  const [tickTock, setTickTock] = useState<boolean>(false);
 
   
   const updateMlpBalance = async () => {
     console.log("updateMlpBalance");
-    if (!web3reactContext.account) {
+    const account = web3reactContext.account;
+    if (!account) {
       setUserTrxData({...userTrxData, mLPbalance: 0});
       return;
     }
@@ -49,23 +51,23 @@ export default function ProductInfo({ product, loading }: any) {
       if (!mlp) {
         console.log("Could not instantiate MLP");
       }
-      const balanceOnChain = new BN(await mlp.methods.balanceOf(web3reactContext.account).call());
+      const balanceOnChain = new BN(await mlp.methods.balanceOf(account).call());
       console.log(`Balance on ${mlpData.name} : ${balanceOnChain}`);
       totalMlpBalance = totalMlpBalance.add(balanceOnChain);
     }
-    totalMlpBalance = totalMlpBalance.div(new BN('10').pow(new BN('6')));
-    setUserTrxData({...userTrxData, mLPbalance: totalMlpBalance.toNumber()});
+    totalMlpBalance = totalMlpBalance.div(new BN('10').pow(new BN('4')));
+    setUserTrxData({...userTrxData, mLPbalance: totalMlpBalance.toNumber()/100});
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      updateMlpBalance();
+      setTickTock(oldVal => !oldVal);
     }, 10000);
     return () => clearInterval(interval);
   }, []);
   useEffect(() => {
     updateMlpBalance();
-  }, [web3reactContext.account]);
+  }, [web3reactContext.account, tickTock]);
 
   return (
     <>
