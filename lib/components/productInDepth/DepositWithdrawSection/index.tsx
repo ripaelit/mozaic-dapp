@@ -38,9 +38,11 @@ export default function DepositWithdrawSection({
   const web3reactContext = useWeb3React();
 
   const onDepositSuccess = () => {
+    setOpenDepositModal(false);
   };
 
   const onWithdrawalSuccess = () => {
+    setOpenWithdrawModal(false);
   };
 
   const updateBalancingState = async () => {
@@ -120,7 +122,7 @@ export default function DepositWithdrawSection({
           {!loading ? (
             <>
               <TransactionBtn
-                state={depositAmount > 0 ? 'pending': 'idle'}
+                state={depositAmount > 0 ? 'idle': 'idle'}
                 onClick={setOpenDepositModal}
                 buttonType='Deposit'
                 tooltip={tooltipData.deposit}
