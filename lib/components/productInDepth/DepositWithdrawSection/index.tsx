@@ -107,11 +107,20 @@ export default function DepositWithdrawSection({
   }
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      updateBalancingState();
+      updateDepositAmount();
+      updateWithdrawAmount();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     updateBalancingState();
-    console.log("DepositWithdrawSection.useEffect called");
     updateDepositAmount();
     updateWithdrawAmount();
-  });
+  }, [web3reactContext.account]);
+
 
   // dummy optimization/farming state
 
