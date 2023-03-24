@@ -38,19 +38,9 @@ export default function DepositWithdrawSection({
   const web3reactContext = useWeb3React();
 
   const onDepositSuccess = () => {
-    setOpenDepositModal(false);
-    setDepositState('pending');
-    setTimeout(() => {
-      setDepositState('idle');
-    }, 10000);
   };
 
   const onWithdrawalSuccess = () => {
-    setOpenWithdrawModal(false);
-    setWithdrawState('pending');
-    setTimeout(() => {
-      setWithdrawState('idle');
-    }, 10000);
   };
 
   const updateBalancingState = async () => {
