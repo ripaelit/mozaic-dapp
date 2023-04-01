@@ -79,7 +79,8 @@ export const chains: ChainDataType[] = [
     id: 0,
     chainID: 97, // from chainlist
     lzChainID: 10102, // LayerZero
-    rpcUrls: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
+    // rpcUrls: 'https://endpoints.omniatech.io/v1/bsc/testnet/public',
+    rpcUrls: 'https://data-seed-prebsc-1-s3.binance.org:8545/',
     name: 'BSC Testnet',
     nativeCurrency: {
       name: 'tBNB',
