@@ -58,14 +58,12 @@ export default function DepositWithdrawSection({
         console.log("Could not instantiate Vault");
     }
     const protocolStatus = await vaultContract.methods.protocolStatus().call();
-    console.log(`ProtocolStatus: ${protocolStatus}`);
 
     let newBalancingState = 'optimizing';
     if (protocolStatus == 0) {
       newBalancingState = 'farming';
     }
     setBalancingState(newBalancingState);
-    console.log("updateBalancingState:", newBalancingState);
   }
 
   const updateDepositAmount = async () => {
@@ -86,7 +84,6 @@ export default function DepositWithdrawSection({
     // TODO: move Mozaic Decimal 6 to static data source.
     let floatDepositAmountSum = depositAmountSum.div(new BN('10').pow(new BN('6'))).toNumber();
     setDepositAmount(floatDepositAmountSum);
-    console.log("setDepositAmount:", floatDepositAmountSum);
   }
 
   const updateWithdrawAmount = async () => {
@@ -107,7 +104,6 @@ export default function DepositWithdrawSection({
     // TODO: move mLP Decimal 6 to static data source.
     let floatWithdrawAmountSum = withdrawAmountSum.div(new BN('10').pow(new BN('6'))).toNumber();
     setWithdrawAmount(floatWithdrawAmountSum);
-    console.log("setWithdrawAmount:", floatWithdrawAmountSum);
   }
 
   useEffect(() => {
