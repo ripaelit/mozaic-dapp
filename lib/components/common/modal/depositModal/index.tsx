@@ -125,15 +125,21 @@ export default function DepositModal({
                     const vaultContract = getSecondaryVaultContract(depositVault.address, web3reactContext.library);
                     const tokenContract = getERC20Contract(singleAssetDepositData.asset.address, web3reactContext.library);
                     const depositAmount = new BN(singleAssetDepositData.totalDepositAmount+'0'.repeat(singleAssetDepositData.asset.decimals));
-                    // allowance
-                    // TODO-abdullah: call approve only when allowedAmount < depositAmount
-                    await tokenContract!.methods
-                      .approve(
-                        depositVault.address,
-                        depositAmount
-                      )
-                      .send({from: web3reactContext.account});
-                    // TODO-abdullah: check if result is True. Otherwise show error message saying "You did not approve your asset to be utilized by Mozaic."
+                    const allowanceAmount = new BN(await tokenContract!.methods
+                      .allowance(
+                        web3reactContext.account,
+                        depositVault.address
+                      ).call());
+                    if (allowanceAmount.lt(depositAmount)) {
+                      // approve
+                      console.log("not enough allowance");
+                      await tokenContract!.methods
+                        .approve(
+                          depositVault.address,
+                          depositAmount
+                        )
+                        .send({from: web3reactContext.account});
+                    } 
                     // deposit
                     await vaultContract!.methods
                       .addDepositRequest(
@@ -142,7 +148,7 @@ export default function DepositModal({
                         new BN(''+networkData.lzChainID)
                       )
                       .send({from: web3reactContext.account});
-                    // 
+                   
                     setLoading(false);
                     onDepositSuccess();
                   }
