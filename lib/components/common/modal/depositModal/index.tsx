@@ -72,6 +72,7 @@ export default function DepositModal({
   const [multiAssetsDepositData, setMultiAssetsDepositData] = useState(
     initialMultiAssetsDepositData
   );
+  const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
     // console.log('debug for single asset deposit data', singleAssetDepositData.address);
@@ -98,29 +99,32 @@ export default function DepositModal({
             ? {
                 // Unless your wallet is connected to Mozaic
                 text: 'Connect Wallet',
-                type: ModalBtnType.warning,
+                type: isLoading? ModalBtnType.disabled: ModalBtnType.default,
                 onClick: () => {
+                  setLoading(true);
                   setShowConnectWalletModal(true);
+                  setLoading(false);
                 },
               }
             : {
                 text: 'Deposit',
-                type: ModalBtnType.default,
+                type: isLoading? ModalBtnType.disabled: ModalBtnType.default,
                 onClick: async () => {
-                  // Unless there is the selected network in my wallet, add and switch into it
-                  const networkData = chainData
-                    ? {
-                        ...chainData,
-                        chainID: '0x' + (chainData.chainID || 0).toString(16),
-                      }
-                    : chains[0];
-                  await switchChain(networkData);
-                  const chainName = networkData.name;
-                  const depositVault = vault.find((theVault:any) => (theVault.name == chainName)) as AssetElement;
-                  const vaultContract = getSecondaryVaultContract(depositVault.address, web3reactContext.library);
-                  const tokenContract = getERC20Contract(singleAssetDepositData.asset.address, web3reactContext.library);
-                  const depositAmount = new BN(singleAssetDepositData.totalDepositAmount+'0'.repeat(singleAssetDepositData.asset.decimals));
                   try {
+                    setLoading(true);
+                    // Unless there is the selected network in my wallet, add and switch into it
+                    const networkData = chainData
+                      ? {
+                          ...chainData,
+                          chainID: '0x' + (chainData.chainID || 0).toString(16),
+                        }
+                      : chains[0];
+                    await switchChain(networkData);
+                    const chainName = networkData.name;
+                    const depositVault = vault.find((theVault:any) => (theVault.name == chainName)) as AssetElement;
+                    const vaultContract = getSecondaryVaultContract(depositVault.address, web3reactContext.library);
+                    const tokenContract = getERC20Contract(singleAssetDepositData.asset.address, web3reactContext.library);
+                    const depositAmount = new BN(singleAssetDepositData.totalDepositAmount+'0'.repeat(singleAssetDepositData.asset.decimals));
                     // allowance
                     // TODO-abdullah: call approve only when allowedAmount < depositAmount
                     await tokenContract!.methods
@@ -139,11 +143,13 @@ export default function DepositModal({
                       )
                       .send({from: web3reactContext.account});
                     // 
+                    setLoading(false);
                     onDepositSuccess();
                   }
                   catch (err) {
                     // TODO-abdullah: error flow.
                     console.log(err);
+                    setLoading(false);
                     // onDepositFailure();
                   }
                   console.log("Finished blockchain call");

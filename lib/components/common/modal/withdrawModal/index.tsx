@@ -71,6 +71,7 @@ export default function WithdrawModal({
   const [multiAssetsWithdrawData, setMultiAssetsWithdrawData] = useState(
     initialMultiAssetsWithdrawData
   );
+  const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
     // console.log('debug for single asset withdraw data', singleAssetWithdrawData.address);
@@ -86,25 +87,26 @@ export default function WithdrawModal({
   }, [singleAssetWithdrawData]);
 
   const withdrawFunds = async () => {
-    const networkData = chainData
-      ? {
-          ...chainData,
-          chainID: '0x' + (chainData.chainID || 0).toString(16),
-        }
-      : chains[0];
-    await switchChain(networkData);
-    const chainName = networkData.name;
-    const withdrawVault = vault.find((theVault: any) => theVault.name == chainName) as AssetElement;
-    const vaultContract = getSecondaryVaultContract(
-      withdrawVault.address,
-      web3reactContext.library
-    );
-    // TODO: to use mozaicLP decimals, not constant 6
-    const withdrawAmount = new BN(
-      singleAssetWithdrawData.totalWithdrawAmount +
-        '0'.repeat(6)
-    );
     try {
+      setLoading(true);
+      const networkData = chainData
+        ? {
+            ...chainData,
+            chainID: '0x' + (chainData.chainID || 0).toString(16),
+          }
+        : chains[0];
+      await switchChain(networkData);
+      const chainName = networkData.name;
+      const withdrawVault = vault.find((theVault: any) => theVault.name == chainName) as AssetElement;
+      const vaultContract = getSecondaryVaultContract(
+        withdrawVault.address,
+        web3reactContext.library
+      );
+      // TODO: to use mozaicLP decimals, not constant 6
+      const withdrawAmount = new BN(
+        singleAssetWithdrawData.totalWithdrawAmount +
+          '0'.repeat(6)
+      );
       await vaultContract!.methods
         .addWithdrawRequest(
           withdrawAmount,
@@ -113,10 +115,12 @@ export default function WithdrawModal({
         )
         .send({ from: web3reactContext.account });
       //
+      setLoading(false);
       onWithdrawalSuccess();
     } catch (err) {
       // TODO-abdullah: error flow.
       console.log(err);
+      setLoading(false);
       // onWithdrawFailure();
     }
     console.log('Finished blockchain call');
@@ -140,14 +144,16 @@ export default function WithdrawModal({
           !web3reactContext.account
             ? {
                 text: 'Connect Wallet',
-                type: ModalBtnType.warning,
+                type: isLoading? ModalBtnType.disabled: ModalBtnType.default,
                 onClick: () => {
+                  setLoading(true);
                   setShowConnectWalletModal(true);
+                  setLoading(false);
                 },
               }
             : {
                 text: 'Withdraw',
-                type: ModalBtnType.default,
+                type: isLoading? ModalBtnType.disabled: ModalBtnType.default,
                 onClick: withdrawFunds,
               }
         }>
